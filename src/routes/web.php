@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,9 @@ Route::post('team/edit', [App\Http\Controllers\TeamController::class, 'update'])
 Route::get('team/del', [App\Http\Controllers\TeamController::class, 'del']);
 Route::post('team/del', [App\Http\Controllers\TeamController::class, 'remove']);
 Route::get('team/show', [App\Http\Controllers\TeamController::class, 'show']);
+Route::get('team/find', [App\Http\Controllers\TeamController::class, 'find']);
+Route::post('team/find', [App\Http\Controllers\TeamController::class, 'search']);
+// Project
+Route::get('project', [App\Http\Controllers\ProjectController::class, 'index']);
+Route::get('project/add', [App\Http\Controllers\ProjectController::class, 'add']);
+Route::post('project/add', [App\Http\Controllers\ProjectController::class, 'create']);

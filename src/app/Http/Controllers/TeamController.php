@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 
 class TeamController extends Controller
 {
     public function index(Request $request)
-   {
-       $items = DB::table('teams')->get();
-       return view('team.index', ['items' => $items]);
-   }
+    {
+        $items = Team::all();
+        return view('team.index', ['items' => $items]);
+    }
 
    public function post(Request $request)
    {
-       $items = DB::select('select * from teams');
+       $items = Team::all();
        return view('team.index', ['items' => $items]);
    }
 
@@ -26,44 +27,39 @@ class TeamController extends Controller
 
    public function create(Request $request)
     {
-    $param = [
-        'name' => $request->name,
-        'information' => $request->information,
-        'user_id' => $request->user_id,
-    ];
-    DB::table('teams')->insert($param);
+    $this->validate($request, Team::$rules);
+    $team = new Team;
+    $form = $request->all();
+    unset($form['_token']);
+    $team->fill($form)->save();
     return redirect('/team');
     }
 
     public function edit(Request $request)
     {
-    $item = DB::table('teams')->where('id', $request->id)->first();
-    return view('team.edit', ['form' => $item]);
+    $team = Team::find($request->id);
+    return view('team.edit', ['form' => $team]);
     }
 
     public function update(Request $request)
     {
-    $param = [
-        'id' => $request->id,
-        'name' => $request->name,
-        'information' => $request->information,
-        'user_id' => $request->user_id,
-    ];
-    DB::table('teams')->where('id', $request->id)->update($param);
+    $this->validate($request, Team::$rules);
+    $team = Team::find($request->id);
+    $form = $request->all();
+    unset($form['_token']);
+    $team->fill($form)->save();
     return redirect('/team');
     }
 
     public function del(Request $request)
     {
-    $item = DB::table('teams')
-       ->where('id', $request->id)->first();
-    return view('team.del', ['form' => $item]);
+    $person = Team::find($request->id);
+    return view('team.del', ['form' => $person]);
     }
 
     public function remove(Request $request)
     {
-    DB::table('teams')
-        ->where('id', $request->id)->delete();
+    Team::find($request->id)->delete();
     return redirect('/team');
     }
 
@@ -72,6 +68,18 @@ class TeamController extends Controller
     $id = $request->id;
     $items = DB::table('teams')->where('id', '<=', $id)->get();
     return view('team.show', ['items' => $items]);
+    }
+
+    public function find(Request $request)
+    {
+    return view('team.find',['input' => '']);
+    }
+
+    public function search(Request $request)
+    {
+    $item = Team::where('name', $request->input)->first();
+    $param = ['input' => $request->input, 'item' => $item];
+    return view('team.find', $param);
     }
 
 }
