@@ -21,10 +21,6 @@
    @endforeach
    </table>
   <button> <a href='team/add'>新規チーム作成</a></button>
-  
-  
-  
-
 @endsection
 
 @section('footer')
