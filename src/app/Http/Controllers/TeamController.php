@@ -9,7 +9,7 @@ class TeamController extends Controller
 {
     public function index(Request $request)
    {
-       $items = DB::select('select * from teams');
+       $items = DB::table('teams')->get();
        return view('team.index', ['items' => $items]);
    }
 
@@ -25,21 +25,20 @@ class TeamController extends Controller
    }
 
    public function create(Request $request)
-   {
-       $param = [
-           'name' => $request->name,
-           'information' => $request->information,
-           'user_id' => $request->user_id,
-       ];
-       DB::insert('insert into teams (name, information, user_id ) values (:name, :information, :user_id)', $param);
-       return redirect('/team');
-   }
-
-   public function edit(Request $request)
     {
-    $param = ['id' => $request->id];
-    $item = DB::select('select * from teams where id = :id', $param);
-    return view('team.edit', ['form' => $item[0]]);
+    $param = [
+        'name' => $request->name,
+        'information' => $request->information,
+        'user_id' => $request->user_id,
+    ];
+    DB::table('teams')->insert($param);
+    return redirect('/team');
+    }
+
+    public function edit(Request $request)
+    {
+    $item = DB::table('teams')->where('id', $request->id)->first();
+    return view('team.edit', ['form' => $item]);
     }
 
     public function update(Request $request)
@@ -50,22 +49,29 @@ class TeamController extends Controller
         'information' => $request->information,
         'user_id' => $request->user_id,
     ];
-    DB::update('update teams set name =:name, information = :information, user_id = :user_id where id = :id', $param);
+    DB::table('teams')->where('id', $request->id)->update($param);
     return redirect('/team');
     }
 
     public function del(Request $request)
     {
-    $param = ['id' => $request->id];
-    $item = DB::select('select * from teams where id = :id', $param);
-    return view('team.del', ['form' => $item[0]]);
+    $item = DB::table('teams')
+       ->where('id', $request->id)->first();
+    return view('team.del', ['form' => $item]);
     }
 
     public function remove(Request $request)
     {
-    $param = ['id' => $request->id];
-    DB::delete('delete from teams where id = :id', $param);
+    DB::table('teams')
+        ->where('id', $request->id)->delete();
     return redirect('/team');
+    }
+
+    public function show(Request $request)
+    {
+    $id = $request->id;
+    $items = DB::table('teams')->where('id', '<=', $id)->get();
+    return view('team.show', ['items' => $items]);
     }
 
 }

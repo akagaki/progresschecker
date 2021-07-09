@@ -20,6 +20,7 @@
       <tr><th></th><td><input type="submit" 
          value="send"></td></tr>
    </table>
+   <button> <a href='/team'>戻る</a></button>
    </form>
 @endsection
 

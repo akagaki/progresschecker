@@ -3,7 +3,7 @@
 @section('title', 'Add')
 
 @section('menubar',)
-    新規作成
+   新規作成
 @endsection
 
 @section('content')
@@ -16,6 +16,7 @@
       <tr><th></th><td><input type="submit" value="send"></td></tr>
    </table>
    </form>
+   <button> <a href='/team'>戻る</a></button>
 @endsection
 
 @section('footer')

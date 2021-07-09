@@ -28,3 +28,4 @@ Route::get('team/edit', [App\Http\Controllers\TeamController::class, 'edit']);
 Route::post('team/edit', [App\Http\Controllers\TeamController::class, 'update']);
 Route::get('team/del', [App\Http\Controllers\TeamController::class, 'del']);
 Route::post('team/del', [App\Http\Controllers\TeamController::class, 'remove']);
+Route::get('team/show', [App\Http\Controllers\TeamController::class, 'show']);

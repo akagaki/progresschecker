@@ -16,6 +16,7 @@
       <tr><th>作成者: </th><td>{{$form->user_id}}</td></tr>
       <tr><th></th><td><input type="submit" value="send"></td></tr>
    </table>
+   <button> <a href='/team'>戻る</a></button>
    </form>
 @endsection
 
