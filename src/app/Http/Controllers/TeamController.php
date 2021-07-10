@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,8 @@ class TeamController extends Controller
     public function index(Request $request)
     {
         $items = Team::all();
-        
-        return view('team.index', ['items' => $items]);
+        $tasks = DB::select('select * from tasks');
+        return view('team.index', ['items' => $items], ['tasks' => $tasks]);
     }
 
    public function post(Request $request)

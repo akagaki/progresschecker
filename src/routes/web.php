@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,11 @@ Route::get('project/edit', [App\Http\Controllers\ProjectController::class, 'edit
 Route::post('project/edit', [App\Http\Controllers\ProjectController::class, 'update']);
 Route::get('project/del', [App\Http\Controllers\ProjectController::class, 'del']);
 Route::post('project/del', [App\Http\Controllers\ProjectController::class, 'remove']);
+// Task
+Route::get('task', [App\Http\Controllers\TaskController::class, 'index']);
+Route::get('task/add', [App\Http\Controllers\TaskController::class, 'add']);
+Route::post('task/add', [App\Http\Controllers\TaskController::class, 'create']);
+Route::get('task/edit', [App\Http\Controllers\TaskController::class, 'edit']);
+Route::post('task/edit', [App\Http\Controllers\TaskController::class, 'update']);
+Route::get('task/del', [App\Http\Controllers\TaskController::class, 'del']);
+Route::post('task/del', [App\Http\Controllers\TaskController::class, 'remove']);
