@@ -33,6 +33,11 @@ class Team extends Model
     return $this->belongsTo('App\Models\User');
     }
 
+    public function ownerName()
+    {
+        return $this->user->name;
+    }
+
     
 
 }

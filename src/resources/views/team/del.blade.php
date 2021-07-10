@@ -1,4 +1,4 @@
-@extends('layouts.helloapp')
+@extends('layouts.app')
 
 @section('title', 'Delete')
 
@@ -13,7 +13,7 @@
       <input type="hidden" name="id" value="{{$form->id}}">
       <tr><th>チーム名: </th><td>{{$form->name}}</td></tr>
       <tr><th>詳細: </th><td>{{$form->information}}</td></tr>
-      <tr><th>作成者: </th><td>{{$form->user_id}}</td></tr>
+      <tr><th>作成者: </th><td>{{$form->ownerName()}}</td></tr>
       <tr><th></th><td><input type="submit" value="send"></td></tr>
    </table>
    <button> <a href='/team'>戻る</a></button>

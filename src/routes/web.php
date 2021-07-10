@@ -36,3 +36,7 @@ Route::post('team/find', [App\Http\Controllers\TeamController::class, 'search'])
 Route::get('project', [App\Http\Controllers\ProjectController::class, 'index']);
 Route::get('project/add', [App\Http\Controllers\ProjectController::class, 'add']);
 Route::post('project/add', [App\Http\Controllers\ProjectController::class, 'create']);
+Route::get('project/edit', [App\Http\Controllers\ProjectController::class, 'edit']);
+Route::post('project/edit', [App\Http\Controllers\ProjectController::class, 'update']);
+Route::get('project/del', [App\Http\Controllers\ProjectController::class, 'del']);
+Route::post('project/del', [App\Http\Controllers\ProjectController::class, 'remove']);

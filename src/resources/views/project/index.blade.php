@@ -1,4 +1,4 @@
-@extends('layouts.helloapp')
+@extends('layouts.app')
 
 @section('title', 'Project.index')
 

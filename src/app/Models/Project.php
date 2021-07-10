@@ -23,13 +23,27 @@ class Project extends Model
        return $this->id . ': ' . $this->name . ' (' . $this->team->name . ')'.' (' . $this->user->name . ')';
    }
 
-   public function team()
+   
+
+    public function user()
     {
-    return $this->belongsTo('App\Models\Team');
+        return $this->belongsTo('App\Models\User');
     }
-    
-   public function user()
+
+    public function ownerName()
     {
-    return $this->belongsTo('App\Models\User');
+        return $this->user->name;
     }
+
+    public function team()
+    {
+        return $this->belongsTo('App\Models\Team');
+    }
+
+    public function ownerTeam()
+    {
+        return $this->team->id;
+    }
+
+
 }

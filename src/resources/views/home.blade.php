@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    <a href='/team'>チームページ</a>
+                    <a href='/team'>MyPage</a>
                 </div>
             </div>
         </div>

@@ -1,13 +1,26 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <style>
+    body {font-size:16pt; color:#999; margin: 5px; }
+    h1 { font-size:50pt; text-align:right; color:#f6f6f6;
+        margin:-20px 0px -30px 0px; letter-spacing:-4pt; }
+    ul { font-size:12pt; }
+    hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
+    .menutitle {font-size:14pt; font-weight:bold; margin: 0px; }
+    .content {margin:10px; }
+    .footer { text-align:right; font-size:10pt; margin:10px;
+        border-bottom:solid 1px #ccc; color:#ccc; }
+    th {background-color:#999; color:fff; padding:5px 10px; }
+    td {border: solid 1px #aaa; color:#999; padding:5px 10px; }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,8 +36,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('home') }}">
+                    {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,13 +55,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('新規登録') }}</a>
                                 </li>
                             @endif
                         @else
@@ -76,7 +89,16 @@
         </nav>
 
         <main class="py-4">
+            <h1>@yield('title')</h1>
+            <h2 class="menutitle">
+            @yield('menubar')
+            </h2>
+            <div class="content">
             @yield('content')
+            </div>
+            <div class="footer">
+            @yield('footer')
+            </div>
         </main>
     </div>
 </body>
