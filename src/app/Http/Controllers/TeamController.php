@@ -14,16 +14,9 @@ class TeamController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Team::all();
-        $tasks = DB::select('select * from tasks');
-        return view('team.index', ['items' => $items], ['tasks' => $tasks]);
+        $teams = Team::all();
+        return view('team.index', ['teams' => $teams]);
     }
-
-   public function post(Request $request)
-   {
-       $items = Team::all();
-       return view('team.index', ['items' => $items]);
-   }
 
    public function add(Request $request)
    {
@@ -72,9 +65,8 @@ class TeamController extends Controller
 
     public function show(Request $request)
     {
-        $id = $request->id;
-        $items = DB::table('teams')->where('id', '<=', $id)->get();
-        return view('team.show', ['items' => $items]);
+        $team = Team::find($request->id);
+        return view('team.show', ['team' => $team]);
     }
 
     public function find(Request $request)
@@ -84,8 +76,8 @@ class TeamController extends Controller
 
     public function search(Request $request)
     {
-        $item = Team::where('name', $request->input)->first();
-        $param = ['input' => $request->input, 'item' => $item];
+        $team = Team::where('name', $request->input)->first();
+        $param = ['input' => $request->input, 'team' => $team];
         return view('team.find', $param);
     }
 

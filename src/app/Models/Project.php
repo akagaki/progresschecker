@@ -23,6 +23,11 @@ class Project extends Model
        return $this->id . ': ' . $this->name . ' (' . $this->team->name . ')'.' (' . $this->user->name . ')';
    }
 
+    public function tasks()
+    {
+        return $this->hasMany('App\Models\Task');
+    }
+
    
 
     public function user()
@@ -42,7 +47,7 @@ class Project extends Model
 
     public function ownerTeam()
     {
-        return $this->team->id;
+        return $this->team->name;
     }
 
 

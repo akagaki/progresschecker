@@ -37,14 +37,20 @@ class Task extends Model
 
     public function ownerProject()
     {
-        return $this->project->id;
+        return $this->project->name;
     }
 
-    public static $progressNames = [
-        '未対応',
-        '処理中',
-        '処理済',
-        '完了',
-    ];
+    public function getProgressString(){
+        switch($this->progress){
+        case 0:
+            return "未対応";
+        case 1:
+            return "対応中";
+        case 2:
+            return "対応済";
+        case 3:
+            return "完了";
+        }
+  }
 
 }

@@ -61,4 +61,11 @@ class ProjectController extends Controller
         Project::find($request->id)->delete();
         return redirect('/team');
     }
+
+    public function show(Request $request)
+    {
+        $project = Project::find($request->id);
+        return view('project.show', ['project' => $project]);
+    }
+
 }

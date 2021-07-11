@@ -33,7 +33,7 @@
          value="send"></td></tr>
    </table>
    </form>
-   <button> <a href='/team'>戻る</a></button>
+   <button> <a href='/project/show?id={{$project->id}}'>戻る</a></button>
 @endsection
 
 @section('footer')

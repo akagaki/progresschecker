@@ -41,6 +41,7 @@ Route::get('project/edit', [App\Http\Controllers\ProjectController::class, 'edit
 Route::post('project/edit', [App\Http\Controllers\ProjectController::class, 'update']);
 Route::get('project/del', [App\Http\Controllers\ProjectController::class, 'del']);
 Route::post('project/del', [App\Http\Controllers\ProjectController::class, 'remove']);
+Route::get('project/show', [App\Http\Controllers\ProjectController::class, 'show']);
 // Task
 Route::get('task', [App\Http\Controllers\TaskController::class, 'index']);
 Route::get('task/add', [App\Http\Controllers\TaskController::class, 'add']);

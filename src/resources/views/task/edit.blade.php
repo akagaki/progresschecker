@@ -26,8 +26,15 @@
          value="{{$form->name}}"></td></tr>
       <tr><th>詳細: </th><td><input type="text" name="information" 
          value="{{$form->information}}"></td></tr>
-      <tr><th>進捗: </th><td><input type="text" name="progress" 
-         value="{{$form->progress}}"></td></tr>
+      <tr><th>進捗: </th><td>
+         <!-- <input type="text" name="progress" value="{{$form->progress}}"></td></tr> -->
+         <select name="progress">
+            <option value="{{$form->progress}}"></option>
+            <option value=0>未対応</option>
+            <option value=1>対応中</option>
+            <option value=2>対応済</option>
+            <option value=3>完了</option>
+         </select>
       <tr><th>期日: </th><td><input type="date" name="deadline" 
          value="{{$form->deadline}}"></td></tr>
       <tr><th></th><td><input type="submit" 
