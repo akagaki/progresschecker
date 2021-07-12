@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
-    public function index(Request $request)
-    {
-        $teams = Team::all();
-        return view('team.index', ['teams' => $teams]);
-    }
+    // public function index(Request $request)
+    // {
+    //     $teams = Team::all();
+    //     return view('team.index', ['teams' => $teams]);
+    // }
 
    public function add(Request $request)
    {
@@ -32,7 +32,7 @@ class TeamController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $team->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function edit(Request $request)
@@ -48,7 +48,7 @@ class TeamController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $team->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function del(Request $request)
@@ -60,25 +60,13 @@ class TeamController extends Controller
     public function remove(Request $request)
     {
         Team::find($request->id)->delete();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function show(Request $request)
     {
         $team = Team::find($request->id);
         return view('team.show', ['team' => $team]);
-    }
-
-    public function find(Request $request)
-    {
-        return view('team.find',['input' => '']);
-    }
-
-    public function search(Request $request)
-    {
-        $team = Team::where('name', $request->input)->first();
-        $param = ['input' => $request->input, 'team' => $team];
-        return view('team.find', $param);
     }
 
 }

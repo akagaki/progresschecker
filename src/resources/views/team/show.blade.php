@@ -33,7 +33,7 @@
          @endif
    </table>
    <button><a href='/project/add?id={{$team->id}}''>新規プロジェクト作成</a></button>
-   <button> <a href='/team'>戻る</a></button>
+   <button> <a href='/home'>戻る</a></button>
 @endsection
 
 @section('footer')

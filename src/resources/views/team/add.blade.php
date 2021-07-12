@@ -29,7 +29,7 @@
            value="send"></td></tr>
    </table>
    </form>
-   <button> <a href='/team'>戻る</a></button>
+   <button> <a href='/home'>戻る</a></button>
 @endsection
 
 @section('footer')

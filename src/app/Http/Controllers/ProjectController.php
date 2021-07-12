@@ -11,12 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-    public function index(Request $request)
-    {
-        $items = Project::all();
-        return view('project.index', ['items' => $items]);
-    }
-
+    
     public function add(Request $request)
     {
         $user = Auth::user(); 
@@ -31,7 +26,7 @@ class ProjectController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $project->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function edit(Request $request)
@@ -47,7 +42,7 @@ class ProjectController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $project->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function del(Request $request)
@@ -59,7 +54,7 @@ class ProjectController extends Controller
     public function remove(Request $request)
     {
         Project::find($request->id)->delete();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function show(Request $request)

@@ -31,8 +31,6 @@ Route::post('team/edit', [App\Http\Controllers\TeamController::class, 'update'])
 Route::get('team/del', [App\Http\Controllers\TeamController::class, 'del']);
 Route::post('team/del', [App\Http\Controllers\TeamController::class, 'remove']);
 Route::get('team/show', [App\Http\Controllers\TeamController::class, 'show']);
-Route::get('team/find', [App\Http\Controllers\TeamController::class, 'find']);
-Route::post('team/find', [App\Http\Controllers\TeamController::class, 'search']);
 // Project
 Route::get('project', [App\Http\Controllers\ProjectController::class, 'index']);
 Route::get('project/add', [App\Http\Controllers\ProjectController::class, 'add']);
@@ -50,3 +48,4 @@ Route::get('task/edit', [App\Http\Controllers\TaskController::class, 'edit']);
 Route::post('task/edit', [App\Http\Controllers\TaskController::class, 'update']);
 Route::get('task/del', [App\Http\Controllers\TaskController::class, 'del']);
 Route::post('task/del', [App\Http\Controllers\TaskController::class, 'remove']);
+Route::get('task/show', [App\Http\Controllers\TaskController::class, 'show']);

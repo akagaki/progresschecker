@@ -3,16 +3,47 @@
 <head>
     <style>
     body {font-size:16pt; color:#999; margin: 5px; }
-    h1 { font-size:50pt; text-align:right; color:#f6f6f6;
-        margin:-20px 0px -30px 0px; letter-spacing:-4pt; }
-    ul { font-size:12pt; }
-    hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
-    .menutitle {font-size:14pt; font-weight:bold; margin: 0px; }
+    .menutitle {font-size:14pt; font-weight:bold; margin: 10px; padding: 20px; }
     .content {margin:10px; }
     .footer { text-align:right; font-size:10pt; margin:10px;
         border-bottom:solid 1px #ccc; color:#ccc; }
-    th {background-color:#999; color:fff; padding:5px 10px; }
-    td {border: solid 1px #aaa; color:#999; padding:5px 10px; }
+    .items{float: right; padding-right: 40px;}
+    .team-box {
+         padding: 20px;margin: 20px 10px;
+    }
+    .team-information{font-weight:bold; }
+    .project-information p{ 
+        align-items: center;
+        margin: auto 0;
+    }
+    .project-information {
+        border-top:solid 1px #ccc; border-bottom:solid 1px #ccc; 
+        padding: 10px 0; margin: 10px 0;
+
+    }
+    .task-box {
+        display: flex;
+        width: 100%;
+    }
+    .card-container {
+        flex: 1;
+        margin: 0 10px;
+        padding: 10px;
+        text-align: center;
+        background-color:#5f9ea0;
+        color: whitesmoke;
+        border-radius: 2%;
+    }
+    .card-item {
+        width: 100%;
+        height: auto;
+        margin: 10px auto;
+        padding: 10px;
+        text-align: left;
+        background-color: #f0f8ff;
+        font-size: 10px;
+        border-radius: 2%;
+    }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +59,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -89,10 +121,9 @@
         </nav>
 
         <main class="py-4">
-            <h1>@yield('title')</h1>
-            <h2 class="menutitle">
+            <div class="menutitle">
             @yield('menubar')
-            </h2>
+            </div>
             <div class="content">
             @yield('content')
             </div>

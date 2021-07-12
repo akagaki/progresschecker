@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function index(Request $request)
-    {
-        $items = Task::all();
-        return view('task.index', ['items' => $items]);
-    }
 
     public function add(Request $request)
     {
@@ -30,7 +25,7 @@ class TaskController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $task->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function edit(Request $request)
@@ -46,7 +41,7 @@ class TaskController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $task->fill($form)->save();
-        return redirect('/team');
+        return redirect('/home');
     }
 
     public function del(Request $request)
@@ -58,6 +53,12 @@ class TaskController extends Controller
     public function remove(Request $request)
     {
         Task::find($request->id)->delete();
-        return redirect('/team');
+        return redirect('/home');
+    }
+
+    public function show(Request $request)
+    {
+        $task = Task::find($request->id);
+        return view('task.show', ['task' => $task]);
     }
 }

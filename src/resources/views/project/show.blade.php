@@ -22,7 +22,7 @@
          @if ($project->tasks != null)
                @foreach ($project->tasks as $task)
                <tr>
-                  <td>{{$task->name}}</td>
+                  <td><a href='/task/show?id={{$task->id}}'>{{$task->name}}</a></td>
                   <td>{{$task->getProgressString()}}</td>
                   <td>{{$task->deadline}}</td>
                </tr>
