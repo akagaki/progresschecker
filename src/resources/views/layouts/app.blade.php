@@ -2,22 +2,29 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <style>
-    body {font-size:16pt; color:#999; margin: 5px; }
+    main {background-color: #f5f5f5;}
+    body {font-size:16pt; color:#383c3c; margin: 5px; }
     .menutitle {font-size:14pt; font-weight:bold; margin: 10px; padding: 20px; }
     .content {margin:10px; }
     .footer { text-align:right; font-size:10pt; margin:10px;
         border-bottom:solid 1px #ccc; color:#ccc; }
     .items{float: right; padding-right: 40px;}
+    .member-search { margin-left: 20px;}
+    .member-add { margin: 20px 0;}
+    .team-conteiner{display: flex; }
     .team-box {
-         padding: 20px;margin: 20px 10px;
+         padding: 20px;margin: 20px 10px; 
+         background-color: white; box-shadow: 2px 2px 4px gray;border-radius: 1%;
     }
-    .team-information{font-weight:bold; }
-    .project-information p{ 
+    .main-information{
+        border-bottom:solid 1px #ccc; font-weight:bold; padding: 10px 0; margin: 10px 0;
+    }
+    .sub-information p{ 
         align-items: center;
         margin: auto 0;
     }
-    .project-information {
-        border-top:solid 1px #ccc; border-bottom:solid 1px #ccc; 
+    .sub-information {
+        border-bottom:solid 1px #ccc; 
         padding: 10px 0; margin: 10px 0;
 
     }
@@ -32,7 +39,8 @@
         text-align: center;
         background-color:#5f9ea0;
         color: whitesmoke;
-        border-radius: 2%;
+        box-shadow: 2px 2px 4px gray;
+        border-radius: 2%
     }
     .card-item {
         width: 100%;
@@ -40,7 +48,7 @@
         margin: 10px auto;
         padding: 10px;
         text-align: left;
-        background-color: #f0f8ff;
+        background-color: #ffff;
         font-size: 10px;
         border-radius: 2%;
     }

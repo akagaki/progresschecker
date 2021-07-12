@@ -3,7 +3,10 @@
 @section('title', 'Edit')
 
 @section('menubar')
-   更新ページ
+   チーム編集ページ
+   <div class="items">
+      <a href='/team/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
+   </div>
 @endsection
 
 @section('content')
@@ -16,20 +19,24 @@
        </ul>
    </div>
    @endif
+<div class="team-box">
+
    <form action="/team/edit" method="post">
-   <table>
-      @csrf
-      <input type="hidden" name="id" value="{{$form->id}}">
-      <input type="hidden" name="user_id" value="{{$form->user_id}}">
-      <tr><th>チーム名: </th><td><input type="text" name="name" 
-         value="{{$form->name}}"></td></tr>
-      <tr><th>詳細: </th><td><input type="text" name="information" 
-         value="{{$form->information}}"></td></tr>
-      <tr><th></th><td><input type="submit" 
-         value="send"></td></tr>
-   </table>
-   <button> <a href='/team/show?id={{$form->id}}'>戻る</a></button>
+  
+            <div class="main-information">
+               @csrf
+               <input type="hidden" name="id" value="{{$form->id}}">
+               <input type="hidden" name="user_id" value="{{$form->user_id}}">
+               <p>チーム名：<input type="text" name="name" value="{{$form->name}}"></p>
+               <p>詳細　　：<input type="text" name="information" value="{{$form->information}}"></p>
+               <p>作成者　：{{$form->ownerName()}}</p>
+               <p>作成日　：{{$form->created_at}}</p>
+               <p>更新日　：{{$form->updated_at}}</p> 
+               <input type="submit" value="編集">    
+             </div>
+   
    </form>
+</div>
 @endsection
 
 @section('footer')

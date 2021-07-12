@@ -15,14 +15,14 @@
    @foreach ($teams as $team)
      <div class="team-box">
 <!-- Team -->
-            <div class="team-information">
+            <div class="main-information">
                 <p>チーム名：<a href='/team/show?id={{$team->id}}'>{{$team->name}}</a></p>
             </div>
 
 <!-- Project -->
         @if ($team->projects != null)
             @foreach ($team->projects as $project)
-            <div class="project-information">
+            <div class="sub-information">
                 <p>プロジェクト名：<a href='/project/show?id={{$project->id}}'>{{$project->name}}</a></p>
                 <p>詳細：{{$project->information}}</p>
             </div>

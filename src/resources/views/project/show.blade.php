@@ -3,34 +3,97 @@
 @section('title', 'Show')
 
 @section('menubar')
-{{$project->ownerTeam()}}'sプロジェクト 詳細ページ
+プロジェクト詳細ページ
+   <div class="items">
+      <a href='/task/add?id={{$project->id}}'><i class="fas fa-plus"></i>NewTask</a>
+      <a href='/team/show?id={{$project->team_id}}'><i class="fa fa-reply"></i>	</a>
+   </div>
 @endsection
 
 @section('content')
-   <table>
-   @csrf
-      <tr><th>プロジェクト名: </th><td>{{$project->name}}</td></tr>
-      <tr><th>詳細: </th><td>{{$project->information}}</td></tr>
-      <tr><th>作成者: </th><td>{{$project->ownerName()}}</td></tr>
-      <tr><th>作成日: </th><td>{{$project->created_at}}</td></tr>
-      <tr><th>更新日: </th><td>{{$project->updated_at}}</td></tr>
-   </table>
-   <button> <a href='/project/edit?id={{$project->id}}'>編集</a></button>
-   <button> <a href='/project/del?id={{$project->id}}'>削除</a></button>
-   <table>
-      <tr><th>タスク名</th><th>進捗</th><th>期日</th></tr>    
-         @if ($project->tasks != null)
-               @foreach ($project->tasks as $task)
-               <tr>
-                  <td><a href='/task/show?id={{$task->id}}'>{{$task->name}}</a></td>
-                  <td>{{$task->getProgressString()}}</td>
-                  <td>{{$task->deadline}}</td>
-               </tr>
-               @endforeach    
-         @endif
-   </table>
-   <button><a href='/task/add?id={{$project->id}}''>新規タスク作成</a></button>
-   <button> <a href='/team/show?id={{$project->team_id}}'>戻る</a></button>
+<div class="team-box">
+         
+<!-- Team -->
+         <div class="sub-information">
+            <p>チーム名：{{$project->ownerTeam()}}</p>  
+         </div>
+         <div class="main-information">
+            <div class="items">
+               <a href='/project/store?id={{$project->id}}'><i class="fas fa-plus"></i>NewMember</a>
+               <a href='/project/edit?id={{$project->id}}'><i class="fas fa-tools"></i></a>
+               <a href='/project/del?id={{$project->id}}'><i class="fas fa-trash-alt"></i></a>
+            </div>
+         @csrf
+            <p>プロジェクト名：{{$project->name}}</p>
+            <p>詳細　　：{{$project->information}}</p>
+            <p>作成者　：{{$project->ownerName()}}</p>
+            <p>作成日　：{{$project->created_at}}</p>
+            <p>更新日　：{{$project->updated_at}}</p> 
+         </div>
+<!-- Task -->
+@if ($project->tasks != null)
+             <p>タスクボード</p>
+             <div class="task-box">
+                  <div class="card-container"> 未対応
+                     @foreach ($project->tasks as $task)
+                        @if ($task->progress ==0)
+                              <div class="card-item">
+                                 <a href="/task/show?id={{$task->id}}">
+                                    <p>タスク名：{{$task->name}}</p>
+                                    <p>詳細：{{$task->information}}</p>
+                                    <p>進捗：{{$task->getProgressString()}}</p>
+                                    <p>期日：{{$task->deadline}}</p>
+                                 </a>
+                              </div>
+                        @endif
+                     @endforeach 
+                  </div>
+                <div class="card-container"> 対応中
+                  @foreach ($project->tasks as $task)
+                     @if ($task->progress ==1)
+                           <div class="card-item">
+                              <a href="/task/show?id={{$task->id}}">
+                                 <p>タスク名：{{$task->name}}</p>
+                                 <p>詳細：{{$task->information}}</p>
+                                 <p>進捗：{{$task->getProgressString()}}</p>
+                                 <p>期日：{{$task->deadline}}</p>
+                              </a>
+                           </div>
+                     @endif
+                  @endforeach 
+                </div>
+                <div class="card-container"> 対応済
+                  @foreach ($project->tasks as $task)
+                     @if ($task->progress ==2)
+                           <div class="card-item">
+                              <a href="/task/show?id={{$task->id}}">
+                                 <p>タスク名：{{$task->name}}</p>
+                                 <p>詳細：{{$task->information}}</p>
+                                 <p>進捗：{{$task->getProgressString()}}</p>
+                                 <p>期日：{{$task->deadline}}</p>
+                              </a>
+                           </div>
+                     @endif
+                  @endforeach 
+                </div>
+                <div class="card-container"> 完了
+                  @foreach ($project->tasks as $task)
+                     @if ($task->progress ==3)
+                           <div class="card-item">
+                              <a href="/task/show?id={{$task->id}}">
+                                 <p>タスク名：{{$task->name}}</p>
+                                 <p>詳細：{{$task->information}}</p>
+                                 <p>進捗：{{$task->getProgressString()}}</p>
+                                 <p>期日：{{$task->deadline}}</p>
+                              </a>
+                           </div>
+                     @endif
+                  @endforeach 
+                </div>
+            </div> 
+        @endif
+    </div>
+
 @endsection
 
 @section('footer')

@@ -4,20 +4,30 @@
 
 @section('menubar')
    削除ページ
+   <div class="items">
+      <a href='/team/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
+   </div>
 @endsection
 
 @section('content')
+
+<div class="team-box">
+
    <form action="/team/del" method="post">
-   <table>
-      @csrf
-      <input type="hidden" name="id" value="{{$form->id}}">
-      <tr><th>チーム名: </th><td>{{$form->name}}</td></tr>
-      <tr><th>詳細: </th><td>{{$form->information}}</td></tr>
-      <tr><th>作成者: </th><td>{{$form->ownerName()}}</td></tr>
-      <tr><th></th><td><input type="submit" value="send"></td></tr>
-   </table>
-   <button> <a href='/team/show?id={{$form->id}}'>戻る</a></button>
+  
+             <div class="main-information">
+               @csrf
+               <input type="hidden" name="id" value="{{$form->id}}">
+               <p>チーム名：{{$form->name}}</p>
+               <p>詳細　　：{{$form->information}}</p>
+               <p>作成者　：{{$form->ownerName()}}</p>
+               <p>作成日　：{{$form->created_at}}</p>
+               <p>更新日　：{{$form->updated_at}}</p> 
+               <input type="submit" value="削除">    
+             </div>
+   
    </form>
+</div>
 @endsection
 
 @section('footer')

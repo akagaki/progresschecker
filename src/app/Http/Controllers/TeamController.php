@@ -12,19 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $teams = Team::all();
-    //     return view('team.index', ['teams' => $teams]);
-    // }
 
-   public function add(Request $request)
-   {
-        $user = Auth::user();   
-        return view('team.add',['user' => $user]);
-   }
+    public function add(Request $request)
+    {
+            $user = Auth::user();   
+            return view('team.add',['user' => $user]);
+    }
 
-   public function create(Request $request)
+    public function create(Request $request)
     {   
         
         $this->validate($request, Team::$rules);
@@ -53,8 +48,8 @@ class TeamController extends Controller
 
     public function del(Request $request)
     {
-        $person = Team::find($request->id);
-        return view('team.del', ['form' => $person]);
+        $team = Team::find($request->id);
+        return view('team.del', ['form' => $team]);
     }
 
     public function remove(Request $request)
@@ -67,6 +62,26 @@ class TeamController extends Controller
     {
         $team = Team::find($request->id);
         return view('team.show', ['team' => $team]);
+    }
+    public function store(Request $request)
+    {
+        $team = Team::find($request->id);
+        return view('team.store', ['team' => $team],['input' => 'メールアドレスを入力']);
+    }
+
+    public function search(Request $request)
+    {
+        $team = Team::find($request->id);
+        $user = User::where('email', $request->input)->first();
+        return view('team.member', ['team' => $team, 'user' => $user, 'input' => $request->input]);
+    }
+
+    public function teamadd(Request $request)
+    {   
+        $team = Team::find($request->id);
+        $param = ['team_id' => $request->team_id, 'user_id' => $request->user_id];
+        DB::table('team_user')->insert($param);
+        return view('team.store', ['team' => $team], ['input' => '続けて登録できます']);
     }
 
 }
