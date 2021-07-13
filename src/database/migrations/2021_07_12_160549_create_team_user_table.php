@@ -16,11 +16,8 @@ class CreateTeamUserTable extends Migration
         Schema::create('team_user', function (Blueprint $table) {
              $table->unsignedInteger('team_id');
              $table->unsignedInteger('user_id');
-             // 複合主キー
+
              $table->primary(['team_id','user_id']);
-            //  外部キー制約
-            //  $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-            //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

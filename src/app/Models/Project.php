@@ -49,6 +49,15 @@ class Project extends Model
     {
         return $this->team->name;
     }
+    public function ownerTeamId()
+    {
+        return $this->team->id;
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 
 
 }

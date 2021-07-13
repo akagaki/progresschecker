@@ -20,12 +20,13 @@ class TaskController extends Controller
 
     public function create(Request $request)
     {
+        $project = Project::find($request->project_id);
         $this->validate($request, Task::$rules);
         $task = new Task;
         $form = $request->all();
         unset($form['_token']);
         $task->fill($form)->save();
-        return redirect('/home');
+        return view('project.show', ['project' => $project]);
     }
 
     public function edit(Request $request)

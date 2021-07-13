@@ -7,7 +7,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -26,7 +26,7 @@ class ProjectController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $project->fill($form)->save();
-        return redirect('/home');
+        return view('project.show', ['project' => $project]);
     }
 
     public function edit(Request $request)
@@ -42,7 +42,7 @@ class ProjectController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $project->fill($form)->save();
-        return redirect('/home');
+        return view('project.show', ['project' => $project]);
     }
 
     public function del(Request $request)
@@ -60,6 +60,34 @@ class ProjectController extends Controller
     public function show(Request $request)
     {
         $project = Project::find($request->id);
+        return view('project.show', ['project' => $project]);
+    }
+
+    public function store(Request $request)
+    {
+        $project = Project::find($request->id);
+        $team = Team::find($project->ownerTeamId());
+        return view('project.store', ['project' => $project],['team' => $team]);
+    }
+
+    public function projectadd(Request $request)
+    {   
+        $project = Project::find($request->id);
+        $param = ['project_id' => $request->project_id, 'user_id' => $request->user_id];
+        DB::table('project_user')->insert($param);
+        return view('project.show', ['project' => $project]);
+    }
+
+    public function memberdel(Request $request)
+    {
+        $project = Project::find($request->id);
+        return view('project.memberdel', ['project' => $project]);
+    }
+
+    public function memberremove(Request $request)
+    {   
+        $project = Project::find($request->id);
+        DB::table('project_user')->where('user_id',$request->user_id)->where('project_id',$request->project_id)->delete();
         return view('project.show', ['project' => $project]);
     }
 

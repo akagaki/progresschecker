@@ -17,7 +17,7 @@
          
 <!-- Team -->
          <div class="sub-information">
-            <p>チーム名：{{$project->ownerTeam()}}</p>  
+            <p>チーム名：<a href="/team/show?id={{$project->team_id}}">{{$project->ownerTeam()}}</a></p>
          </div>
 <!-- Project -->
 <div class="main-conteiner">
@@ -31,7 +31,13 @@
          </div>
          <div class="member-information">
             <p>メンバー</p>
-            <a href='/project/store?id={{$project->id}}'><i class="fas fa-plus"></i>NewMember</a>
+            @foreach($project->users as $member)
+               <p>{{$member->name}}</p>
+            @endforeach
+         </div>
+         <div class="member-information">
+            <p><a href='/project/store?id={{$project->id}}'><i class="fas fa-plus"></i>NewMember</a></p>
+            <p><a href='/project/memberdel?id={{$project->id}}'><i class="fas fa-times"></i>DelMember</a></p>
          </div>
          <div class="main-items">
             <a href='/project/edit?id={{$project->id}}'><i class="fas fa-tools"></i></a>

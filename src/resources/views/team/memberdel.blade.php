@@ -24,6 +24,7 @@
             @foreach($team->users as $member)
             <form action="/team/memberdel" method="post">
                 @csrf
+                <input type="hidden" name="id" value="{{$team->id}}">
                 <input type="hidden" name="team_id" value="{{$team->id}}">
                 <input type="hidden" name="user_id" value="{{$member->id}}">
                 <p>{{$member->name}}　<input type="submit" value="削除"> </p>

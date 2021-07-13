@@ -93,9 +93,9 @@ class TeamController extends Controller
 
     public function memberremove(Request $request)
     {   
-        // DB::table('team_user')->where('user_id',$request->user_id)->delete();
+        $team = Team::find($request->id);
         DB::table('team_user')->where('user_id',$request->user_id)->where('team_id',$request->team_id)->delete();
-        return redirect('/home');
+        return view('team.show', ['team' => $team]);
     }
 
 }

@@ -45,6 +45,10 @@ Route::post('project/edit', [App\Http\Controllers\ProjectController::class, 'upd
 Route::get('project/del', [App\Http\Controllers\ProjectController::class, 'del']);
 Route::post('project/del', [App\Http\Controllers\ProjectController::class, 'remove']);
 Route::get('project/show', [App\Http\Controllers\ProjectController::class, 'show']);
+Route::get('project/store', [App\Http\Controllers\ProjectController::class, 'store']);
+Route::post('project/store', [App\Http\Controllers\ProjectController::class, 'projectadd']);
+Route::get('project/memberdel', [App\Http\Controllers\ProjectController::class, 'memberdel']);
+Route::post('project/memberdel', [App\Http\Controllers\ProjectController::class, 'memberremove']);
 // Task
 Route::get('task', [App\Http\Controllers\TaskController::class, 'index']);
 Route::get('task/add', [App\Http\Controllers\TaskController::class, 'add']);
