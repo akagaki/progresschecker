@@ -3,7 +3,10 @@
 @section('title', 'Task.Add')
 
 @section('menubar')
-   {{$project->name}} / 新規タスク作成
+   新規タスク作成
+      <div class="items">
+         <a href='/project/show?id={{$project->id}}'><i class="fa fa-reply"></i></a>
+      </div>
 @endsection
 
 @section('content')
@@ -16,24 +19,32 @@
        </ul>
    </div>
    @endif
-   <form action="/task/add" method="post">
-   <table>
-      @csrf
-      <input type="hidden" name="project_id" value="{{$project->id}}">
-      <input type="hidden" name="user_id" value="{{$user->id}}">
-      <input type="hidden" name="progress" value=0>
-      <tr><th>タスク名: </th><td><input type="text" 
-         name="name"></td></tr>
-      <tr><th>詳細: </th><td><input type="text" 
-         name="information"></td></tr>
-      <tr><th>期日: </th><td><input type="date" 
-         name="deadline"></td></tr>
-      <tr><th>作成者: </th><td>{{$user->name}}</td></tr>
-      <tr><th></th><td><input type="submit" 
-         value="send"></td></tr>
-   </table>
+<div class="team-box">
+         <div class="sub-information">
+            <p>プロジェクト名：<a href="/project/show?id={{$project->id}}">{{$project->name}}</a></p>
+         </div>
+ <form action="/task/add" method="post">
+   <div class="main-information">
+            @csrf
+            <input type="hidden" name="project_id" value="{{$project->id}}">
+            <input type="hidden" name="user_id" value="{{$user->id}}">
+            <input type="hidden" name="progress" value=0>
+            <p>タスク名：<input type="text" name="name" value="{{old('name')}}"></p>
+            <p>詳細　　：<input type="text" name="information" value="{{old('information')}}"></p>
+            <p>担当者　：
+               <select name="member_id">
+                     <option value="{{$user->id}}">{{$user->name}}</option>
+                  @foreach($project->users as $member)
+                     <option value="{{$member->id}}">{{$member->name}}</option>
+                  @endforeach
+               </select>
+            </p>
+            <p>期日　　：<input type="date" name="deadline"></p>
+            <p>作成者　：{{$user->name}}</p>
+            <input type="submit" value="新規作成">
+        </div>
    </form>
-   <button> <a href='/project/show?id={{$project->id}}'>戻る</a></button>
+</div>
 @endsection
 
 @section('footer')

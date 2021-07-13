@@ -4,6 +4,9 @@
 
 @section('menubar',)
    新規チーム作成
+   <div class="items">
+      <a href='/home'><i class="fa fa-reply"></i></a>
+   </div>
 @endsection
 
 @section('content')
@@ -16,20 +19,19 @@
        </ul>
    </div>
    @endif
+<div class="team-box">
+
    <form action="/team/add" method="post">
-   <table>
-       @csrf
-       <input type="hidden" name="user_id" value="{{$user->id}}">
-       <tr><th>チーム名: </th><td><input type="text" name="name"
-           value="{{old('name')}}"></td></tr>
-       <tr><th>詳細: </th><td><input type="text" name="information"
-           value="{{old('information')}}"></td></tr>
-       <tr><th>作成者: </th><td>{{$user->name}}</td></tr>
-       <tr><th></th><td><input type="submit" 
-           value="send"></td></tr>
-   </table>
+        <div class="main-information">
+            @csrf
+            <input type="hidden" name="user_id" value="{{$user->id}}">
+            <p>チーム名：<input type="text" name="name" value="{{old('name')}}"></p>
+            <p>詳細　　：<input type="text" name="information" value="{{old('information')}}"></p>
+            <p>作成者　：{{$user->name}}</p>
+            <input type="submit" value="新規作成">
+        </div>
    </form>
-   <button> <a href='/home'>戻る</a></button>
+</div>
 @endsection
 
 @section('footer')

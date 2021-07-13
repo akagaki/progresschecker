@@ -3,23 +3,44 @@
 @section('title', 'Show')
 
 @section('menubar')
-{{$task->ownerProject()}}'sタスク 詳細ページ
+タスク 詳細ページ
+   <div class="items">
+      <a href='/project/show?id={{$task->project_id}}'><i class="fa fa-reply"></i>	</a>
+   </div>
 @endsection
 
 @section('content')
-   <table>
-   @csrf
-      <tr><th>タスク名: </th><td>{{$task->name}}</td></tr>
-      <tr><th>詳細: </th><td>{{$task->information}}</td></tr>
-      <tr><th>作成者: </th><td>{{$task->ownerName()}}</td></tr>
-      <tr><th>進捗: </th><td>{{$task->getProgressString()}}</td></tr>
-      <tr><th>期日: </th><td>{{$task->deadline}}</td></tr>
-      <tr><th>作成日: </th><td>{{$task->created_at}}</td></tr>
-      <tr><th>更新日: </th><td>{{$task->updated_at}}</td></tr>
-   </table>
-   <button> <a href='/task/edit?id={{$task->id}}'>編集</a></button>
-   <button> <a href='/task/del?id={{$task->id}}'>削除</a></button>
-   <button> <a href='/project/show?id={{$task->project_id}}'>戻る</a></button>
+<div class="team-box">
+<!-- Project -->
+   <div class="sub-information">
+      <p>プロジェクト名：<a href="/project/show?id={{$task->project_id}}">{{$task->ownerProject()}}</a></p>
+   </div>
+<!-- Task -->
+      <div class="main-conteiner">
+            <div class="main-information">
+            @csrf
+               <p>タスク名：{{$task->name}}</p>
+               <p>詳細　　：{{$task->information}}</p>
+               <p>作成日　：{{$task->created_at}}</p>
+               <p>更新日　：{{$task->updated_at}}</p> 
+               <p>作成者　：{{$task->ownerName()}}</p>
+            </div>
+            <div class="member-information">
+                  @foreach($task->users as $member)
+                        <p>担当名：{{$member->name}}</p>
+                  @endforeach
+               <p>進捗　：{{$task->getProgressString()}}</p>
+               <p>期日　：{{$task->deadline}}</p>
+            </div>
+            <div class="member-information">
+               <p><a href='/task/store?id={{$task->id}}'><i class="fas fa-plus"></i>担当変更</a></p>
+            </div>
+            <div class="main-items">
+                  <a href='/task/edit?id={{$task->id}}'><i class="fas fa-tools"></i></a>
+                  <a href='/task/del?id={{$task->id}}'><i class="fas fa-trash-alt"></i></a>
+            </div>
+      </div>
+</div>
 @endsection
 
 @section('footer')

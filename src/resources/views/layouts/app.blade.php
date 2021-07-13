@@ -19,7 +19,7 @@
         font-weight:bold; padding: 10px 0; margin: 10px 0;
     }
     .member-information { 
-        font-weight:bold; padding: 10px 0; margin: 10px 20px;
+        font-weight:bold; padding: 10px; margin: 10px 20px; border-left:solid 1px #ccc;
     }
     .member-add { margin: 20px 0;}
     .main-items{padding: 10px 0; margin: 10px 20px; float: right;}
@@ -36,6 +36,8 @@
     .task-box {
         display: flex;
         width: 100%;
+        padding-bottom: 10px;
+        border-bottom:solid 1px #ccc;
     }
     .card-container {
         flex: 1;

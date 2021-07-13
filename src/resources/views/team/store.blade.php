@@ -59,6 +59,9 @@
                                  <a href="/task/show?id={{$task->id}}">
                                     <p>タスク名：{{$task->name}}</p>
                                     <p>詳細：{{$task->information}}</p>
+                                    @foreach($task->users as $member)
+                                          <p>担当名：{{$member->name}}</p>
+                                    @endforeach
                                     <p>進捗：{{$task->getProgressString()}}</p>
                                     <p>期日：{{$task->deadline}}</p>
                                  </a>
@@ -73,6 +76,9 @@
                               <a href="/task/show?id={{$task->id}}">
                                  <p>タスク名：{{$task->name}}</p>
                                  <p>詳細：{{$task->information}}</p>
+                                 @foreach($task->users as $member)
+                                       <p>担当名：{{$member->name}}</p>
+                                 @endforeach
                                  <p>進捗：{{$task->getProgressString()}}</p>
                                  <p>期日：{{$task->deadline}}</p>
                               </a>
@@ -87,6 +93,9 @@
                               <a href="/task/show?id={{$task->id}}">
                                  <p>タスク名：{{$task->name}}</p>
                                  <p>詳細：{{$task->information}}</p>
+                                 @foreach($task->users as $member)
+                                       <p>担当名：{{$member->name}}</p>
+                                 @endforeach
                                  <p>進捗：{{$task->getProgressString()}}</p>
                                  <p>期日：{{$task->deadline}}</p>
                               </a>
@@ -101,6 +110,9 @@
                               <a href="/task/show?id={{$task->id}}">
                                  <p>タスク名：{{$task->name}}</p>
                                  <p>詳細：{{$task->information}}</p>
+                                 @foreach($task->users as $member)
+                                       <p>担当名：{{$member->name}}</p>
+                                 @endforeach
                                  <p>進捗：{{$task->getProgressString()}}</p>
                                  <p>期日：{{$task->deadline}}</p>
                               </a>

@@ -3,7 +3,10 @@
 @section('title', 'Project.Add')
 
 @section('menubar')
-   {{$team->name}} / 新規プロジェクト作成
+   新規プロジェクト作成
+   <div class="items">
+      <a href='/team/show?id={{$team->id}}'><i class="fa fa-reply"></i></a>
+   </div>
 @endsection
 
 @section('content')
@@ -16,21 +19,22 @@
        </ul>
    </div>
    @endif
+<div class="team-box">
+         <div class="sub-information">
+            <p>チーム名：<a href="/team/show?id={{$team->id}}">{{$team->name}}</a></p>
+         </div>
    <form action="/project/add" method="post">
-   <table>
-      @csrf
-      <input type="hidden" name="team_id" value="{{$team->id}}">
-      <input type="hidden" name="user_id" value="{{$user->id}}">
-      <tr><th>プロジェクト名: </th><td><input type="text" 
-         name="name"></td></tr>
-      <tr><th>詳細: </th><td><input type="text" 
-         name="information"></td></tr>
-      <tr><th>作成者: </th><td>{{$user->name}}</td></tr>
-      <tr><th></th><td><input type="submit" 
-         value="send"></td></tr>
-   </table>
+         <div class="main-information">
+            @csrf
+            <input type="hidden" name="user_id" value="{{$user->id}}">
+            <input type="hidden" name="team_id" value="{{$team->id}}">
+            <p>プロジェクト名：<input type="text" name="name" value="{{old('name')}}"></p>
+            <p>詳細　　：<input type="text" name="information" value="{{old('information')}}"></p>
+            <p>作成者　：{{$user->name}}</p>
+            <input type="submit" value="新規作成">
+        </div>
    </form>
-   <button> <a href='/team/show?id={{$team->id}}'>戻る</a></button>
+</div>
 @endsection
 
 @section('footer')

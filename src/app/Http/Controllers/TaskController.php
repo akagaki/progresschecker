@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
@@ -26,6 +27,8 @@ class TaskController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $task->fill($form)->save();
+        $param = ['task_id' => $task->id, 'user_id' => $request->member_id];
+        DB::table('task_user')->insert($param);
         return view('project.show', ['project' => $project]);
     }
 
