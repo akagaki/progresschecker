@@ -3,29 +3,41 @@
 @section('title', 'Show')
 
 @section('menubar')
-   チーム詳細ページ
+チーム詳細ページ
+   <div class="items">
+      <a href='/home'><i class="fa fa-reply"></i>	</a>
+   </div>
    <div class="items">
       <a href='/project/add?id={{$team->id}}''><i class="fas fa-plus"></i>NewProject</a>
    </div>
 @endsection
 
 @section('content')
-
-
-     <div class="team-box">
-                  <div class="items">
-                     <a href='/team/store?id={{$team->id}}'><i class="fas fa-plus"></i>NewMember</a>
-                     <a href='/team/edit?id={{$team->id}}'><i class="fas fa-tools"></i></a>
-                     <a href='/team/del?id={{$team->id}}'><i class="fas fa-trash-alt"></i></a>
-                  </div>
+<div class="team-box">
 <!-- Team -->
-            <div class="main-information">
-               <p>チーム名：{{$team->name}}</p>
-               <p>詳細　　：{{$team->information}}</p>
-               <p>作成者　：{{$team->ownerName()}}</p>
-               <p>作成日　：{{$team->created_at}}</p>
-               <p>更新日　：{{$team->updated_at}}</p>      
-             </div>
+   <div class="main-conteiner">
+      <div class="main-information">
+         <p>チーム名：{{$team->name}}</p>
+         <p>詳細　　：{{$team->information}}</p>
+         <p>作成者　：{{$team->ownerName()}}</p>
+         <p>作成日　：{{$team->created_at}}</p>
+         <p>更新日　：{{$team->updated_at}}</p>      
+      </div>
+      <div class="member-information">
+         <p>メンバー</p> 
+         @foreach($team->users as $member)
+           <p>{{$member->name}}</p>
+         @endforeach
+      </div>
+      <div class="member-information">
+         <p><a href='/team/store?id={{$team->id}}'><i class="fas fa-plus"></i>NewMember</a></p>
+         <p><a href='/team/memberdel?id={{$team->id}}'><i class="fas fa-times"></i>DelMember</a></p>
+      </div>
+      <div class="main-items">
+         <a href='/team/edit?id={{$team->id}}'><i class="fas fa-tools"></i></a>
+         <a href='/team/del?id={{$team->id}}'><i class="fas fa-trash-alt"></i></a>
+      </div>
+   </div>      
 <!-- Project -->
         @if ($team->projects != null)
             @foreach ($team->projects as $project)

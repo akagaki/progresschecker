@@ -5,8 +5,10 @@
 @section('menubar')
 プロジェクト詳細ページ
    <div class="items">
-      <a href='/task/add?id={{$project->id}}'><i class="fas fa-plus"></i>NewTask</a>
       <a href='/team/show?id={{$project->team_id}}'><i class="fa fa-reply"></i>	</a>
+   </div>
+   <div class="items">
+      <a href='/task/add?id={{$project->id}}'><i class="fas fa-plus"></i>NewTask</a>
    </div>
 @endsection
 
@@ -17,19 +19,25 @@
          <div class="sub-information">
             <p>チーム名：{{$project->ownerTeam()}}</p>  
          </div>
+<!-- Project -->
+<div class="main-conteiner">
          <div class="main-information">
-            <div class="items">
-               <a href='/project/store?id={{$project->id}}'><i class="fas fa-plus"></i>NewMember</a>
-               <a href='/project/edit?id={{$project->id}}'><i class="fas fa-tools"></i></a>
-               <a href='/project/del?id={{$project->id}}'><i class="fas fa-trash-alt"></i></a>
-            </div>
-         @csrf
+            @csrf
             <p>プロジェクト名：{{$project->name}}</p>
             <p>詳細　　：{{$project->information}}</p>
             <p>作成者　：{{$project->ownerName()}}</p>
             <p>作成日　：{{$project->created_at}}</p>
             <p>更新日　：{{$project->updated_at}}</p> 
          </div>
+         <div class="member-information">
+            <p>メンバー</p>
+            <a href='/project/store?id={{$project->id}}'><i class="fas fa-plus"></i>NewMember</a>
+         </div>
+         <div class="main-items">
+            <a href='/project/edit?id={{$project->id}}'><i class="fas fa-tools"></i></a>
+            <a href='/project/del?id={{$project->id}}'><i class="fas fa-trash-alt"></i></a>
+         </div>
+</div>
 <!-- Task -->
 @if ($project->tasks != null)
              <p>タスクボード</p>

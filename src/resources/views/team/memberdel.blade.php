@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'メンバー登録')
+@section('title', 'メンバー削除')
 
 @section('menubar')
-   メンバー追加
+   メンバー削除
    <div class="items">
       <a href='/team/show?id={{$team->id}}'><i class="fa fa-reply"></i>	</a>
    </div>
@@ -22,33 +22,20 @@
           <div class="member-information">
             <p>メンバー</p> 
             @foreach($team->users as $member)
-            <p>{{$member->name}}</p>
+            <form action="/team/memberdel" method="post">
+                @csrf
+                <input type="hidden" name="team_id" value="{{$team->id}}">
+                <input type="hidden" name="user_id" value="{{$member->id}}">
+                <p>{{$member->name}}　<input type="submit" value="削除"> </p>
+            </form>
             @endforeach
          </div>
           <div class="member-information">
-            <p>ユーザー検索</p>
-            <form action="/team/store" method="post">
-                  @csrf
-                  <input type="hidden" name="id" value="{{ $team->id }}">
-                  <input type="text" name="input" value="{{$input}}">
-                  <input type="submit" value="検索">
-            </form>
-            @if (isset($user))
-            <div class="member-add">
-               <form action="/team/member" method="post">
-                     @csrf
-                     <p>ユーザー名：{{$user->name}}</p> 
-                     <input type="hidden" name="id" value="{{ $team->id }}">
-                     <input type="hidden" name="team_id" value="{{$team->id}}">
-                     <input type="hidden" name="user_id" value="{{$user->id}}">   
-                     <input type="submit" value="登録">
-               </form>
-            </div>
-            @endif
+           
          </div>
          <div class="main-items">
-         <a href='/team/edit?id={{$team->id}}'><i class="fas fa-tools"></i></a>
-         <a href='/team/del?id={{$team->id}}'><i class="fas fa-trash-alt"></i></a>
+            <a href='/team/edit?id={{$team->id}}'><i class="fas fa-tools"></i></a>
+            <a href='/team/del?id={{$team->id}}'><i class="fas fa-trash-alt"></i></a>
          </div>
    </div>
 <!-- Project -->             
@@ -127,4 +114,3 @@
 @section('footer')
 copyright 2021 akagaki.
 @endsection
-

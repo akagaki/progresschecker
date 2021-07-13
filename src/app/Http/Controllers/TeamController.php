@@ -60,6 +60,7 @@ class TeamController extends Controller
 
     public function show(Request $request)
     {
+        
         $team = Team::find($request->id);
         return view('team.show', ['team' => $team]);
     }
@@ -81,7 +82,20 @@ class TeamController extends Controller
         $team = Team::find($request->id);
         $param = ['team_id' => $request->team_id, 'user_id' => $request->user_id];
         DB::table('team_user')->insert($param);
-        return view('team.store', ['team' => $team], ['input' => '続けて登録できます']);
+        return view('team.show', ['team' => $team]);
+    }
+
+    public function memberdel(Request $request)
+    {
+        $team = Team::find($request->id);
+        return view('team.memberdel', ['team' => $team]);
+    }
+
+    public function memberremove(Request $request)
+    {   
+        // DB::table('team_user')->where('user_id',$request->user_id)->delete();
+        DB::table('team_user')->where('user_id',$request->user_id)->where('team_id',$request->team_id)->delete();
+        return redirect('/home');
     }
 
 }

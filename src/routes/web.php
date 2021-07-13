@@ -34,6 +34,8 @@ Route::get('team/show', [App\Http\Controllers\TeamController::class, 'show']);
 Route::get('team/store', [App\Http\Controllers\TeamController::class, 'store']);
 Route::post('team/store', [App\Http\Controllers\TeamController::class, 'search']);
 Route::post('team/member', [App\Http\Controllers\TeamController::class, 'teamadd']);
+Route::get('team/memberdel', [App\Http\Controllers\TeamController::class, 'memberdel']);
+Route::post('team/memberdel', [App\Http\Controllers\TeamController::class, 'memberremove']);
 // Project
 Route::get('project', [App\Http\Controllers\ProjectController::class, 'index']);
 Route::get('project/add', [App\Http\Controllers\ProjectController::class, 'add']);

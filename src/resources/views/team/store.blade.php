@@ -3,7 +3,7 @@
 @section('title', 'メンバー登録')
 
 @section('menubar')
-   メンバー登録
+   チームメンバー登録
    <div class="items">
       <a href='/team/show?id={{$team->id}}'><i class="fa fa-reply"></i>	</a>
    </div>
@@ -11,7 +11,9 @@
 
 @section('content')
 <div class="team-box">
-   <div class="team-conteiner">
+           
+<!-- Team -->
+   <div class="main-conteiner">
          <div class="main-information">
             <p>チーム名：{{$team->name}}</p>
             <p>詳細　　：{{$team->information}}</p>
@@ -19,7 +21,13 @@
             <p>作成日　：{{$team->created_at}}</p>
             <p>更新日　：{{$team->updated_at}}</p>      
           </div>
-          <div class="member-search">
+          <div class="member-information">
+            <p>メンバー</p> 
+            @foreach($team->users as $member)
+            <p>{{$member->name}}</p>
+            @endforeach
+         </div>
+          <div class="member-information">
             <p>ユーザー検索</p>
             <form action="/team/store" method="post">
                   @csrf
@@ -27,6 +35,10 @@
                   <input type="text" name="input" value="{{$input}}">
                   <input type="submit" value="検索">
             </form>
+         </div>
+         <div class="main-items">
+               <a href='/team/edit?id={{$team->id}}'><i class="fas fa-tools"></i></a>
+               <a href='/team/del?id={{$team->id}}'><i class="fas fa-trash-alt"></i></a>
          </div>
    </div>
 <!-- Project -->             

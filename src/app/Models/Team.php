@@ -38,10 +38,12 @@ class Team extends Model
         return $this->user->name;
     }
 
-    public function userConnect()
+    public function users()
     {
         return $this->belongsToMany('App\Models\User');
     }
+
+    
 
 }
 

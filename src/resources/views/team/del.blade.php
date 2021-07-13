@@ -3,7 +3,7 @@
 @section('title', 'Delete')
 
 @section('menubar')
-   削除ページ
+   チーム削除ページ
    <div class="items">
       <a href='/team/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
    </div>
@@ -23,6 +23,7 @@
                <p>作成者　：{{$form->ownerName()}}</p>
                <p>作成日　：{{$form->created_at}}</p>
                <p>更新日　：{{$form->updated_at}}</p> 
+               <p>※一度削除すると元に戻すことはできません。</p> 本当に削除しますか？　
                <input type="submit" value="削除">    
              </div>
    

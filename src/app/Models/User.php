@@ -45,9 +45,4 @@ class User extends Authenticatable
     {
     return $this->hasMany('App\Models\Team');
     }
-
-    public function teamConnect()
-    {
-        return $this->belongsToMany('App\Models\Team');
-    }
 }

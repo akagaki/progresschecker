@@ -3,10 +3,12 @@
 @section('title', 'home')
 
 @section('menubar',)
-     ダッシュボード
-     <div class="items">
-        <a href='team/add'><i class="fas fa-plus">NewTeam</i></a>
+    ダッシュボード
+    <div class="items">
         <a href=''><i class="fas fa-search">Search</i></a>
+    </div>
+    <div class="items">
+        <a href='team/add'><i class="fas fa-plus">NewTeam</i></a>
     </div>
 @endsection
 
@@ -15,16 +17,17 @@
    @foreach ($teams as $team)
      <div class="team-box">
 <!-- Team -->
-            <div class="main-information">
-                <p>チーム名：<a href='/team/show?id={{$team->id}}'>{{$team->name}}</a></p>
-            </div>
+<div class="main-conteiner">
+    <div class="main-information">
+        <p>チーム名：<a href='/team/show?id={{$team->id}}'>{{$team->name}}</a></p>
+    </div>
+</div>
 
 <!-- Project -->
         @if ($team->projects != null)
             @foreach ($team->projects as $project)
             <div class="sub-information">
                 <p>プロジェクト名：<a href='/project/show?id={{$project->id}}'>{{$project->name}}</a></p>
-                <p>詳細：{{$project->information}}</p>
             </div>
 <!-- Task -->
              @if ($project->tasks != null)
