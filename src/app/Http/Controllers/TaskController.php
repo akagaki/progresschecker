@@ -34,8 +34,31 @@ class TaskController extends Controller
 
     public function edit(Request $request)
     {
+        $user = Auth::user();
         $task = Task::find($request->id);
-        return view('task.edit', ['form' => $task]);
+        $project = Project::find($task->project_id);
+        return view('task.edit',['user' => $user,'task' => $task,'project' => $project]);
+    }
+    public function memberedit(Request $request)
+    {
+        $user = Auth::user();
+        $task = Task::find($request->id);
+        $project = Project::find($task->project_id);
+        return view('task.memberedit',['user' => $user,'task' => $task,'project' => $project]);
+    }
+    public function progressedit(Request $request)
+    {
+        $user = Auth::user();
+        $task = Task::find($request->id);
+        $project = Project::find($task->project_id);
+        return view('task.progressedit',['user' => $user,'task' => $task,'project' => $project]);
+    }
+    public function deadlineedit(Request $request)
+    {
+        $user = Auth::user();
+        $task = Task::find($request->id);
+        $project = Project::find($task->project_id);
+        return view('task.deadlineedit',['user' => $user,'task' => $task,'project' => $project]);
     }
 
     public function update(Request $request)
@@ -45,19 +68,22 @@ class TaskController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $task->fill($form)->save();
-        return redirect('/home');
+        $param = ['task_id' => $task->id, 'user_id' => $request->member_id];
+        DB::table('task_user')->where('task_id',$task->id)->update($param);
+        return view('task.show', ['task' => $task]);
     }
 
     public function del(Request $request)
     {
         $task = Task::find($request->id);
-        return view('task.del', ['form' => $task]);
+        return view('task.del', ['task' => $task]);
     }
 
     public function remove(Request $request)
     {
+        $project = Project::find($request->project_id);
         Task::find($request->id)->delete();
-        return redirect('/home');
+        return view('project.show', ['project' => $project]);
     }
 
     public function show(Request $request)

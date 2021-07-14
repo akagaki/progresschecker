@@ -23,7 +23,7 @@
                <p>詳細　　：{{$task->information}}</p>
                <p>作成日　：{{$task->created_at}}</p>
                <p>更新日　：{{$task->updated_at}}</p> 
-               <p>作成者　：{{$task->ownerName()}}</p>
+               <p>最終更新：{{$task->ownerName()}}</p>
             </div>
             <div class="member-information">
                   @foreach($task->users as $member)
@@ -33,7 +33,9 @@
                <p>期日　：{{$task->deadline}}</p>
             </div>
             <div class="member-information">
-               <p><a href='/task/store?id={{$task->id}}'><i class="fas fa-plus"></i>担当変更</a></p>
+               <p><a href='/task/memberedit?id={{$task->id}}'><i class="fas fa-plus"></i>担当変更</a></p>
+               <p><a href='/task/progressedit?id={{$task->id}}'><i class="fas fa-plus"></i>進捗変更</a></p>
+               <p><a href='/task/deadlineedit?id={{$task->id}}'><i class="fas fa-plus"></i>期日変更</a></p>
             </div>
             <div class="main-items">
                   <a href='/task/edit?id={{$task->id}}'><i class="fas fa-tools"></i></a>

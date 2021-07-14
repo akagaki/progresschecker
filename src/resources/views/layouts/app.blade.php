@@ -14,15 +14,17 @@
         background-color: white; box-shadow: 2px 2px 4px gray;border-radius: 1%;
     }
     /* mein */
-    .main-conteiner{display: flex; border-bottom:solid 1px #ccc; }
+    .main-conteiner{display: flex; border-bottom:solid 1px #ccc; 
+    margin-bottom: 10px;
+    }
     .main-information{
-        font-weight:bold; padding: 10px 0; margin: 10px 0;
+        font-weight:bold; padding: 10px 0; 
     }
     .member-information { 
-        font-weight:bold; padding: 10px; margin: 10px 20px; border-left:solid 1px #ccc;
+        font-weight:bold; padding: 10px; margin: 0 20px; border-left:solid 1px #ccc;
     }
     .member-add { margin: 20px 0;}
-    .main-items{padding: 10px 0; margin: 10px 20px; float: right;}
+    .main-items{ margin: 10px 20px; float: right;}
     /* sub */
     .sub-information p{ 
         align-items: center;

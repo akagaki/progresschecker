@@ -40,6 +40,13 @@ class Task extends Model
         return $this->project->name;
     }
 
+    public function ownerProjectId()
+    {
+        return $this->project->id;
+    }
+
+
+
     public function getProgressString(){
         switch($this->progress){
         case 0:
@@ -57,5 +64,6 @@ class Task extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+
 
 }

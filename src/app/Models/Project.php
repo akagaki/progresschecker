@@ -18,11 +18,6 @@ class Project extends Model
        'information' => 'required'
    );
 
-   public function getData()
-   {
-       return $this->id . ': ' . $this->name . ' (' . $this->team->name . ')'.' (' . $this->user->name . ')';
-   }
-
     public function tasks()
     {
         return $this->hasMany('App\Models\Task');

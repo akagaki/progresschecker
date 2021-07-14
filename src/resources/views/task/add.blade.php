@@ -33,7 +33,6 @@
             <p>詳細　　：<input type="text" name="information" value="{{old('information')}}"></p>
             <p>担当者　：
                <select name="member_id">
-                     <option value="{{$user->id}}">{{$user->name}}</option>
                   @foreach($project->users as $member)
                      <option value="{{$member->id}}">{{$member->name}}</option>
                   @endforeach
