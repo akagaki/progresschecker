@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Project.Add')
+@section('title', '新規プロジェクト作成')
 
 @section('menubar')
    新規プロジェクト作成

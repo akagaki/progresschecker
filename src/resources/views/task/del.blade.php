@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Delete')
+@section('title', 'タスク削除')
 
 @section('menubar')
-   タスク削除ページ
+   タスク削除
 <div class="items">
    <a href='/task/show?id={{$task->id}}'><i class="fa fa-reply"></i>	</a>
 </div>

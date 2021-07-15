@@ -3,7 +3,7 @@
 @section('title', 'メンバー登録')
 
 @section('menubar')
-   チームメンバー登録
+   メンバー登録
    <div class="items">
       <a href='/team/show?id={{$team->id}}'><i class="fa fa-reply"></i>	</a>
    </div>

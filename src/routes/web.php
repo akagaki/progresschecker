@@ -22,6 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Mypege
+Route::get('/mypage', [App\Http\Controllers\MypageController::class, 'index']);
 // Team
 Route::get('team', [App\Http\Controllers\TeamController::class, 'index']);
 Route::get('team/add', [App\Http\Controllers\TeamController::class, 'add']);

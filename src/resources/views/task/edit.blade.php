@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Edit')
+@section('title', 'タスク編集')
 
 @section('menubar')
-   タスク更新ページ
+   タスク編集
 <div class="items">
    <a href='/task/show?id={{$task->id}}'><i class="fa fa-reply"></i>	</a>
 </div>

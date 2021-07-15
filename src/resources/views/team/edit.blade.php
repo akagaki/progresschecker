@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Edit')
+@section('title', 'チーム編集')
 
 @section('menubar')
-   チーム編集ページ
+   チーム編集
    <div class="items">
       <a href='/team/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
    </div>

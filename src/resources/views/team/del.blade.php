@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Delete')
+@section('title', 'チーム削除')
 
 @section('menubar')
-   チーム削除ページ
+   チーム削除
    <div class="items">
       <a href='/team/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
    </div>

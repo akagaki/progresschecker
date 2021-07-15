@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add')
+@section('title', '新規チーム作成')
 
 @section('menubar',)
    新規チーム作成

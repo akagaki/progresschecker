@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Edit')
+@section('title', 'プロジェクト編集')
 
 @section('menubar')
-   プロジェクト編集ページ
+   プロジェクト編集
    <div class="items">
       <a href='/project/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
    </div>

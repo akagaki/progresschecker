@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'home')
+@section('title', 'ダッシュボード')
 
 @section('menubar',)
     ダッシュボード
-    <div class="items">
-        <a href=''><i class="fas fa-search">Search</i></a>
-    </div>
     <div class="items">
         <a href='team/add'><i class="fas fa-plus">NewTeam</i></a>
     </div>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Delete')
+@section('title', 'プロジェクト削除')
 
 @section('menubar')
-   プロジェクト削除ページ
+   プロジェクト削除
    <div class="items">
       <a href='/project/show?id={{$form->id}}'><i class="fa fa-reply"></i>	</a>
    </div>

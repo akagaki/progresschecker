@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Show')
+@section('title', 'プロジェクト詳細')
 
 @section('menubar')
-プロジェクト詳細ページ
+プロジェクト詳細
    <div class="items">
       <a href='/team/show?id={{$project->team_id}}'><i class="fa fa-reply"></i>	</a>
    </div>

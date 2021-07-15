@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Show')
+@section('title', 'チーム詳細')
 
 @section('menubar')
-チーム詳細ページ
+チーム詳細
    <div class="items">
       <a href='/home'><i class="fa fa-reply"></i>	</a>
    </div>

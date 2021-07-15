@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Task.Add')
+@section('title', '新規タスク作成')
 
 @section('menubar')
    新規タスク作成
