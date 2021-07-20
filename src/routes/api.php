@@ -18,5 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('dashboard', [App\Http\Controllers\ApiController::class, 'index']);
+Route::get('userIndex', [App\Http\Controllers\ApiController::class, 'userIndex']);
+Route::get('teamIndex', [App\Http\Controllers\ApiController::class, 'teamIndex']);
+Route::get('projectIndex', [App\Http\Controllers\ApiController::class, 'projectIndex']);
+Route::get('taskIndex', [App\Http\Controllers\ApiController::class, 'taskIndex']);
 

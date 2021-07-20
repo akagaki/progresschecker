@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Team;
+use App\Models\Project;
+use App\Models\Task;
 
 class ApiController extends Controller
 {
@@ -14,9 +17,27 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    // 一覧取得
+    public function userIndex()
     {
-        return ApiResource::collection(Team::all());
+        $users = User::all();
+        return $users;
+    }
+    public function teamIndex()
+    {
+        $teams = Team::all();
+        return $teams;
+    }
+    public function projectIndex()
+    {
+        $projects = Project::all();
+        return $projects;
+    }
+    public function taskIndex()
+    {
+        $tasks = Task::all();
+        return $tasks;
     }
 
     /**

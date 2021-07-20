@@ -144,6 +144,7 @@
             <div class="footer">
             @yield('footer')
             </div>
+
         </main>
     </div>
 </body>
