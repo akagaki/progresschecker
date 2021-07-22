@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $teams = Team::all();
+        $teams = Auth::user()->userTeams;
         return view('home', ['teams' => $teams]);
     }
 }

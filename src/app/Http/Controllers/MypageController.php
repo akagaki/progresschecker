@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
-{
+{   
+
     public function index(Request $request)
     {
         $user = Auth::user(); 
@@ -21,6 +22,13 @@ class MypageController extends Controller
             }
         }
         
-        return view('mypage.index',['user'=>$user,'taskcount'=>$user->userTasks->count(),'incomplete_count'=>$incomplete_count]);
+        $sort = $request->sort;
+        if($sort != '') {
+            $tasks = Auth::user()->userTasks->sortBy($sort);
+        } else {
+            $tasks = Auth::user()->userTasks;
+        }
+
+        return view('mypage.index',['user'=>$user,'taskcount'=>$user->userTasks->count(),'incomplete_count'=>$incomplete_count, 'sort'=>$sort,'tasks'=>$tasks]);
     }
 }

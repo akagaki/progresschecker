@@ -61,6 +61,13 @@
         font-size: 10px;
         border-radius: 2%;
     }
+    .sort-items a {
+        border: 2px solid #5f9ea0;
+        border-radius: 10%;
+        padding: 3px;
+        background-color: #5f9ea0;
+        color: white;
+    }
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

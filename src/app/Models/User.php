@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Task');
     }
+    public function sortedTasks($sort)
+    {
+        return $this->userTasks->sortBy($sort);
+    }
 }

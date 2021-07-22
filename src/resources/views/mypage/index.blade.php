@@ -37,15 +37,15 @@ Myページ
          </div>
   </div>
       <p>タスクボード</p>
-      <p>
+      <p class='sort-items'>
          <i class="fas fa-filter"></i>
-         <button>期日</button>
-         <button>作成</button>
-         <button>更新</button>
+            <a href="/mypage?sort=created_at">作成順</a>
+            <a href="/mypage?sort=updated_at">更新順</a>
+            <a href="/mypage?sort=deadline">期日順</a>
       </p>
    <div class="task-box">
             <div class="card-container"> 未対応
-                @foreach ($user->userTasks as $task)
+                @foreach ($tasks as $task)
                     @if ($task->progress ==0)
                         <div class="card-item">
                             <a href="/task/show?id={{$task->id}}">
@@ -62,7 +62,7 @@ Myページ
                 @endforeach 
             </div>
             <div class="card-container"> 対応中
-                @foreach ($user->userTasks as $task)
+                @foreach ($tasks as $task)
                     @if ($task->progress ==1)
                         <div class="card-item">
                             <a href="/task/show?id={{$task->id}}">
@@ -79,7 +79,7 @@ Myページ
                 @endforeach 
             </div>
             <div class="card-container"> 対応済
-                @foreach ($user->userTasks as $task)
+                @foreach ($tasks as $task)
                     @if ($task->progress ==2)
                         <div class="card-item">
                             <a href="/task/show?id={{$task->id}}">
@@ -96,7 +96,7 @@ Myページ
                 @endforeach 
             </div>
             <div class="card-container"> 完了
-                @foreach ($user->userTasks as $task)
+                @foreach ($tasks as $task)
                     @if ($task->progress ==3)
                         <div class="card-item">
                             <a href="/task/show?id={{$task->id}}">
