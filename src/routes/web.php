@@ -20,7 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+Route::middleware('verified')->group(function() {
+// メール認証が必要なルートをここに追加（下記全部）
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Mypege
@@ -67,3 +70,4 @@ Route::post('task/edit', [App\Http\Controllers\TaskController::class, 'update'])
 Route::get('task/del', [App\Http\Controllers\TaskController::class, 'del'])->middleware('auth');
 Route::post('task/del', [App\Http\Controllers\TaskController::class, 'remove'])->middleware('auth');
 Route::get('task/show', [App\Http\Controllers\TaskController::class, 'show'])->middleware('auth');
+
