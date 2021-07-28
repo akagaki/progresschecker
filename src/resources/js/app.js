@@ -13,3 +13,10 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+require('./components/index');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Index from './components/index';
+
+ReactDOM.render(<Index />, document.getElementById('index'));
