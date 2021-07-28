@@ -25,7 +25,7 @@ class TaskItem extends React.Component{
           })
       }
   render() {
-    const taskName = this.state.loading ? "now loading...." : this.state.taskIndex.map(obj=>
+    const taskName = this.state.loading ? "NowLoading..." : this.state.taskIndex.map(obj=>
       <tr>
         <td>{obj.name}</td>
       </tr>

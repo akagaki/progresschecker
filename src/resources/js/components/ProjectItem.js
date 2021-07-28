@@ -25,7 +25,7 @@ class ProjectItem extends React.Component{
           })
       }
   render() {
-    const projectName = this.state.loading ? "now loading...." : this.state.projectIndex.map(obj =>
+    const projectName = this.state.loading ? "NowLoading..." : this.state.projectIndex.map(obj =>
       <tr>
         <td>{obj.name}</td>
       </tr>

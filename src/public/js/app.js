@@ -2045,7 +2045,7 @@ var ProjectItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var projectName = this.state.loading ? "now loading...." : this.state.projectIndex.map(function (obj) {
+      var projectName = this.state.loading ? "NowLoading..." : this.state.projectIndex.map(function (obj) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
             children: obj.name
@@ -2148,7 +2148,7 @@ var TaskItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var taskName = this.state.loading ? "now loading...." : this.state.taskIndex.map(function (obj) {
+      var taskName = this.state.loading ? "NowLoading..." : this.state.taskIndex.map(function (obj) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
             children: obj.name
@@ -2222,10 +2222,13 @@ var TeamItem = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this);
     _this.state = {
       loading: false,
-      teamIndex: []
+      teamIndex: [],
+      teamModalOpen: false,
+      teamInformation: []
     };
     return _this;
-  }
+  } // API取得
+
 
   _createClass(TeamItem, [{
     key: "componentDidMount",
@@ -2239,7 +2242,7 @@ var TeamItem = /*#__PURE__*/function (_React$Component) {
         return response.json();
       }).then(function (json) {
         console.log(json.map(function (obj) {
-          return obj.name;
+          return obj.id;
         }));
 
         _this2.setState({
@@ -2247,21 +2250,92 @@ var TeamItem = /*#__PURE__*/function (_React$Component) {
           loading: false
         });
       });
+    } // 『イベント』
+    // 詳細表示
+
+  }, {
+    key: "handleClickOpen",
+    value: function handleClickOpen(id) {
+      var data = this.state.teamIndex.find(function (obj) {
+        return obj.id === id;
+      });
+      console.log(data);
+      this.setState({
+        teamInformation: data,
+        teamModalOpen: true
+      });
+    } // 詳細を閉じる
+
+  }, {
+    key: "handleClickClose",
+    value: function handleClickClose() {
+      this.setState({
+        teamModalOpen: false,
+        teamInformation: []
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var teamName = this.state.loading ? "now loading...." : this.state.teamIndex.map(function (obj) {
+      var _this3 = this;
+
+      // 『データ』
+      // 一覧
+      var teamName = this.state.loading ? "NowLoading..." : this.state.teamIndex.map(function (obj) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+            onClick: function onClick() {
+              _this3.handleClickOpen(obj.id);
+            },
             children: obj.name
           })
         });
-      });
+      }); // 詳細
+
+      var teamShow = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u30C1\u30FC\u30E0\u540D\uFF1A", this.state.teamInformation.name]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u8A73\u7D30\u3000\u3000\uFF1A", this.state.teamInformation.information]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u4F5C\u6210\u65E5\u3000\uFF1A", this.state.teamInformation.created_at]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u4F5C\u6210\u8005\u3000\uFF1A", this.state.teamInformation.user_id]
+          })
+        })]
+      }); // 『描写』
+      // 詳細
+
+
+      var teamModal;
+
+      if (this.state.teamModalOpen === true) {
+        teamModal = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: [teamShow, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            onClick: function onClick() {
+              _this3.handleClickClose();
+            },
+            children: "Close"
+          })]
+        });
+      } // 一覧
+
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
           children: "Team"
-        }), teamName]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: teamName
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: teamModal
+        })]
       });
     }
   }]);
