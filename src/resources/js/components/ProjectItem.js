@@ -65,13 +65,15 @@ class ProjectItem extends React.Component{
     let projectModal;
     if(this.state.projectModalOpen === true){
         projectModal = (
-        <div>
-            {projectShow}
-            <button onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
-        </div>
-      )
+          <div className='modal'>
+            <div className='modal-container'>
+              {projectShow}
+              <button onClick={() => {this.handleClickClose()}}>
+                Close
+              </button>
+            </div>
+          </div>
+        )
     }
 // 一覧
     return (

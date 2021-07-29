@@ -67,12 +67,14 @@ class TaskItem extends React.Component{
     let taskModal;
     if(this.state.taskModalOpen === true){
         taskModal = (
-        <div>
-            {taskShow}
-            <button onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
-        </div>
+          <div className='modal'>
+            <div className='modal-container'>
+              {taskShow}
+              <button onClick={() => {this.handleClickClose()}}>
+                Close
+              </button>
+            </div>
+          </div>
       )
     }
 // 一覧

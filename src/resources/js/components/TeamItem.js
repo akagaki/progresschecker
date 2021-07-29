@@ -67,13 +67,15 @@ class TeamItem extends React.Component{
     let teamModal;
     if(this.state.teamModalOpen === true){
         teamModal = (
-        <div>
-            {teamShow}
-            <button onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
-        </div>
-      )
+          <div className='modal'>
+            <div className='modal-container'>
+              {teamShow}
+              <button onClick={() => {this.handleClickClose()}}>
+                Close
+              </button>
+            </div>
+          </div>
+        )
     }
 // 一覧
     return (
@@ -81,10 +83,8 @@ class TeamItem extends React.Component{
         <h2>Team</h2>
         <div>
           {teamName}
-        </div>
-        <div>
+        </div >
           {teamModal}
-        </div>
       </div>
     );
   }
