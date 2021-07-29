@@ -12,7 +12,7 @@ class TeamItem extends React.Component{
       }
       
   }
-  // API取得
+// API取得
   componentDidMount(){
       this.setState({
           loading: true
@@ -27,8 +27,8 @@ class TeamItem extends React.Component{
               })
           })
       }
-  // 『イベント』
-  // 詳細表示
+// 『イベント』
+// 詳細表示
   handleClickOpen(id) {
     const data = this.state.teamIndex.find(obj=> obj.id === id);
     console.log(data);
@@ -46,25 +46,24 @@ class TeamItem extends React.Component{
   }
   
   render() {
-    // 『データ』
-    // 一覧
+// 『データ』
+// 一覧
     const teamName = this.state.loading ? "NowLoading..." : this.state.teamIndex.map(obj=>
       <tr>
         <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
       </tr>
     )
-    // 詳細
+// 詳細
     const teamShow = (
-        
-          <div>
-            <tr><td>チーム名：{this.state.teamInformation.name}</td></tr>  
-            <tr><td>詳細　　：{this.state.teamInformation.information}</td></tr>  
-            <tr><td>作成日　：{this.state.teamInformation.created_at}</td></tr>  
-            <tr><td>作成者　：{this.state.teamInformation.user_id}</td></tr> 
-          </div>
+      <div>
+        <tr><td>チーム名：{this.state.teamInformation.name}</td></tr>  
+        <tr><td>詳細　　：{this.state.teamInformation.information}</td></tr>  
+        <tr><td>作成日　：{this.state.teamInformation.created_at}</td></tr>  
+        <tr><td>作成者　：{this.state.teamInformation.user_id}</td></tr> 
+      </div>
     )
-    // 『描写』
-    // 詳細
+// 『描写』
+// 詳細
     let teamModal;
     if(this.state.teamModalOpen === true){
         teamModal = (
@@ -76,7 +75,7 @@ class TeamItem extends React.Component{
         </div>
       )
     }
-    // 一覧
+// 一覧
     return (
       <div>
         <h2>Team</h2>

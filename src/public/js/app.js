@@ -2016,10 +2016,13 @@ var ProjectItem = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this);
     _this.state = {
       loading: false,
-      projectIndex: []
+      projectIndex: [],
+      projectModalOpen: false,
+      projectInformation: []
     };
     return _this;
-  }
+  } // API取得
+
 
   _createClass(ProjectItem, [{
     key: "componentDidMount",
@@ -2041,21 +2044,92 @@ var ProjectItem = /*#__PURE__*/function (_React$Component) {
           loading: false
         });
       });
+    } // 『イベント』
+    // 詳細表示
+
+  }, {
+    key: "handleClickOpen",
+    value: function handleClickOpen(id) {
+      var data = this.state.projectIndex.find(function (obj) {
+        return obj.id === id;
+      });
+      console.log(data);
+      this.setState({
+        projectInformation: data,
+        projectModalOpen: true
+      });
+    } // 詳細を閉じる
+
+  }, {
+    key: "handleClickClose",
+    value: function handleClickClose() {
+      this.setState({
+        projectModalOpen: false,
+        projectInformation: []
+      });
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      // 『データ』
+      // 一覧
       var projectName = this.state.loading ? "NowLoading..." : this.state.projectIndex.map(function (obj) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+            onClick: function onClick() {
+              _this3.handleClickOpen(obj.id);
+            },
             children: obj.name
           })
         });
-      });
+      }); // 詳細
+
+      var projectShow = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u540D\uFF1A", this.state.projectInformation.name]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u8A73\u7D30\u3000\u3000\uFF1A", this.state.projectInformation.information]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u4F5C\u6210\u65E5\u3000\uFF1A", this.state.projectInformation.created_at]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u4F5C\u6210\u8005\u3000\uFF1A", this.state.projectInformation.user_id]
+          })
+        })]
+      }); // 『描写』
+      // 詳細
+
+
+      var projectModal;
+
+      if (this.state.projectModalOpen === true) {
+        projectModal = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: [projectShow, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            onClick: function onClick() {
+              _this3.handleClickClose();
+            },
+            children: "Close"
+          })]
+        });
+      } // 一覧
+
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
           children: "Project"
-        }), projectName]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: projectName
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: projectModal
+        })]
       });
     }
   }]);
@@ -2119,10 +2193,13 @@ var TaskItem = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this);
     _this.state = {
       loading: false,
-      taskIndex: []
+      taskIndex: [],
+      taskModalOpen: false,
+      taskInformation: []
     };
     return _this;
-  }
+  } // API取得
+
 
   _createClass(TaskItem, [{
     key: "componentDidMount",
@@ -2144,21 +2221,100 @@ var TaskItem = /*#__PURE__*/function (_React$Component) {
           loading: false
         });
       });
+    } // 『イベント』
+    // 詳細表示
+
+  }, {
+    key: "handleClickOpen",
+    value: function handleClickOpen(id) {
+      var data = this.state.taskIndex.find(function (obj) {
+        return obj.id === id;
+      });
+      console.log(data);
+      this.setState({
+        taskInformation: data,
+        taskModalOpen: true
+      });
+    } // 詳細を閉じる
+
+  }, {
+    key: "handleClickClose",
+    value: function handleClickClose() {
+      this.setState({
+        taskModalOpen: false,
+        taskInformation: []
+      });
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      // 『データ』
+      // 一覧
       var taskName = this.state.loading ? "NowLoading..." : this.state.taskIndex.map(function (obj) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+            onClick: function onClick() {
+              _this3.handleClickOpen(obj.id);
+            },
             children: obj.name
           })
         });
-      });
+      }); // 詳細
+
+      var taskShow = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u30BF\u30B9\u30AF\u540D\uFF1A", this.state.taskInformation.name]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u8A73\u7D30\u3000\u3000\uFF1A", this.state.taskInformation.information]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u9032\u6357\u3000\u3000\uFF1A", this.state.taskInformation.progress]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u671F\u65E5\u3000\u3000\uFF1A", this.state.taskInformation.deadline]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u66F4\u65B0\u65E5\u3000\uFF1A", this.state.taskInformation.updated_at]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("td", {
+            children: ["\u66F4\u65B0\u8005\u3000\uFF1A", this.state.taskInformation.user_id]
+          })
+        })]
+      }); // 『描写』
+      // 詳細
+
+
+      var taskModal;
+
+      if (this.state.taskModalOpen === true) {
+        taskModal = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: [taskShow, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            onClick: function onClick() {
+              _this3.handleClickClose();
+            },
+            children: "Close"
+          })]
+        });
+      } // 一覧
+
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
           children: "Task"
-        }), taskName]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: taskName
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: taskModal
+        })]
       });
     }
   }]);
