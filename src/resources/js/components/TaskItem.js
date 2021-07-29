@@ -8,7 +8,8 @@ class TaskItem extends React.Component{
           loading:false,
           taskIndex: [],
           taskModalOpen: false,
-          taskInformation:[]
+          taskInformation:[],
+          progressString:'',
       }
   }
 // API取得
@@ -26,23 +27,40 @@ class TaskItem extends React.Component{
               })
           })
       }
-// 『イベント』
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.taskIndex.find(obj=> obj.id === id);
     console.log(data);
-    this.setState({
+    // 対象データ取得
+    this.setState({          
       taskInformation:data,
       taskModalOpen: true
     });
+    // 進捗表示変更
+    switch(data.progress){
+      case 0:
+        this.setState({progressString:"未対応"});
+        break;
+      case 1:
+        this.setState({progressString:"対応中"});
+        break;
+      case 2:
+        this.setState({progressString:"対応済"});
+        break;
+      case 3:
+        this.setState({progressString:"完了"});
+        break;
+      }
   }
 // 詳細を閉じる
   handleClickClose(){
     this.setState({
       taskModalOpen: false,
-      taskInformation:[]
+      taskInformation:[],
+      progressString:''
     });
   }
+  
   render() {
 // 『データ』
 // 一覧
@@ -51,12 +69,13 @@ class TaskItem extends React.Component{
         <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
       </tr>
     )
+    
 // 詳細
     const taskShow = (    
       <div>
         <tr><td>タスク名：{this.state.taskInformation.name}</td></tr>  
         <tr><td>詳細　　：{this.state.taskInformation.information}</td></tr>  
-        <tr><td>進捗　　：{this.state.taskInformation.progress}</td></tr>  
+        <tr><td>進捗　　：{this.state.progressString}</td></tr>  
         <tr><td>期日　　：{this.state.taskInformation.deadline}</td></tr>  
         <tr><td>更新日　：{this.state.taskInformation.updated_at}</td></tr>  
         <tr><td>更新者　：{this.state.taskInformation.user_id}</td></tr> 
