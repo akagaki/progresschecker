@@ -10,9 +10,7 @@ Myページ
 @endsection
 
 @section('content')
-<div id='index'>
-  
-</div>
+<div id='index'></div>
 @endsection
 
 @section('footer')

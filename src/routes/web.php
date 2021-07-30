@@ -25,7 +25,7 @@ Route::middleware('verified')->group(function() {
 // メール認証が必要なルートをここに追加（下記全部）
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 // Mypege
 Route::get('/mypage', [App\Http\Controllers\MypageController::class, 'index'])->middleware('auth');
 // Team
@@ -71,3 +71,5 @@ Route::get('task/del', [App\Http\Controllers\TaskController::class, 'del'])->mid
 Route::post('task/del', [App\Http\Controllers\TaskController::class, 'remove'])->middleware('auth');
 Route::get('task/show', [App\Http\Controllers\TaskController::class, 'show'])->middleware('auth');
 
+// ログイン情報取得API
+Route::middleware('auth')->get('api/loginUser', [App\Http\Controllers\ApiController::class, 'loginUser']);

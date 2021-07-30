@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Team;
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -39,7 +40,11 @@ class ApiController extends Controller
         $tasks = Task::all();
         return $tasks;
     }
-
+    public function loginUser()
+    {
+        $loginUser = Auth::user();
+        return $loginUser;
+    }
     /**
      * Store a newly created resource in storage.
      *
