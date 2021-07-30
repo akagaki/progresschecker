@@ -63,18 +63,16 @@ class ProjectItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.map(obj =>
-      <tr>
-        <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
-      </tr>
+    const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.map((obj,index) =>
+      <div key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
 // 詳細
     const projectShow = (    
       <div>
-        <tr><td>プロジェクト名：{this.state.projectInformation.name}</td></tr>  
-        <tr><td>詳細　　：{this.state.projectInformation.information}</td></tr>  
-        <tr><td>作成日　：{this.state.projectInformation.created_at}</td></tr>  
-        <tr><td>作成者　：{this.state.createUserString}</td></tr> 
+        <div>プロジェクト名：{this.state.projectInformation.name}</div> 
+        <div>詳細　　：{this.state.projectInformation.information}</div> 
+        <div>作成日　：{this.state.projectInformation.created_at}</div> 
+        <div>作成者　：{this.state.createUserString}</div>
       </div>
     )
 // 『描写』

@@ -63,18 +63,16 @@ class TeamItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.map(obj=>
-      <tr>
-        <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
-      </tr>
+    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.map((obj,index)=>
+        <div key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
 // 詳細
     const teamShow = (
       <div>
-        <tr><td>チーム名：{this.state.teamInformation.name}</td></tr>  
-        <tr><td>詳細　　：{this.state.teamInformation.information}</td></tr>  
-        <tr><td>作成日　：{this.state.teamInformation.created_at}</td></tr>  
-        <tr><td>作成者　：{this.state.createUserString}</td></tr> 
+        <div>チーム名：{this.state.teamInformation.name}</div>  
+        <div>詳細　　：{this.state.teamInformation.information}</div>  
+        <div>作成日　：{this.state.teamInformation.created_at}</div>  
+        <div>作成者　：{this.state.createUserString}</div> 
       </div>
     )
 // 『描写』

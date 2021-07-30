@@ -143,10 +143,10 @@
         </nav>
 
         <main class="py-4">
-            <div class="menutitle">
+            <div class="container">
             @yield('menubar')
             </div>
-            <div class="content">
+            <div class="container">
             @yield('content')
             </div>
             <div class="footer">

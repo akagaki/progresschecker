@@ -81,21 +81,19 @@ class TaskItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map(obj=>
-      <tr>
-        <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
-      </tr>
+    const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map((obj,index)=>
+      <div key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
     
 // 詳細
     const taskShow = (    
       <div>
-        <tr><td>タスク名：{this.state.taskInformation.name}</td></tr>  
-        <tr><td>詳細　　：{this.state.taskInformation.information}</td></tr>  
-        <tr><td>進捗　　：{this.state.progressString}</td></tr>  
-        <tr><td>期日　　：{this.state.taskInformation.deadline}</td></tr>  
-        <tr><td>更新日　：{this.state.taskInformation.updated_at}</td></tr>  
-        <tr><td>更新者　：{this.state.updateUserString}</td></tr> 
+        <div>タスク名：{this.state.taskInformation.name}</div>  
+        <div>詳細　　：{this.state.taskInformation.information}</div>  
+        <div>進捗　　：{this.state.progressString}</div>  
+        <div>期日　　：{this.state.taskInformation.deadline}</div>  
+        <div>更新日　：{this.state.taskInformation.updated_at}</div>  
+        <div>更新者　：{this.state.updateUserString}</div> 
       </div>
     )
 // 『描写』

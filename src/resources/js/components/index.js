@@ -10,10 +10,10 @@ class Index extends React.Component {
     return (
       <div className='container'>
           <div className='row'>
-            <LoginUser className='col' />
-            <TeamItem className='col' />
-            <ProjectItem className='col' />
-            <TaskItem className='col' />
+            <div><LoginUser className='col' /></div>
+            <div><TeamItem className='col' /></div>
+            <div><ProjectItem className='col' /></div>
+            <div><TaskItem className='col' /></div>
           </div>
       </div>
     );
