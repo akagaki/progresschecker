@@ -64,6 +64,7 @@ class TaskItem extends React.Component{
         this.setState({progressString:"完了"});
         break;
       }
+    // 更新者表示変更
     const updateUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
     this.setState({updateUserString:updateUser.name});
   }

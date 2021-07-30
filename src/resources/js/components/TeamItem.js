@@ -8,16 +8,18 @@ class TeamItem extends React.Component{
       this.state = {
           loading:false,
           userTeams: [],
+          userIndex: [],
           teamModalOpen: false,
-          teamInformation:[]
-      }
-      
+          teamInformation:[],
+          createUserString:'',
+      }  
   }
 // API取得
   componentDidMount(){
       this.setState({
           loading: true
       })
+      // ログインユーザーのチーム情報
       fetch("http://0.0.0.0:8000/api/userTeams")
           .then(response => response.json())
           .then(json => {
@@ -27,8 +29,16 @@ class TeamItem extends React.Component{
                   loading: false
               })
           })
+      // 登録ユーザー情報
+      fetch("http://0.0.0.0:8000/api/userIndex")
+          .then(response => response.json())
+          .then(users => {
+              console.log(users);
+              this.setState({
+                  userIndex: users,
+              })
+          })
       }
-// 『イベント』
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.userTeams.find(obj=> obj.id === id);
@@ -37,12 +47,16 @@ class TeamItem extends React.Component{
       teamInformation:data,
       teamModalOpen: true
     });
+    //作成者表示変更
+    const createUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    this.setState({createUserString:createUser.name});
   }
   // 詳細を閉じる
   handleClickClose(){
     this.setState({
       teamModalOpen: false,
-      teamInformation:[]
+      teamInformation:[],
+      createUserString:'',
     });
   }
   
@@ -60,7 +74,7 @@ class TeamItem extends React.Component{
         <tr><td>チーム名：{this.state.teamInformation.name}</td></tr>  
         <tr><td>詳細　　：{this.state.teamInformation.information}</td></tr>  
         <tr><td>作成日　：{this.state.teamInformation.created_at}</td></tr>  
-        <tr><td>作成者　：{this.state.teamInformation.user_id}</td></tr> 
+        <tr><td>作成者　：{this.state.createUserString}</td></tr> 
       </div>
     )
 // 『描写』
@@ -84,8 +98,10 @@ class TeamItem extends React.Component{
         <h2>Team</h2>
         <div>
           {teamName}
-        </div >
+        </div>
+        <div>
           {teamModal}
+        </div>
       </div>
     );
   }

@@ -8,8 +8,10 @@ class ProjectItem extends React.Component{
       this.state = {
           loading:false,
           userProjects: [],
+          userIndex: [],
           projectModalOpen: false,
-          projectInformation:[]
+          projectInformation:[],
+          createUserString:'',
       }
   }
 // API取得
@@ -17,6 +19,7 @@ class ProjectItem extends React.Component{
       this.setState({
           loading: true
       })
+      // ログインユーザーのプロジェクト情報
       fetch("http://0.0.0.0:8000/api/userProjects")
           .then(response => response.json())
           .then(json => {
@@ -26,8 +29,16 @@ class ProjectItem extends React.Component{
                   loading: false
               })
           })
+      // 登録ユーザー情報
+      fetch("http://0.0.0.0:8000/api/userIndex")
+          .then(response => response.json())
+          .then(users => {
+              console.log(users);
+              this.setState({
+                  userIndex: users,
+              })
+          })
       }
-// 『イベント』
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.userProjects.find(obj=> obj.id === id);
@@ -36,13 +47,18 @@ class ProjectItem extends React.Component{
       projectInformation:data,
       projectModalOpen: true
     });
+    //作成者表示変更
+    const createUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    this.setState({createUserString:createUser.name});
   }
 // 詳細を閉じる
   handleClickClose(){
     this.setState({
       projectModalOpen: false,
-      projectInformation:[]
+      projectInformation:[],
+      createUserString:'',
     });
+
   }
   render() {
 // 『データ』
@@ -58,7 +74,7 @@ class ProjectItem extends React.Component{
         <tr><td>プロジェクト名：{this.state.projectInformation.name}</td></tr>  
         <tr><td>詳細　　：{this.state.projectInformation.information}</td></tr>  
         <tr><td>作成日　：{this.state.projectInformation.created_at}</td></tr>  
-        <tr><td>作成者　：{this.state.projectInformation.user_id}</td></tr> 
+        <tr><td>作成者　：{this.state.createUserString}</td></tr> 
       </div>
     )
 // 『描写』
