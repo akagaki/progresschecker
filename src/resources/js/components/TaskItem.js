@@ -87,13 +87,13 @@ class TaskItem extends React.Component{
     
 // 詳細
     const taskShow = (    
-      <div>
-        <div>タスク名：{this.state.taskInformation.name}</div>  
-        <div>詳細　　：{this.state.taskInformation.information}</div>  
-        <div>進捗　　：{this.state.progressString}</div>  
-        <div>期日　　：{this.state.taskInformation.deadline}</div>  
-        <div>更新日　：{this.state.taskInformation.updated_at}</div>  
-        <div>更新者　：{this.state.updateUserString}</div> 
+      <div className="m-4">
+        <div className="border-bottom text-center pb-2 mb-3">{this.state.taskInformation.name}</div>  
+        <div>詳細　　：　{this.state.taskInformation.information}</div>  
+        <div>進捗　　：　{this.state.progressString}</div>  
+        <div>期日　　：　{this.state.taskInformation.deadline}</div>  
+        <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
+        <div>更新者　：　{this.state.updateUserString}</div> 
       </div>
     )
 // 『描写』
@@ -104,7 +104,7 @@ class TaskItem extends React.Component{
           <div className='modal'>
             <div className='modal-container'>
               {taskShow}
-              <button onClick={() => {this.handleClickClose()}}>
+              <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
             </div>
@@ -114,8 +114,8 @@ class TaskItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>Task</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">Task</h2>
+        <div className="px-2">
           {taskName}
         </div>
         <div>

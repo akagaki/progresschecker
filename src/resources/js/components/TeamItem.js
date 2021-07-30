@@ -68,11 +68,11 @@ class TeamItem extends React.Component{
     )
 // 詳細
     const teamShow = (
-      <div>
-        <div>チーム名：{this.state.teamInformation.name}</div>  
-        <div>詳細　　：{this.state.teamInformation.information}</div>  
-        <div>作成日　：{this.state.teamInformation.created_at}</div>  
-        <div>作成者　：{this.state.createUserString}</div> 
+      <div className="m-4">
+        <div className="border-bottom text-center pb-2 mb-3">{this.state.teamInformation.name}</div>  
+        <div>詳細　　：　{this.state.teamInformation.information}</div>  
+        <div>作成日　：　{this.state.teamInformation.created_at}</div>  
+        <div>作成者　：　{this.state.createUserString}</div> 
       </div>
     )
 // 『描写』
@@ -83,7 +83,7 @@ class TeamItem extends React.Component{
           <div className='modal'>
             <div className='modal-container'>
               {teamShow}
-              <button onClick={() => {this.handleClickClose()}}>
+              <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
             </div>
@@ -93,8 +93,8 @@ class TeamItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>Team</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">Team</h2>
+        <div className="px-2">
           {teamName}
         </div>
         <div>

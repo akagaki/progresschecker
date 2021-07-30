@@ -1,13 +1,7 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <style>
-    main {background-color: #f5f5f5;}
-    body {font-size:16pt; color:#383c3c; margin: 5px; }
-    .menutitle {font-size:14pt; font-weight:bold; margin: 10px; padding: 20px; }
-    .content {margin:10px; }
-    .footer { text-align:right; font-size:10pt; margin:10px;
-        border-bottom:solid 1px #ccc; color:#ccc; }
     .items{float: right; padding-right: 40px;}
     .team-box {
         padding: 20px;margin: 20px 10px; 
@@ -89,9 +83,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body class="h-100">
+    <div id="app" class="h-100">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('home') }}">
                     {{ config('app.name') }}
@@ -142,18 +136,19 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            <div class="container">
+        <main class="py-5 h-100">
+            <div class="container my-5">
             @yield('menubar')
             </div>
-            <div class="container">
+            <div class="container my-5">
             @yield('content')
             </div>
-            <div class="footer">
-            @yield('footer')
-            </div>
-
         </main>
+        <footer class="my-0 py-2 bg-primary bg-gradient text-light fixed-bottom">
+            <div class="container text-center">
+                <p class="my-0">Copyright &copy;2021 akagaki, All Rights Reserved.</p>
+            </div>
+        </footer>    
     </div>
 </body>
 </html>

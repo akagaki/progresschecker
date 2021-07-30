@@ -42,8 +42,8 @@ class LoginUser extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>User</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">User</h2>
+        <div className="px-2">
           {userShow}
         </div >
       </div>

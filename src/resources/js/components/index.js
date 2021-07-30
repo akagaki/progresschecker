@@ -8,12 +8,12 @@ import LoginUser from './LoginUser';
 class Index extends React.Component {
   render() {
     return (
-      <div className='container'>
-          <div className='row'>
-            <div><LoginUser className='col' /></div>
-            <div><TeamItem className='col' /></div>
-            <div><ProjectItem className='col' /></div>
-            <div><TaskItem className='col' /></div>
+      <div className='container rounded bg-white p-4 shadow-sm'>
+          <div className='row border-bottom pb-4'>
+            <div  className='col justify-content-around' ><LoginUser/></div>
+            <div  className='col justify-content-around' ><TeamItem/></div>
+            <div  className='col justify-content-around' ><ProjectItem/></div>
+            <div  className='col justify-content-around' ><TaskItem/></div>
           </div>
       </div>
     );
