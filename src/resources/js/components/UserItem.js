@@ -27,7 +27,10 @@ class UserItem extends React.Component{
   }
 
   render() {
-    return ({userIndex});
+    const userData = this.state.userIndex.map(userData=><li>{userData.name}</li>);
+    return (
+      <div>{userData}</div>
+    );
   }
 }
 export default UserItem;

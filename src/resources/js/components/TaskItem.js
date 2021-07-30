@@ -8,9 +8,11 @@ class TaskItem extends React.Component{
       this.state = {
           loading:false,
           userTasks: [],
+          userIndex: [],
           taskModalOpen: false,
           taskInformation:[],
           progressString:'',
+          updateUserString:'',
       }
   }
 // API取得
@@ -18,6 +20,7 @@ class TaskItem extends React.Component{
       this.setState({
           loading: true
       })
+      // ログインユーザーのタスク情報
       fetch("http://0.0.0.0:8000/api/userTasks")
           .then(response => response.json())
           .then(json => {
@@ -25,6 +28,15 @@ class TaskItem extends React.Component{
               this.setState({
                   userTasks: json,
                   loading: false
+              })
+          })
+      // 登録ユーザー情報
+      fetch("http://0.0.0.0:8000/api/userIndex")
+          .then(response => response.json())
+          .then(users => {
+              console.log(users);
+              this.setState({
+                  userIndex: users,
               })
           })
       }
@@ -52,13 +64,16 @@ class TaskItem extends React.Component{
         this.setState({progressString:"完了"});
         break;
       }
+    const updateUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    this.setState({updateUserString:updateUser.name});
   }
 // 詳細を閉じる
   handleClickClose(){
     this.setState({
       taskModalOpen: false,
       taskInformation:[],
-      progressString:''
+      progressString:'',
+      updateUserString:'',
     });
   }
   
@@ -79,7 +94,7 @@ class TaskItem extends React.Component{
         <tr><td>進捗　　：{this.state.progressString}</td></tr>  
         <tr><td>期日　　：{this.state.taskInformation.deadline}</td></tr>  
         <tr><td>更新日　：{this.state.taskInformation.updated_at}</td></tr>  
-        <tr><td>更新者　：{this.state.taskInformation.user_id}</td></tr> 
+        <tr><td>更新者　：{this.state.updateUserString}</td></tr> 
       </div>
     )
 // 『描写』
