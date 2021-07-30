@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,3 @@ Route::get('userIndex', [App\Http\Controllers\ApiController::class, 'userIndex']
 Route::get('teamIndex', [App\Http\Controllers\ApiController::class, 'teamIndex']);
 Route::get('projectIndex', [App\Http\Controllers\ApiController::class, 'projectIndex']);
 Route::get('taskIndex', [App\Http\Controllers\ApiController::class, 'taskIndex']);
-

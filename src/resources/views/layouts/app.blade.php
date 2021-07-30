@@ -68,6 +68,7 @@
         background-color: #5f9ea0;
         color: white;
     }
+
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
