@@ -73,3 +73,6 @@ Route::get('task/show', [App\Http\Controllers\TaskController::class, 'show'])->m
 
 // ログイン情報取得API
 Route::middleware('auth')->get('api/loginUser', [App\Http\Controllers\ApiController::class, 'loginUser']);
+Route::middleware('auth')->get('api/userTeams', [App\Http\Controllers\ApiController::class, 'userTeams']);
+Route::middleware('auth')->get('api/userProjects', [App\Http\Controllers\ApiController::class, 'userProjects']);
+Route::middleware('auth')->get('api/userTasks', [App\Http\Controllers\ApiController::class, 'userTasks']);

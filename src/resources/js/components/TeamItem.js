@@ -7,7 +7,7 @@ class TeamItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          teamIndex: [],
+          userTeams: [],
           teamModalOpen: false,
           teamInformation:[]
       }
@@ -18,12 +18,12 @@ class TeamItem extends React.Component{
       this.setState({
           loading: true
       })
-      fetch("http://0.0.0.0:8000/api/teamIndex")
+      fetch("http://0.0.0.0:8000/api/userTeams")
           .then(response => response.json())
           .then(json => {
               console.log(json.map(obj => obj.id));
               this.setState({
-                  teamIndex: json,
+                  userTeams: json,
                   loading: false
               })
           })
@@ -31,7 +31,7 @@ class TeamItem extends React.Component{
 // 『イベント』
 // 詳細表示
   handleClickOpen(id) {
-    const data = this.state.teamIndex.find(obj=> obj.id === id);
+    const data = this.state.userTeams.find(obj=> obj.id === id);
     console.log(data);
     this.setState({
       teamInformation:data,
@@ -49,7 +49,7 @@ class TeamItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const teamName = this.state.loading ? "NowLoading..." : this.state.teamIndex.map(obj=>
+    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.map(obj=>
       <tr>
         <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
       </tr>

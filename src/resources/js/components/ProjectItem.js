@@ -7,7 +7,7 @@ class ProjectItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          projectIndex: [],
+          userProjects: [],
           projectModalOpen: false,
           projectInformation:[]
       }
@@ -17,12 +17,12 @@ class ProjectItem extends React.Component{
       this.setState({
           loading: true
       })
-      fetch("http://0.0.0.0:8000/api/projectIndex")
+      fetch("http://0.0.0.0:8000/api/userProjects")
           .then(response => response.json())
           .then(json => {
               console.log(json.map(obj => obj.name));
               this.setState({
-                  projectIndex: json,
+                  userProjects: json,
                   loading: false
               })
           })
@@ -30,7 +30,7 @@ class ProjectItem extends React.Component{
 // 『イベント』
 // 詳細表示
   handleClickOpen(id) {
-    const data = this.state.projectIndex.find(obj=> obj.id === id);
+    const data = this.state.userProjects.find(obj=> obj.id === id);
     console.log(data);
     this.setState({
       projectInformation:data,
@@ -47,7 +47,7 @@ class ProjectItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const projectName = this.state.loading ? "NowLoading..." : this.state.projectIndex.map(obj =>
+    const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.map(obj =>
       <tr>
         <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
       </tr>

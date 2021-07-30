@@ -7,7 +7,7 @@ class TaskItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          taskIndex: [],
+          userTasks: [],
           taskModalOpen: false,
           taskInformation:[],
           progressString:'',
@@ -18,19 +18,19 @@ class TaskItem extends React.Component{
       this.setState({
           loading: true
       })
-      fetch("http://0.0.0.0:8000/api/taskIndex")
+      fetch("http://0.0.0.0:8000/api/userTasks")
           .then(response => response.json())
           .then(json => {
               console.log(json.map(obj => obj.name));
               this.setState({
-                  taskIndex: json,
+                  userTasks: json,
                   loading: false
               })
           })
       }
 // 詳細表示
   handleClickOpen(id) {
-    const data = this.state.taskIndex.find(obj=> obj.id === id);
+    const data = this.state.userTasks.find(obj=> obj.id === id);
     console.log(data);
     // 対象データ取得
     this.setState({          
@@ -65,7 +65,7 @@ class TaskItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const taskName = this.state.loading ? "NowLoading..." : this.state.taskIndex.map(obj=>
+    const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map(obj=>
       <tr>
         <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
       </tr>
