@@ -8,10 +8,12 @@ class ProjectItem extends React.Component{
       this.state = {
           loading:false,
           userProjects: [],
+          userTeams: [],
           userIndex: [],
           projectModalOpen: false,
           projectInformation:[],
           createUserString:'',
+          teamName:'',
       }
   }
 // API取得
@@ -22,10 +24,18 @@ class ProjectItem extends React.Component{
       // ログインユーザーのプロジェクト情報
       fetch("http://0.0.0.0:8000/api/userProjects")
           .then(response => response.json())
-          .then(json => {
+          .then(projects => {
               this.setState({
-                  userProjects: json,
+                  userProjects: projects,
                   loading: false
+              })
+          })
+      // ログインユーザーのチーム情報
+      fetch("http://0.0.0.0:8000/api/userTeams")
+          .then(response => response.json())
+          .then(teams => {
+              this.setState({
+                  userTeams: teams,
               })
           })
       // 登録ユーザー情報
@@ -38,7 +48,7 @@ class ProjectItem extends React.Component{
           })
       }
 // 詳細表示
-  handleClickOpen(id) {
+  handleClickOpen(id,team_id) {
     const data = this.state.userProjects.find(obj=> obj.id === id);
     this.setState({
       projectInformation:data,
@@ -47,6 +57,9 @@ class ProjectItem extends React.Component{
     //作成者表示変更
     const createUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
     this.setState({createUserString:createUser.name});
+    // チーム情報表示変更
+    const teamData = this.state.userTeams.find((obj)=>obj.id === team_id );
+    this.setState({teamName:teamData.name});
   }
 // 詳細を閉じる
   handleClickClose(){
@@ -54,6 +67,7 @@ class ProjectItem extends React.Component{
       projectModalOpen: false,
       projectInformation:[],
       createUserString:'',
+      teamName:'',
     });
 
   }
@@ -61,12 +75,16 @@ class ProjectItem extends React.Component{
 // 『データ』
 // 一覧
     const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.map((obj,index) =>
-      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
+      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
+        <div>{obj.name}</div>
+      </div>
     )
 // 詳細
     const projectShow = (    
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">{this.state.projectInformation.name}</div> 
+        <div className="border-bottom text-center pb-2 mb-3">{this.state.projectInformation.name}
+          <span className="small">　belong to {this.state.teamName}</span>
+        </div> 
         <div>詳細　　：　{this.state.projectInformation.information}</div> 
         <div>作成日　：　{this.state.projectInformation.created_at}</div> 
         <div>作成者　：　{this.state.createUserString}</div>
