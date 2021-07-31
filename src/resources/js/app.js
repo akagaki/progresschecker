@@ -18,5 +18,7 @@ require('./bootstrap');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Index from './components/index';
+import Board from './components/board';
 
 ReactDOM.render(<Index />, document.getElementById('index'));
+ReactDOM.render(<Board />, document.getElementById('board'));

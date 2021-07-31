@@ -31,9 +31,9 @@ class LoginUser extends React.Component{
 // 一覧
     const userShow = this.state.loading ? "NowLoading..." : (
       <div>
-        <tr><td>ID　：{this.state.loginUser.id}</td></tr>  
-        <tr><td>名前：{this.state.loginUser.name}</td></tr>  
-        <tr><td>mail：{this.state.loginUser.email}</td></tr>  
+        <div>ID　：{this.state.loginUser.id}</div>  
+        <div>名前：{this.state.loginUser.name}</div>  
+        <div>mail：{this.state.loginUser.email}</div>  
       </div>
     )
         
@@ -42,8 +42,8 @@ class LoginUser extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>User</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">User</h2>
+        <div className="px-2">
           {userShow}
         </div >
       </div>

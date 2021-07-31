@@ -23,7 +23,6 @@ class TeamItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userTeams")
           .then(response => response.json())
           .then(json => {
-              console.log(json.map(obj => obj.id));
               this.setState({
                   userTeams: json,
                   loading: false
@@ -33,7 +32,6 @@ class TeamItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userIndex")
           .then(response => response.json())
           .then(users => {
-              console.log(users);
               this.setState({
                   userIndex: users,
               })
@@ -42,7 +40,6 @@ class TeamItem extends React.Component{
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.userTeams.find(obj=> obj.id === id);
-    console.log(data);
     this.setState({
       teamInformation:data,
       teamModalOpen: true
@@ -63,18 +60,16 @@ class TeamItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.map(obj=>
-      <tr>
-        <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
-      </tr>
+    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.map((obj,index)=>
+        <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
 // 詳細
     const teamShow = (
-      <div>
-        <tr><td>チーム名：{this.state.teamInformation.name}</td></tr>  
-        <tr><td>詳細　　：{this.state.teamInformation.information}</td></tr>  
-        <tr><td>作成日　：{this.state.teamInformation.created_at}</td></tr>  
-        <tr><td>作成者　：{this.state.createUserString}</td></tr> 
+      <div className="m-4">
+        <div className="border-bottom text-center pb-2 mb-3">{this.state.teamInformation.name}</div>  
+        <div>詳細　　：　{this.state.teamInformation.information}</div>  
+        <div>作成日　：　{this.state.teamInformation.created_at}</div>  
+        <div>作成者　：　{this.state.createUserString}</div> 
       </div>
     )
 // 『描写』
@@ -85,7 +80,7 @@ class TeamItem extends React.Component{
           <div className='modal'>
             <div className='modal-container'>
               {teamShow}
-              <button onClick={() => {this.handleClickClose()}}>
+              <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
             </div>
@@ -95,8 +90,8 @@ class TeamItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>Team</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">Team</h2>
+        <div className="px-2">
           {teamName}
         </div>
         <div>

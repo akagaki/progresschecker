@@ -24,7 +24,6 @@ class TaskItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userTasks")
           .then(response => response.json())
           .then(json => {
-              console.log(json.map(obj => obj.name));
               this.setState({
                   userTasks: json,
                   loading: false
@@ -34,7 +33,6 @@ class TaskItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userIndex")
           .then(response => response.json())
           .then(users => {
-              console.log(users);
               this.setState({
                   userIndex: users,
               })
@@ -43,7 +41,6 @@ class TaskItem extends React.Component{
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.userTasks.find(obj=> obj.id === id);
-    console.log(data);
     // 対象データ取得
     this.setState({          
       taskInformation:data,
@@ -81,21 +78,19 @@ class TaskItem extends React.Component{
   render() {
 // 『データ』
 // 一覧
-    const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map(obj=>
-      <tr>
-        <td onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</td>
-      </tr>
+    const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map((obj,index)=>
+      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
     
 // 詳細
     const taskShow = (    
-      <div>
-        <tr><td>タスク名：{this.state.taskInformation.name}</td></tr>  
-        <tr><td>詳細　　：{this.state.taskInformation.information}</td></tr>  
-        <tr><td>進捗　　：{this.state.progressString}</td></tr>  
-        <tr><td>期日　　：{this.state.taskInformation.deadline}</td></tr>  
-        <tr><td>更新日　：{this.state.taskInformation.updated_at}</td></tr>  
-        <tr><td>更新者　：{this.state.updateUserString}</td></tr> 
+      <div className="m-4">
+        <div className="border-bottom text-center pb-2 mb-3">{this.state.taskInformation.name}</div>  
+        <div>詳細　　：　{this.state.taskInformation.information}</div>  
+        <div>進捗　　：　{this.state.progressString}</div>  
+        <div>期日　　：　{this.state.taskInformation.deadline}</div>  
+        <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
+        <div>更新者　：　{this.state.updateUserString}</div> 
       </div>
     )
 // 『描写』
@@ -106,7 +101,7 @@ class TaskItem extends React.Component{
           <div className='modal'>
             <div className='modal-container'>
               {taskShow}
-              <button onClick={() => {this.handleClickClose()}}>
+              <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
             </div>
@@ -116,8 +111,8 @@ class TaskItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2>Task</h2>
-        <div>
+        <h2 className="border-bottom text-center pb-2 mb-3">Task</h2>
+        <div className="px-2">
           {taskName}
         </div>
         <div>
