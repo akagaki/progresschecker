@@ -24,7 +24,6 @@ class TaskItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userTasks")
           .then(response => response.json())
           .then(json => {
-              console.log(json.map(obj => obj.name));
               this.setState({
                   userTasks: json,
                   loading: false
@@ -34,7 +33,6 @@ class TaskItem extends React.Component{
       fetch("http://0.0.0.0:8000/api/userIndex")
           .then(response => response.json())
           .then(users => {
-              console.log(users);
               this.setState({
                   userIndex: users,
               })
@@ -43,7 +41,6 @@ class TaskItem extends React.Component{
 // 詳細表示
   handleClickOpen(id) {
     const data = this.state.userTasks.find(obj=> obj.id === id);
-    console.log(data);
     // 対象データ取得
     this.setState({          
       taskInformation:data,
@@ -82,7 +79,7 @@ class TaskItem extends React.Component{
 // 『データ』
 // 一覧
     const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.map((obj,index)=>
-      <div key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
+      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
     )
     
 // 詳細
