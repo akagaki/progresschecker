@@ -105,12 +105,12 @@ class TeamItem extends React.Component{
           {teamName}
         </div>
         {/* ページネーション */}
-        <ReactPaginate 
+        <ReactPaginate
           pageCount={Math.ceil(this.state.userTeams.length / 3)} //総ページ数。今回は一覧表示したいデータ数 / 1ページあたりの表示数としてます。
           marginPagesDisplayed={1} //先頭と末尾に表示するページの数。今回は2としたので1,2…今いるページの前後…後ろから2番目, 1番目 のように表示されます。
           pageRangeDisplayed={0} //上記の「今いるページの前後」の番号をいくつ表示させるかを決めます。
           onPageChange={this.pageChange} //ページネーションのリンクをクリックしたときのイベント(詳しくは下で解説します)
-          containerClassName='pagination' //ページネーションリンクの親要素のクラス名
+          containerClassName='pagination pagination-sm' //ページネーションリンクの親要素のクラス名
           pageClassName='page-item' //各子要素(li要素)のクラス名
           pageLinkClassName='page-link' //ページネーションのリンクのクラス名
           activeClassName='active' //今いるページ番号のクラス名。今いるページの番号だけ太字にしたりできます 
