@@ -4609,9 +4609,9 @@ input[type=button].btn-block {
   border-color: #dee2e6;
 }
 .page-link:focus {
-  z-index: 3;
+  /* z-index: 3;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25); */
 }
 
 .page-item:first-child .page-link {
@@ -4624,10 +4624,9 @@ input[type=button].btn-block {
   border-bottom-right-radius: 0.25rem;
 }
 .page-item.active .page-link {
-  z-index: 3;
-  color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  z-index: 1;
+  color: #212529;
+  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25); 
 }
 .page-item.disabled .page-link {
   color: #6c757d;

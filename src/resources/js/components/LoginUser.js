@@ -18,7 +18,6 @@ class LoginUser extends React.Component{
   fetch("http://0.0.0.0:8000/api/loginUser")
       .then(response => response.json())
       .then(json => {
-          console.log(json);
           this.setState({
               loginUser: json,
               loading: false
