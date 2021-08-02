@@ -40,6 +40,7 @@ class TeamItem extends React.Component{
               })
           })
       }
+// ページネーション時のメソッド
   pageChange = (data) => {
     let pageNumber = data['selected'] * 3; //選択されたページ番号
     this.setState({
@@ -103,10 +104,8 @@ class TeamItem extends React.Component{
         <div className="px-2">
           {teamName}
         </div>
-        <div>
-          {teamModal}
-        </div>
-        <ReactPaginate
+        {/* ページネーション */}
+        <ReactPaginate 
           pageCount={Math.ceil(this.state.userTeams.length / 3)} //総ページ数。今回は一覧表示したいデータ数 / 1ページあたりの表示数としてます。
           marginPagesDisplayed={1} //先頭と末尾に表示するページの数。今回は2としたので1,2…今いるページの前後…後ろから2番目, 1番目 のように表示されます。
           pageRangeDisplayed={0} //上記の「今いるページの前後」の番号をいくつ表示させるかを決めます。
@@ -126,7 +125,9 @@ class TeamItem extends React.Component{
           breakClassName='page-item' // 上記の「…」のクラス名
           breakLinkClassName='page-link' // 「…」の中のリンクにつけるクラス
         />
-        
+        <div>
+          {teamModal}
+        </div>
       </div>
     );
   }
