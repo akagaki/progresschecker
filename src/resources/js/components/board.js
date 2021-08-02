@@ -107,13 +107,13 @@ class Board extends React.Component {
 // 『データ』
 // カード一覧
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
 
 // 詳細
     const taskShow = (    
