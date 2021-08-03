@@ -19,6 +19,7 @@ class Board extends React.Component {
           waipTask:[],//対応中
           doneTask:[],//対応済
           conpletedTask:[],//完了
+          progressData:'',
       }
   }
 // API取得
@@ -92,6 +93,21 @@ class Board extends React.Component {
         break;
       }
   }
+  onChange=(e)=>{
+    console.log(e.target.value);
+    console.log(e.target.id);
+    this.setState({ progressData: e.target.value});
+    console.log(this.state.progressData);
+    // fetch("http://0.0.0.0:8000/api/userTasks",{
+    //   method: 'POST',
+    //   body: this.state.progressData,id
+    // })
+    //       .then(response => response.json())
+    //       .then(progressitem => {
+    //               console.log(progressitem);
+    //       });
+    
+  }
 // 詳細を閉じる
   handleClickClose(){
     this.setState({
@@ -100,20 +116,36 @@ class Board extends React.Component {
       progressString:'',
       updateUserString:'',
       projectName:'',
+      progressData:'',
     });
   }
-
   render() {
 // 『データ』
 // カード一覧
+    // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
-    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="font-weight-bold">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+    </div>)
+    // 対応中
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
-    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="font-weight-bold">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+    </div>)
+    // 対応済
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
-    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="font-weight-bold">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+    </div>)
+    // 完了
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
-    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}><div>{obj.name}</div><div>({obj.deadline})</div></div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="font-weight-bold">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+    </div>)
 
 // 詳細
     const taskShow = (    
@@ -122,10 +154,18 @@ class Board extends React.Component {
           <span className="small">　belong to {this.state.projectName}</span>
         </div>  
         <div>詳細　　：　{this.state.taskInformation.information}</div>  
-        <div>進捗　　：　{this.state.progressString}</div>  
+        <div>進捗　　：　{this.state.progressString}</div>
         <div>期日　　：　{this.state.taskInformation.deadline}</div>  
         <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
-        <div>更新者　：　{this.state.updateUserString}</div> 
+        <div>更新者　：　{this.state.updateUserString}</div>
+        <p className="border-top pt-2 my-2">進捗変更</p>
+        <select className="custom-select" id={this.state.taskInformation.id} value={this.state.progressData} onChange={this.onChange}>
+            <option default value={this.state.taskInformation.progress}>選択して下さい</option>
+            <option value="0">未対応</option>
+            <option value="1">対応中</option>
+            <option value="2">対応済み</option>
+            <option value="3">完了</option>
+          </select>
       </div>
     )
 // 『描写』
@@ -144,7 +184,8 @@ class Board extends React.Component {
     )
   }
     return (
-      <div className='container rounded bg-light p-4 mb-4 shadow'>
+      <div className='container rounded bg-light p-3 mb-5 shadow'>
+        <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
               <h5><span className='badge badge-danger btn-block py-1'>未対応</span></h5>
