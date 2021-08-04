@@ -60,6 +60,7 @@ class Board extends React.Component {
           .then(users => {
               this.setState({
                   userIndex: users,
+                  loading: false
               })
           })
       }
@@ -93,20 +94,27 @@ class Board extends React.Component {
         break;
       }
   }
-  onChange=(e)=>{
-    console.log(e.target.value);
-    console.log(e.target.id);
-    this.setState({ progressData: e.target.value});
-    console.log(this.state.progressData);
-    // fetch("http://0.0.0.0:8000/api/userTasks",{
-    //   method: 'POST',
-    //   body: this.state.progressData,id
-    // })
-    //       .then(response => response.json())
-    //       .then(progressitem => {
-    //               console.log(progressitem);
-    //       });
-    
+  onChangeProgress=(e)=>{
+    const progress = e.target.value;
+    const id = e.target.id; 
+    console.log(progress);
+    console.log(id);
+    this.setState({ 
+      progressData: e.target.value,
+      loading: true
+    });
+    fetch("http://0.0.0.0:8000/api/update",{
+      method: 'POST',
+      body:JSON.stringify({progress:progress,id:id}),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => {
+        return response.text();
+      }).then((text) => {
+        console.log(text);
+      }).catch((e) => {
+        console.error(e);
+      });
+    this.componentDidMount();
   }
 // 詳細を閉じる
   handleClickClose(){
@@ -125,26 +133,26 @@ class Board extends React.Component {
     // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="font-weight-bold">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
+      <div>{obj.name}</div>
+      <div className="border-top"><small>期日：{obj.deadline}</small></div>
     </div>)
     // 対応中
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="font-weight-bold">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
+      <div>{obj.name}</div>
+      <div className="border-top"><small>期日：{obj.deadline}</small></div>
     </div>)
     // 対応済
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="font-weight-bold">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
+      <div>{obj.name}</div>
+      <div className="border-top"><small>期日：{obj.deadline}</small></div>
     </div>)
     // 完了
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="font-weight-bold">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
+      <div>{obj.name}</div>
+      <div className="border-top"><small>期日：{obj.deadline}</small></div>
     </div>)
 
 // 詳細
@@ -159,7 +167,7 @@ class Board extends React.Component {
         <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
         <div>更新者　：　{this.state.updateUserString}</div>
         <p className="border-top pt-2 my-2">進捗変更</p>
-        <select className="custom-select" id={this.state.taskInformation.id} value={this.state.progressData} onChange={this.onChange}>
+        <select className="custom-select" id={this.state.taskInformation.id} value={this.state.progressData} onChange={this.onChangeProgress}>
             <option default value={this.state.taskInformation.progress}>選択して下さい</option>
             <option value="0">未対応</option>
             <option value="1">対応中</option>

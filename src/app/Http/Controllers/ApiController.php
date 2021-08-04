@@ -62,6 +62,18 @@ class ApiController extends Controller
         return $userTasks;
     }
 
+    public function update(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        var_dump($data);
+        $task = Task::find($data["id"]);
+        var_dump($task->users[0]->id);
+        $task->progress = $data["progress"];
+        $task->user_id = $task->users[0]->id;
+        $task->save();
+        return response("進捗情報を更新しました");
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -92,10 +104,7 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.

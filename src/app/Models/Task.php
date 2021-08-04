@@ -64,6 +64,10 @@ class Task extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+    public function getUserId()
+    {
+        return $this->belongsToMany('App\Models\User','task_user','task_id','user_id')->withPivot('user_id');
+    }
 
 
 }
