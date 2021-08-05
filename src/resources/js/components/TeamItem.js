@@ -101,7 +101,7 @@ class TeamItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-2">Team</h2>
+        <h3 className="border-bottom text-center pb-2 mb-2">Team</h3>
         <div className="px-1">
           {teamName}
         </div>

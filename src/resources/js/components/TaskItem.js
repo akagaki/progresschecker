@@ -147,7 +147,7 @@ class TaskItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-2">Task</h2>
+        <h3 className="border-bottom text-center pb-2 mb-2">Task</h3>
         <div className="px-1">
           {taskName}
         </div>

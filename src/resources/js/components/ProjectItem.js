@@ -118,7 +118,7 @@ class ProjectItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-2">Project</h2>
+        <h3 className="border-bottom text-center pb-2 mb-2">Project</h3>
         <div className="px-1">
           {projectName}
         </div>
