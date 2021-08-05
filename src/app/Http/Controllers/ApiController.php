@@ -73,7 +73,18 @@ class ApiController extends Controller
         $task->save();
         return response("進捗情報を更新しました");
     }
-
+    // 未完了のタスクを期日順に取得
+    public function incompTasks()
+    {
+        $tasks = Auth::user()->userTasks->sortBy('deadline');
+        foreach($tasks as $task){
+            if($task->progress < 3){
+                $incompTasks[]=$task;
+            }
+        }
+        dd($incompTasks);
+        return $incompTasks;
+    }
     /**
      * Store a newly created resource in storage.
      *
