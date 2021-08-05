@@ -136,7 +136,7 @@
             </div>
         </nav>
 
-        <main class="py-4 h-100">
+        <main class="py-4">
             <div class="container my-5">
             @yield('menubar')
             </div>
