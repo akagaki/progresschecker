@@ -14,7 +14,7 @@ class TeamItem extends React.Component{
           teamModalOpen: false,
           teamInformation:[],
           createUserString:'',
-          start: 0, //最初は0番目(=最新)の要素から
+          start: 0,
       }  
   }
 // API取得

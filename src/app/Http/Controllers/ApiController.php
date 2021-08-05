@@ -82,7 +82,6 @@ class ApiController extends Controller
                 $incompTasks[]=$task;
             }
         }
-        dd($incompTasks);
         return $incompTasks;
     }
     /**

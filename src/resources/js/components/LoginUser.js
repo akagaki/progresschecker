@@ -1,19 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserItem from './UserItem';
 
 
 class LoginUser extends React.Component{
   constructor(){
       super()
-      this.state = {loginUser: []}
+      this.state = {
+        loading:false,
+        loginUser: [],
+        incompTask: [],
+      }
   }
 // API取得
   componentDidMount(){
+    this.setState({loading: true})
     const load= async () =>{
       const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
       const user = await userdata.json();
-            this.setState({loginUser: user});
+      const incompData = await fetch("http://0.0.0.0:8000/api/incompTasks");
+      const incomp = await incompData.json();
+            this.setState({
+              loginUser: user,
+              incompTask: incomp,
+              loading: false
+            });
             setInterval(clock, 1000);
     }
     load();
@@ -51,7 +61,6 @@ class LoginUser extends React.Component{
       document.querySelector(".clock-time").innerText = time;
     };
   }
-
   render() {
 // 『データ』
 // 一覧
@@ -63,15 +72,21 @@ class LoginUser extends React.Component{
             <h2 className="clock-time mb-0"></h2>
           </div>
           {/* ユーザー情報 */}
-          <div>
-            <small className="m-2">
-            <div className="border-bottom">NAME：{this.state.loginUser.name}</div>  
-            <div className="border-bottom">MAIL：{this.state.loginUser.email}</div>
+          <div  className="py-4">
+            <small>
+              <div className="border-bottom">NAME：{this.state.loginUser.name}</div>  
+              <div className="border-bottom">MAIL：{this.state.loginUser.email}</div>
             </small>
+          </div>
+          {/* 未完了タスク情報 */}
+          <div>         
+             <div>Your uncompleted tasks...</div>
+            <div className=" text-center display-3">
+              {Object.keys(this.state.incompTask).length}
+            </div>
           </div>
       </div>
     )
-        
 
 // 『描写』
 // 一覧
