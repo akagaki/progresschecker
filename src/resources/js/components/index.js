@@ -8,7 +8,7 @@ import LoginUser from './LoginUser';
 class Index extends React.Component {
   render() {
     return (
-      <div className='container rounded bg-light p-4 mb-4 shadow'>
+      <div className='container rounded bg-light p-3 mb-4 shadow'>
           <div className='row border-bottom pb-4'>
             <div  className='col justify-content-around' ><LoginUser/></div>
             <div  className='col justify-content-around' ><TeamItem/></div>

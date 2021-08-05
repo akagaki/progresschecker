@@ -21,36 +21,26 @@ class TaskItem extends React.Component{
   }
 // API取得
   componentDidMount(){
-      this.setState({
-          loading: true
-      })
-      // ログインユーザーのタスク情報
-      fetch("http://0.0.0.0:8000/api/userTasks")
-          .then(response => response.json())
-          .then(tasks => {
-              this.setState({
-                  userTasks: tasks,
-                  loading: false
-              })
-          })
-      // ログインユーザーのプロジェクト情報
-      fetch("http://0.0.0.0:8000/api/userProjects")
-          .then(response => response.json())
-          .then(projects => {
-              this.setState({
-                  userProjects: projects,
-                  loading: false
-              })
-      })
-      // 登録ユーザー情報
-      fetch("http://0.0.0.0:8000/api/userIndex")
-          .then(response => response.json())
-          .then(users => {
-              this.setState({
-                  userIndex: users,
-              })
-          })
-      }
+      this.setState({loading: true})
+      const load = async () =>{
+        // ユーザーチーム一覧
+        const taskData = await fetch("http://0.0.0.0:8000/api/userTasks")
+        const tasks = await taskData.json();
+        // ユーザープロジェクト一覧
+        const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
+        const projects = await projectData.json();
+        // ユーザー一覧
+        const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
+        const users = await userData.json();
+            this.setState({
+                userTasks: tasks,
+                userProjects: projects,
+                userIndex: users,
+                loading: false
+            });
+        }
+        load();
+  }
 // ページネーション時のメソッド
   pageChange = (data) => {
     let pageNumber = data['selected'] * 3; //選択されたページ番号

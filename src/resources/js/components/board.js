@@ -8,6 +8,7 @@ class Board extends React.Component {
       this.state = {
           loading:false,
           userTasks: [],
+          userTeams: [],
           userProjects:[],
           userIndex: [],
           taskModalOpen: false,
@@ -19,50 +20,52 @@ class Board extends React.Component {
           waipTask:[],//対応中
           doneTask:[],//対応済
           conpletedTask:[],//完了
+          progressData:'',
       }
   }
 // API取得
   componentDidMount(){
-      this.setState({
-          loading: true
-      })
-      // ログインユーザーのタスク情報
-      fetch("http://0.0.0.0:8000/api/userTasks")
-          .then(response => response.json())
-          .then(tasks => {
-            const waitList = tasks.filter(obj=>{return obj.progress === 0});
-            const waipList = tasks.filter(obj=>{return obj.progress === 1});
-            const doneList = tasks.filter(obj=>{return obj.progress === 2});
-            const conpletedList = tasks.filter(obj=>{return obj.progress === 3});
-              this.setState({
-                  userTasks: tasks,
-                  loading: false,
-                  userProjects:[],
-                  waitTask:waitList,
-                  waipTask:waipList,
-                  doneTask:doneList,
-                  conpletedTask:conpletedList,
-              })
-          })
-      // ログインユーザーのプロジェクト情報
-      fetch("http://0.0.0.0:8000/api/userProjects")
-          .then(response => response.json())
-          .then(projects => {
-              this.setState({
-                  userProjects: projects,
-                  loading: false
-              })
-      })
-      // 登録ユーザー情報
-      fetch("http://0.0.0.0:8000/api/userIndex")
-          .then(response => response.json())
-          .then(users => {
-              this.setState({
-                  userIndex: users,
-              })
-          })
+      this.setState({loading: true})
+      const load = async () =>{
+        // ユーザータスク一覧
+        const taskdata = await fetch("http://0.0.0.0:8000/api/userTasks");
+        const tasks = await taskdata.json();
+        const waitList = tasks.filter(obj=>{return obj.progress === 0});
+        const waipList = tasks.filter(obj=>{return obj.progress === 1});
+        const doneList = tasks.filter(obj=>{return obj.progress === 2});
+        const conpletedList = tasks.filter(obj=>{return obj.progress === 3});
+        // ユーザーチーム一覧
+        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+        const teams = await teamData.json();
+        // ユーザープロジェクト一覧
+        const projectdata = await fetch("http://0.0.0.0:8000/api/userProjects");
+        const projects = await projectdata.json();
+        // ユーザー一覧
+        const userdata = await fetch("http://0.0.0.0:8000/api/userIndex");
+        const users = await userdata.json();
+          this.setState({
+            userTasks: tasks,
+            waitTask:waitList,
+            waipTask:waipList,
+            doneTask:doneList,
+            conpletedTask:conpletedList,
+            userTeams: teams,
+            userProjects: projects,
+            userIndex: users,
+            loading: false,
+          });
       }
-// 詳細表示
+      load();
+  }
+  getBelongsName(project_id){
+    const projectData = this.state.userProjects.find((obj)=>obj.id === project_id);
+    const projectName = projectData.name;
+    const teamData = this.state.userTeams.find((obj)=>obj.id === projectData.team_id);
+    const teamName = teamData.name;
+    const belongsName ={projectName:projectName,teamName:teamName};
+    return belongsName;
+  }
+  // タスク詳細表示
   handleClickOpen(id,project_id) {
     const data = this.state.userTasks.find(obj=> obj.id === id);
     // 更新者表示変更
@@ -92,6 +95,29 @@ class Board extends React.Component {
         break;
       }
   }
+  // タスク詳細の進捗変更
+  onChangeProgress=(e)=>{
+    const progress = e.target.value;
+    const id = e.target.id; 
+    console.log(progress);
+    console.log(id);
+    this.setState({ 
+      progressData: e.target.value,
+      loading: true
+    });
+    fetch("http://0.0.0.0:8000/api/update",{
+      method: 'POST',
+      body:JSON.stringify({progress:progress,id:id}),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => {
+        return response.text();
+      }).then((text) => {
+        console.log(text);
+      }).catch((e) => {
+        console.error(e);
+      });
+    this.componentDidMount();
+  }
 // 詳細を閉じる
   handleClickClose(){
     this.setState({
@@ -100,20 +126,52 @@ class Board extends React.Component {
       progressString:'',
       updateUserString:'',
       projectName:'',
+      progressData:'',
     });
   }
-
   render() {
 // 『データ』
 // カード一覧
+    // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="alert-danger">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+      <div className="border-top">
+        <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
+        <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
+      </div>
+    </div>)
+    // 対応中
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="alert-warning">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+      <div className="border-top">
+        <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
+        <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
+      </div>
+    </div>)
+    // 対応済
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="alert-success">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+      <div className="border-top">
+        <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
+        <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
+      </div>
+    </div>)
+    // 完了
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
-    <div className="btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}({obj.deadline})</div>)
+    <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+      <div className="alert-info">{obj.name}</div>
+      <div className="border-top">期日：{obj.deadline}</div>
+      <div className="border-top">
+        <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
+        <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
+      </div>
+    </div>)
 
 // 詳細
     const taskShow = (    
@@ -122,10 +180,18 @@ class Board extends React.Component {
           <span className="small">　belong to {this.state.projectName}</span>
         </div>  
         <div>詳細　　：　{this.state.taskInformation.information}</div>  
-        <div>進捗　　：　{this.state.progressString}</div>  
+        <div>進捗　　：　{this.state.progressString}</div>
         <div>期日　　：　{this.state.taskInformation.deadline}</div>  
         <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
-        <div>更新者　：　{this.state.updateUserString}</div> 
+        <div>更新者　：　{this.state.updateUserString}</div>
+        <p className="border-top pt-2 my-2">進捗変更</p>
+        <select className="custom-select" id={this.state.taskInformation.id} value={this.state.progressData} onChange={this.onChangeProgress}>
+            <option default value={this.state.taskInformation.progress}>選択して下さい</option>
+            <option value="0">未対応</option>
+            <option value="1">対応中</option>
+            <option value="2">対応済み</option>
+            <option value="3">完了</option>
+          </select>
       </div>
     )
 // 『描写』
@@ -144,7 +210,8 @@ class Board extends React.Component {
     )
   }
     return (
-      <div className='container rounded bg-light p-4 mb-4 shadow'>
+      <div className='container rounded bg-light p-3 mb-5 shadow'>
+        <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
               <h5><span className='badge badge-danger btn-block py-1'>未対応</span></h5>

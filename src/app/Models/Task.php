@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class Task extends Model
 {
@@ -19,6 +21,19 @@ class Task extends Model
        'progress' => 'required',
        'deadline' => 'required',
    );
+//    日付表示を変更
+   public function getCreatedAtAttribute($value)
+    {   
+        return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');
+    }
+   public function getUpdatedAtAttribute($value)
+    {   
+        return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');
+    }
+   public function getDeadlineAttribute($value)
+    {   
+        return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');
+    }
 
    public function user()
     {
@@ -63,6 +78,10 @@ class Task extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User');
+    }
+    public function getUserId()
+    {
+        return $this->belongsToMany('App\Models\User','task_user','task_id','user_id')->withPivot('user_id');
     }
 
 
