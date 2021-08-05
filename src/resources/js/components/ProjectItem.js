@@ -40,6 +40,11 @@ class ProjectItem extends React.Component{
         }
         load();
   }
+  getBelongsName(team_id){
+    const teamData = this.state.userTeams.find((obj)=>obj.id === team_id);
+    const teamName = teamData.name;
+    return teamName;
+  }
 // ページネーション時のメソッド
   pageChange = (data) => {
     let pageNumber = data['selected'] * 3; //選択されたページ番号
@@ -75,8 +80,12 @@ class ProjectItem extends React.Component{
 // 『データ』
 // 一覧
     const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
-      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
-        <div>{obj.name}</div>
+      <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
+        <div className="border-bottom">{obj.name}</div>
+        <div>
+          <div><small>Team：{this.getBelongsName(obj.team_id)}</small></div>
+          <br></br>
+        </div>
       </div>
     )
 // 詳細
@@ -108,8 +117,8 @@ class ProjectItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-3">Project</h2>
-        <div className="px-2">
+        <h2 className="border-bottom text-center pb-2 mb-2">Project</h2>
+        <div className="px-1">
           {projectName}
         </div>
         <ReactPaginate 

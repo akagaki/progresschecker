@@ -66,7 +66,11 @@ class TeamItem extends React.Component{
 // 『データ』
 // 一覧
     const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
-        <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>{obj.name}</div>
+        <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>
+          <div className="border-bottom">{obj.name}</div>
+          <br></br>
+          <br></br>
+        </div>
     )
 // 詳細
     const teamShow = (
@@ -95,8 +99,8 @@ class TeamItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-3">Team</h2>
-        <div className="px-2">
+        <h2 className="border-bottom text-center pb-2 mb-2">Team</h2>
+        <div className="px-1">
           {teamName}
         </div>
         {/* ページネーション */}

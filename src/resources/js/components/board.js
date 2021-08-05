@@ -135,9 +135,9 @@ class Board extends React.Component {
     // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-danger">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -145,9 +145,9 @@ class Board extends React.Component {
     // 対応中
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-warning">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -155,9 +155,9 @@ class Board extends React.Component {
     // 対応済
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-success">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -165,9 +165,9 @@ class Board extends React.Component {
     // 完了
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-info">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -210,7 +210,7 @@ class Board extends React.Component {
     )
   }
     return (
-      <div className='container rounded bg-light p-3 mb-5 shadow'>
+      <div className='container rounded bg-light p-3 mb-4 shadow'>
         <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>

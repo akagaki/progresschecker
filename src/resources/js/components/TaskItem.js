@@ -9,6 +9,7 @@ class TaskItem extends React.Component{
       this.state = {
           loading:false,
           userTasks: [],
+          userTeams: [],
           userProjects:[],
           userIndex: [],
           taskModalOpen: false,
@@ -23,9 +24,12 @@ class TaskItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
-        // ユーザーチーム一覧
+        // ユーザータスク一覧
         const taskData = await fetch("http://0.0.0.0:8000/api/userTasks")
         const tasks = await taskData.json();
+        // ユーザーチーム一覧
+        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+        const teams = await teamData.json();
         // ユーザープロジェクト一覧
         const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
         const projects = await projectData.json();
@@ -34,12 +38,21 @@ class TaskItem extends React.Component{
         const users = await userData.json();
             this.setState({
                 userTasks: tasks,
+                userTeams: teams,
                 userProjects: projects,
                 userIndex: users,
                 loading: false
             });
         }
         load();
+  }
+  getBelongsName(project_id){
+    const projectData = this.state.userProjects.find((obj)=>obj.id === project_id);
+    const projectName = projectData.name;
+    const teamData = this.state.userTeams.find((obj)=>obj.id === projectData.team_id);
+    const teamName = teamData.name;
+    const belongsName ={projectName:projectName,teamName:teamName};
+    return belongsName;
   }
 // ページネーション時のメソッド
   pageChange = (data) => {
@@ -93,7 +106,13 @@ class TaskItem extends React.Component{
 // 『データ』
 // 一覧
     const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.slice(this.state.start, this.state.start + 3).map((obj,index)=>
-      <div className="col text-left btn btn-light p-1 m-2" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>{obj.name}</div>
+      <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
+        <div className="border-bottom">{obj.name}</div>
+        <div>
+          <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
+          <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
+        </div>
+      </div>
     )
     
 // 詳細
@@ -127,8 +146,8 @@ class TaskItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h2 className="border-bottom text-center pb-2 mb-3">Task</h2>
-        <div className="px-2">
+        <h2 className="border-bottom text-center pb-2 mb-2">Task</h2>
+        <div className="px-1">
           {taskName}
         </div>
         <ReactPaginate 
