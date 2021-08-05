@@ -20,35 +20,26 @@ class ProjectItem extends React.Component{
   }
 // API取得
   componentDidMount(){
-      this.setState({
-          loading: true
-      })
-      // ログインユーザーのプロジェクト情報
-      fetch("http://0.0.0.0:8000/api/userProjects")
-          .then(response => response.json())
-          .then(projects => {
-              this.setState({
-                  userProjects: projects,
-                  loading: false
-              })
-          })
-      // ログインユーザーのチーム情報
-      fetch("http://0.0.0.0:8000/api/userTeams")
-          .then(response => response.json())
-          .then(teams => {
-              this.setState({
-                  userTeams: teams,
-              })
-          })
-      // 登録ユーザー情報
-      fetch("http://0.0.0.0:8000/api/userIndex")
-          .then(response => response.json())
-          .then(users => {
-              this.setState({
-                  userIndex: users,
-              })
-          })
-      }
+      this.setState({loading: true})
+      const load = async () =>{
+        // ユーザープロジェクト一覧
+        const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
+        const projects = await projectData.json();
+        // ユーザーチーム一覧
+        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+        const teams = await teamData.json();
+        // ユーザー一覧
+        const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
+        const users = await userData.json();
+            this.setState({
+                userProjects: projects,
+                userTeams: teams,
+                userIndex: users,
+                loading: false
+            });
+        }
+        load();
+  }
 // ページネーション時のメソッド
   pageChange = (data) => {
     let pageNumber = data['selected'] * 3; //選択されたページ番号

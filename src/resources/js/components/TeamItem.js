@@ -19,27 +19,22 @@ class TeamItem extends React.Component{
   }
 // API取得
   componentDidMount(){
-      this.setState({
-          loading: true
-      })
-      // ログインユーザーのチーム情報
-      fetch("http://0.0.0.0:8000/api/userTeams")
-          .then(response => response.json())
-          .then(json => {
-              this.setState({
-                  userTeams: json,
-                  loading: false
-              })
-          })
-      // 登録ユーザー情報
-      fetch("http://0.0.0.0:8000/api/userIndex")
-          .then(response => response.json())
-          .then(users => {
-              this.setState({
-                  userIndex: users,
-              })
-          })
+      this.setState({loading: true})
+      const load = async () =>{
+      // ユーザーチーム一覧
+      const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+      const teams = await teamData.json();
+      // ユーザー一覧
+      const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
+      const users = await userData.json();
+          this.setState({
+            userTeams: teams,
+            userIndex: users,
+            loading: false
+        });  
       }
+      load();
+  }
 // ページネーション時のメソッド
   pageChange = (data) => {
     let pageNumber = data['selected'] * 3; //選択されたページ番号

@@ -21,7 +21,7 @@ class Task extends Model
        'progress' => 'required',
        'deadline' => 'required',
    );
-
+//    日付表示を変更
    public function getCreatedAtAttribute($value)
     {   
         return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');

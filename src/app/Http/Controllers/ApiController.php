@@ -61,7 +61,7 @@ class ApiController extends Controller
         $userTasks = Auth::user()->userTasks;
         return $userTasks;
     }
-
+    // マイページ進捗更新
     public function update(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -73,7 +73,6 @@ class ApiController extends Controller
         $task->save();
         return response("進捗情報を更新しました");
     }
-
 
     /**
      * Store a newly created resource in storage.

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserItem from './UserItem';
 
 
 class LoginUser extends React.Component{
@@ -15,14 +16,15 @@ class LoginUser extends React.Component{
     this.setState({
         loading: true
     })
-  fetch("http://0.0.0.0:8000/api/loginUser")
-      .then(response => response.json())
-      .then(json => {
-          this.setState({
-              loginUser: json,
-              loading: false
-          })
-      })
+    const load = async () =>{
+      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
+      const user = await userdata.json();
+            this.setState({
+                loginUser: user,
+                loading: false
+            });
+    }
+    load();
   }
 
   render() {
