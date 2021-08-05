@@ -118,7 +118,8 @@ class TaskItem extends React.Component{
 // 詳細
     const taskShow = (    
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">{this.state.taskInformation.name}
+        <div className="border-bottom text-center pb-2 mb-3">
+          <a href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
           <span className="small">　belong to {this.state.projectName}</span>
         </div>
         <div>詳細　　：　{this.state.taskInformation.information}</div>  

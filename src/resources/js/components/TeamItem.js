@@ -75,7 +75,9 @@ class TeamItem extends React.Component{
 // 詳細
     const teamShow = (
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">{this.state.teamInformation.name}</div>  
+        <div className="border-bottom text-center pb-2 mb-3">
+          <a href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+        </div>  
         <div>詳細　　：　{this.state.teamInformation.information}</div>  
         <div>作成日　：　{this.state.teamInformation.created_at}</div>  
         <div>作成者　：　{this.state.createUserString}</div> 
