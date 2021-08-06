@@ -90,26 +90,41 @@ class LoginUser extends React.Component{
           </div>
           {/* 未完了タスク情報 */}
           <div>         
-             <div>Your uncompleted tasks...</div>
-             <div className="btn btn-light btn-block p-1 m-1"onClick={() => {this.handleClickOpen()}}>
-              <div className="display-3">
-                {this.state.loading ? "" : Object.keys(this.state.incompTask).length}
-              </div>
-            </div>
+            <div>Your uncompleted tasks...</div>
           </div>
       </div>
     )
+    // 未完了タスク数
+    let taskCount ;
+    if (this.state.incompTask === null) {
+      taskCount = (
+          <div className="text-center p-1 m-1">
+            <div className="display-3">
+              {this.state.loading ? "" :0}
+            </div>
+          </div>
+    )} else {
+      taskCount = (
+          <div className="btn btn-light btn-block p-1 m-1"onClick={() => {this.handleClickOpen()}}>
+            <div className="display-3">
+              {this.state.loading ? "" : Object.keys(this.state.incompTask).length}
+            </div>
+          </div>
+      )
+    }
     // モーダル情報取得
-    const incompData = this.state.incompTask.map((obj,index)=>
-    <div className="m-3" key={index} ><a href={"/task/show?id="+obj.id}>{obj.name}</a>　({obj.deadline})</div>
-    )
     let incompModal;
     if(this.state.modalOpen === true){
       incompModal = (
           <div className='modal'>
             <div className='modal-container'>
               <div className="border-bottom text-center pb-2 mb-3">未完了タスク一覧</div>
-              {incompData}
+              <div>
+                    {this.state.incompTask.map((obj,index)=>
+                      <div className="m-3" key={index} >
+                        <a href={"/task/show?id="+obj.id}>{obj.name}</a>　({obj.deadline})
+                      </div>)}
+              </div>
               <button className="mt-3 btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
@@ -122,6 +137,7 @@ class LoginUser extends React.Component{
     return (
         <div>
           {userShow}
+          {taskCount}
           {incompModal}
         </div >
 

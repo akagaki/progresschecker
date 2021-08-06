@@ -82,7 +82,12 @@ class ApiController extends Controller
                 $incompTasks[]=$task;
             }
         }
-        return $incompTasks;
+        if(empty($incompTasks)){
+            $notIncomp = 'null';
+            return $notIncomp;
+        }else{
+            return $incompTasks;
+        }
     }
     /**
      * Store a newly created resource in storage.
