@@ -90,7 +90,7 @@ class ApiController extends Controller
             return $incompTasks;
         }
     }
-    // 新規チーム登録登録
+    // 新規チーム登録
     public function teamAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -100,6 +100,17 @@ class ApiController extends Controller
         $team->fill($data)->save();
         $team->users()->attach($data['user_id']);
         return response("新規チームを作成しました");
+    }
+    // 新規プロジェクト登録
+    public function projectAdd(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $this->validate($request, Project::$rules);
+        $project = new Project;
+        unset($data['_token']);
+        $project->fill($data)->save();
+        $project->users()->attach($data['user_id']);
+        return response("新規プロジェクトを作成しました");
     }
     /**
      * Store a newly created resource in storage.

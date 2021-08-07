@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactPaginate from 'react-paginate'; 
+import ReactPaginate from 'react-paginate';
+import ProjectAdd from './add/projectAdd';
 
 
 
@@ -9,6 +10,7 @@ class TeamItem extends React.Component{
       super()
       this.state = {
           loading:false,
+          loginUser: [],
           userTeams: [],
           userIndex: [],
           teamModalOpen: false,
@@ -21,6 +23,9 @@ class TeamItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
+      // ログインユーザー情報
+      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
+      const user = await userdata.json();
       // ユーザーチーム一覧
       const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
       const teams = await teamData.json();
@@ -28,6 +33,7 @@ class TeamItem extends React.Component{
       const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
       const users = await userData.json();
           this.setState({
+            loginUser: user,
             userTeams: teams,
             userIndex: users,
             loading: false
@@ -66,9 +72,12 @@ class TeamItem extends React.Component{
 // 『データ』
 // 一覧
     const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
-        <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id)}}>
-          <div className="border-bottom">{obj.name}</div>
-          <br></br>
+        <div  key={index}>
+          <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id)}}>
+            <div className="border-bottom">{obj.name}</div>
+          </div>
+          {/* 新規プロジェクト作成 */}
+          <ProjectAdd loginUserId={this.state.loginUser.id} teamId={obj.id}/>
           <br></br>
         </div>
     )

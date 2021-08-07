@@ -28,3 +28,4 @@ Route::get('taskIndex', [App\Http\Controllers\ApiController::class, 'taskIndex']
 Route::post('/progressUpdate', [App\Http\Controllers\ApiController::class, 'progressUpdate']);
 
 Route::post('/teamAdd', [App\Http\Controllers\ApiController::class, 'teamAdd']);
+Route::post('/projectAdd', [App\Http\Controllers\ApiController::class, 'projectAdd']);
