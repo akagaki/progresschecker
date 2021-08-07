@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Team;
 use App\Models\Project;
 use App\Models\Task;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
@@ -95,12 +96,11 @@ class ApiController extends Controller
     public function teamAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        var_dump($data);
-        $this->validate($request, Team::$rules);
+        // $this->validate($data, Team::$rules);
         $team = new Team;
-        $form = $data->all();
-        unset($form['_token']);
-        $team->fill($form)->save();
+        unset($data['_token']);
+        $team->fill($data)->save();
+        $team->users()->attach($data['user_id']);
         return response("新規チームを作成しました");
     }
     /**

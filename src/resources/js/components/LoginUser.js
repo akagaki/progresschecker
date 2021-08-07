@@ -89,7 +89,7 @@ class LoginUser extends React.Component{
               <div className="border-bottom">MAIL：{this.state.loginUser.email}</div>
             </small>
             {/* 新規チーム作成 */}
-            <TeamAdd/>
+            <TeamAdd loginUserId={this.state.loginUser.id}/>
           </div>
           {/* 未完了タスク情報 */}
           <div>         
