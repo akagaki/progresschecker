@@ -105,14 +105,14 @@ class Board extends React.Component {
       progressData: e.target.value,
       loading: true
     });
-    fetch("http://0.0.0.0:8000/api/update",{
+    fetch("http://0.0.0.0:8000/api/progressUpdate",{
       method: 'POST',
       body:JSON.stringify({progress:progress,id:id}),
       headers:{"Content-Type": "application/json"},
     }).then(response => {
         return response.text();
       }).then((text) => {
-        console.log(text);
+        alert(text);
       }).catch((e) => {
         console.error(e);
       });

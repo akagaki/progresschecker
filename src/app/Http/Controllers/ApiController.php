@@ -62,7 +62,7 @@ class ApiController extends Controller
         return $userTasks;
     }
     // マイページ進捗更新
-    public function update(Request $request)
+    public function progressUpdate(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         var_dump($data);
@@ -71,7 +71,9 @@ class ApiController extends Controller
         $task->progress = $data["progress"];
         $task->user_id = $task->users[0]->id;
         $task->save();
-        return response("進捗情報を更新しました");
+        $taskName = $task->name;
+        $text = "${taskName}の進捗情報を更新しました";
+        return $text;
     }
     // 未完了のタスクを期日順に取得
     public function incompTasks()
@@ -88,6 +90,18 @@ class ApiController extends Controller
         }else{
             return $incompTasks;
         }
+    }
+
+    public function teamAdd(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        var_dump($data);
+        $this->validate($request, Team::$rules);
+        $team = new Team;
+        $form = $data->all();
+        unset($form['_token']);
+        $team->fill($form)->save();
+        return response("新規チームを作成しました");
     }
     /**
      * Store a newly created resource in storage.

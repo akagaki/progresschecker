@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TeamAdd from './add/teamAdd';
 
 
 class LoginUser extends React.Component{
@@ -82,11 +83,13 @@ class LoginUser extends React.Component{
             <h2 className="clock-time mb-0"></h2>
           </div>
           {/* ユーザー情報 */}
-          <div  className="py-4">
+          <div  className="pt-4 pb-2">
             <small>
               <div className="border-bottom">NAME：{this.state.loginUser.name}</div>  
               <div className="border-bottom">MAIL：{this.state.loginUser.email}</div>
             </small>
+            {/* 新規チーム作成 */}
+            <TeamAdd/>
           </div>
           {/* 未完了タスク情報 */}
           <div>         
