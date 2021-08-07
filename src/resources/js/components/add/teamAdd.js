@@ -43,7 +43,12 @@ class TeamAdd extends React.Component {
       }).then((text) => {
         alert(text);
       }).catch((e) => {
-        console.error(e);
+        console.log(e);
+        alert('入力が正しくありません。');
+      });
+     this.setState({ 
+        nameData: '',
+        informationData: '',
       });
     window.location.reload();
   }
@@ -65,6 +70,8 @@ class TeamAdd extends React.Component {
   handleClickClose(){
     this.setState({
       teamAddModalOpen: false,
+      nameData: '',
+      informationData: '',
     });
   }
 
@@ -75,13 +82,13 @@ class TeamAdd extends React.Component {
           新規チーム作成
         </div>
         <form>
-          <div className="form-group"  onChange={this.onChangeName}>
+          <div className="form-group">
               TeamName:
-              <input type="text" className="form-control" placeholder="チームの名前を入力"/>
+              <input type="text" className="form-control" value={this.state.nameData} placeholder="チームの名前を入力"   onChange={this.onChangeName}/>
           </div>
-          <div className="form-group" onChange={this.onChangeInfo}>
+          <div className="form-group">
               TeamInformation:
-              <textarea className="form-control" placeholder="チームの詳細を入力"/>
+              <textarea className="form-control" value={this.state.informationData} placeholder="チームの詳細を入力"  onChange={this.onChangeInfo}/>
           </div>
         </form>
           <button className="btn btn-info text-white btn-sm shadow-sm m-1 float-left" onClick={() => {this. handleClickAdd()}}>
