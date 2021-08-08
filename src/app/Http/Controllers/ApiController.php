@@ -49,17 +49,17 @@ class ApiController extends Controller
     }
     public function userTeams()
     {
-        $userTeams = Auth::user()->userTeams;
+        $userTeams = Auth::user()->userTeams->sortByDesc('id')->values();
         return $userTeams;
     }
     public function userProjects()
     {
-        $userProjects = Auth::user()->userProjects;
+        $userProjects = Auth::user()->userProjects->sortByDesc('id')->values();
         return $userProjects;
     }
     public function userTasks()
     {
-        $userTasks = Auth::user()->userTasks;
+        $userTasks = Auth::user()->userTasks->sortByDesc('id')->values();
         return $userTasks;
     }
     // マイページ進捗更新

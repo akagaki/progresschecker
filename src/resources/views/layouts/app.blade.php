@@ -83,8 +83,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body id="app" class="h-100">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+<body id="app" class="h-100 bg-white">
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('home') }}">
                 {{ config('app.name') }}

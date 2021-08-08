@@ -27,9 +27,6 @@ class TeamAdd extends React.Component {
     const isYes = confirm('この内容で登録しますか？');
     if(isYes === false){return}
     const data = {name:this.state.nameData,information:this.state.informationData};
-    console.log(data.name);
-    console.log(data.information);
-    console.log(this.props.loginUserId);
     fetch("http://0.0.0.0:8000/api/teamAdd",{
       method: 'POST',
       body:JSON.stringify({

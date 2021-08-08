@@ -85,13 +85,13 @@ class TeamItem extends React.Component{
       <div className="m-4">
         <div className="text-center">
           <a href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+        </div>
           {/* 新規プロジェクト作成 */}
             <ProjectAdd 
               loginUserId={this.state.loginUser.id} 
               teamId={this.state.teamInformation.id}
               teamName={this.state.teamInformation.name}
             />
-        </div>  
         <div>詳細　　：　{this.state.teamInformation.information}</div>  
         <div>作成日　：　{this.state.teamInformation.created_at}</div>  
         <div>作成者　：　{this.state.createUserString}</div> 
