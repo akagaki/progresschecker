@@ -99,7 +99,7 @@ class ApiController extends Controller
         unset($data['_token']);
         $team->fill($data)->save();
         $team->users()->attach($data['user_id']);
-        return response("新規チームを作成しました");
+        return response("新規チームを作成しました\nメンバーを登録してください");
     }
     // 新規プロジェクト登録
     public function projectAdd(Request $request)
@@ -110,7 +110,18 @@ class ApiController extends Controller
         unset($data['_token']);
         $project->fill($data)->save();
         $project->users()->attach($data['user_id']);
-        return response("新規プロジェクトを作成しました");
+        return response("新規プロジェクトを作成しました\nメンバーを登録してください");
+    }
+    // 新規タスク登録
+    public function taskAdd(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $this->validate($request, Task::$rules);
+        $task = new Task;
+        unset($data['_token']);
+        $task->fill($data)->save();
+        $task->users()->attach($data['user_id']);
+        return response("新規タスクを作成しました\n担当者を登録してください");
     }
     /**
      * Store a newly created resource in storage.

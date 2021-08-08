@@ -75,17 +75,22 @@ class TeamItem extends React.Component{
         <div  key={index}>
           <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id)}}>
             <div className="border-bottom">{obj.name}</div>
+            <br></br>
+            <br></br>
           </div>
-          {/* 新規プロジェクト作成 */}
-          <ProjectAdd loginUserId={this.state.loginUser.id} teamId={obj.id}/>
-          <br></br>
         </div>
     )
 // 詳細
     const teamShow = (
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">
+        <div className="text-center">
           <a href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+          {/* 新規プロジェクト作成 */}
+            <ProjectAdd 
+              loginUserId={this.state.loginUser.id} 
+              teamId={this.state.teamInformation.id}
+              teamName={this.state.teamInformation.name}
+            />
         </div>  
         <div>詳細　　：　{this.state.teamInformation.information}</div>  
         <div>作成日　：　{this.state.teamInformation.created_at}</div>  

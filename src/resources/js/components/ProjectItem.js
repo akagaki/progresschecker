@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate'; 
+import TaskAdd from './add/taskAdd'; 
 
 
 class ProjectItem extends React.Component{
@@ -8,6 +9,7 @@ class ProjectItem extends React.Component{
       super()
       this.state = {
           loading:false,
+          loginUser: [],
           userProjects: [],
           userTeams: [],
           userIndex: [],
@@ -15,13 +17,16 @@ class ProjectItem extends React.Component{
           projectInformation:[],
           createUserString:'',
           teamName:'',
-          start: 0, //最初は0番目(=最新)の要素から
+          start: 0,
       }
   }
 // API取得
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
+        // ログインユーザー情報
+      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
+      const user = await userdata.json();
         // ユーザープロジェクト一覧
         const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
         const projects = await projectData.json();
@@ -32,6 +37,7 @@ class ProjectItem extends React.Component{
         const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
         const users = await userData.json();
             this.setState({
+                loginUser: user,
                 userProjects: projects,
                 userTeams: teams,
                 userIndex: users,
@@ -80,21 +86,28 @@ class ProjectItem extends React.Component{
 // 『データ』
 // 一覧
     const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
-      <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
-        <div className="border-bottom">{obj.name}</div>
-        <div>
+      <div key={index}>
+        <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
+          <div className="border-bottom">{obj.name}</div>
           <div><small>Team：{this.getBelongsName(obj.team_id)}</small></div>
           <br></br>
         </div>
+        
       </div>
     )
 // 詳細
     const projectShow = (    
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">
+        <div className="text-center">
           <a href={"/project/show?id="+this.state.projectInformation.id}>{this.state.projectInformation.name}</a>
           <span className="small">　belong to {this.state.teamName}</span>
-        </div> 
+        </div>
+        {/* 新規タスク作成 */}
+            <TaskAdd 
+              loginUserId={this.state.loginUser.id} 
+              projectId={this.state.projectInformation.id}
+              projectName={this.state.projectInformation.name}
+            />
         <div>詳細　　：　{this.state.projectInformation.information}</div> 
         <div>作成日　：　{this.state.projectInformation.created_at}</div> 
         <div>作成者　：　{this.state.createUserString}</div>

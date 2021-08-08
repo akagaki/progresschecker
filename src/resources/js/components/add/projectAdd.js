@@ -53,7 +53,7 @@ class ProjectAdd extends React.Component {
   // NewProjectボタン
   projectCreate(){
     return(
-      <div className="d-flex flex-row-reverse">
+      <div className="border-bottom pb-2 mb-3 d-flex flex-row-reverse">
         <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewProject</small>
       </div>
     )
@@ -78,6 +78,7 @@ class ProjectAdd extends React.Component {
       <div className="m-4">
         <div className="border-bottom text-center pb-2 mb-3">
           新規プロジェクト作成
+          <span className="small">　for {this.props.teamName}</span>
         </div>
         <form>
           <div className="form-group">
