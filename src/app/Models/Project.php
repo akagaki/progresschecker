@@ -19,6 +19,17 @@ class Project extends Model
        'information' => 'required'
    );
 
+   public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            foreach($model->tasks()->get() as $task){
+                $task->delete();
+            }
+        });
+    }
+
     public function getCreatedAtAttribute($value)
     {   
         return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');

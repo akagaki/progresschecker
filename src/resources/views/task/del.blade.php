@@ -5,17 +5,12 @@
 @section('menubar')
    タスク削除
 <div class="items">
-   <a href='/task/show?id={{$task->id}}'><i class="fa fa-reply"></i>	</a>
+   <!-- <a href='/task/show?id={{$task->id}}'><i class="fa fa-reply"></i>	</a> -->
 </div>
 @endsection
 
 @section('content')
 <div class="team-box">
-<!-- Project -->
-   <div class="sub-information">
-      <p>プロジェクト名：<a href="/project/show?id={{$task->project_id}}">{{$task->ownerProject()}}</a></p>
-   </div>
-<!-- Task -->
    <form action="/task/del" method="post">
    <div class="main-conteiner">
                <div class="main-information">
@@ -26,7 +21,7 @@
                <p>詳細　　：{{$task->information}}</p>
                <p>作成日　：{{$task->created_at}}</p>
                <p>更新日　：{{$task->updated_at}}</p> 
-               <p>最終更新：{{$task->ownerName()}}</p>
+               <!-- <p>最終更新：{{$task->ownerName()}}</p> -->
             </div>
             <div class="member-information">
                   @foreach($task->users as $member)

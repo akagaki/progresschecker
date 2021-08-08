@@ -105,14 +105,14 @@ class Board extends React.Component {
       progressData: e.target.value,
       loading: true
     });
-    fetch("http://0.0.0.0:8000/api/update",{
+    fetch("http://0.0.0.0:8000/api/progressUpdate",{
       method: 'POST',
       body:JSON.stringify({progress:progress,id:id}),
       headers:{"Content-Type": "application/json"},
     }).then(response => {
         return response.text();
       }).then((text) => {
-        console.log(text);
+        alert(text);
       }).catch((e) => {
         console.error(e);
       });
@@ -135,9 +135,9 @@ class Board extends React.Component {
     // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-danger">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -145,9 +145,9 @@ class Board extends React.Component {
     // 対応中
     const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-warning">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -155,9 +155,9 @@ class Board extends React.Component {
     // 対応済
     const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-success">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -165,9 +165,9 @@ class Board extends React.Component {
     // 完了
     const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
-      <div className="alert-info">{obj.name}</div>
-      <div className="border-top">期日：{obj.deadline}</div>
-      <div className="border-top">
+      <div className="border-bottom">{obj.name}</div>
+      <div className="border-bottom">期日：{obj.deadline}</div>
+      <div>
         <div><small>Team：{this.getBelongsName(obj.project_id).teamName}</small></div>
         <div><small>Project：{this.getBelongsName(obj.project_id).projectName}</small></div>
       </div>
@@ -176,7 +176,8 @@ class Board extends React.Component {
 // 詳細
     const taskShow = (    
       <div className="m-4">
-        <div className="border-bottom text-center pb-2 mb-3">{this.state.taskInformation.name}
+        <div className="border-bottom text-center pb-2 mb-3">
+          <a href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
           <span className="small">　belong to {this.state.projectName}</span>
         </div>  
         <div>詳細　　：　{this.state.taskInformation.information}</div>  
@@ -210,7 +211,7 @@ class Board extends React.Component {
     )
   }
     return (
-      <div className='container rounded bg-light p-3 mb-5 shadow'>
+      <div className='container rounded bg-light p-3 mb-4 shadow'>
         <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>

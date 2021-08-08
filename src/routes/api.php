@@ -25,4 +25,8 @@ Route::get('teamIndex', [App\Http\Controllers\ApiController::class, 'teamIndex']
 Route::get('projectIndex', [App\Http\Controllers\ApiController::class, 'projectIndex']);
 Route::get('taskIndex', [App\Http\Controllers\ApiController::class, 'taskIndex']);
 
-Route::post('/update', [App\Http\Controllers\ApiController::class, 'update']);
+Route::post('/progressUpdate', [App\Http\Controllers\ApiController::class, 'progressUpdate']);
+
+Route::post('/teamAdd', [App\Http\Controllers\ApiController::class, 'teamAdd']);
+Route::post('/projectAdd', [App\Http\Controllers\ApiController::class, 'projectAdd']);
+Route::post('/taskAdd', [App\Http\Controllers\ApiController::class, 'taskAdd']);

@@ -18,6 +18,17 @@ class Team extends Model
         'user_id' => 'required'
     );
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            foreach($model->projects()->get() as $project){
+                $project->delete();
+            }
+        });
+    }
+
     public function getCreatedAtAttribute($value)
     {   
         return Carbon::parse($value)->isoFormat('YYYY年MM月DD日(ddd)');
