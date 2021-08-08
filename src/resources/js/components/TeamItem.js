@@ -70,6 +70,8 @@ class TeamItem extends React.Component{
   
   render() {
 // 『データ』
+// タイトル(リロード)
+    const title = <div className="border-bottom  btn btn-block" onClick={() => {this.componentDidMount()}}><h4>Team</h4></div>
 // 一覧
     const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
         <div  key={index}>
@@ -115,7 +117,7 @@ class TeamItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h3 className="border-bottom text-center pb-2 mb-2">Team</h3>
+          {title}
         <div className="px-1">
           {teamName}
         </div>

@@ -47,7 +47,6 @@ class TeamAdd extends React.Component {
         nameData: '',
         informationData: '',
       });
-    window.location.reload();
   }
   // NewTeamボタン
   teamCreate(){

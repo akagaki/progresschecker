@@ -84,6 +84,8 @@ class ProjectItem extends React.Component{
   }
   render() {
 // 『データ』
+// タイトル(リロード)
+    const title = <div className="border-bottom btn btn-block" onClick={() => {this.componentDidMount()}}><h4>Project</h4></div>
 // 一覧
     const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
       <div key={index}>
@@ -131,7 +133,7 @@ class ProjectItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h3 className="border-bottom text-center pb-2 mb-2">Project</h3>
+          {title}
         <div className="px-1">
           {projectName}
         </div>

@@ -104,6 +104,8 @@ class TaskItem extends React.Component{
   
   render() {
 // 『データ』
+// タイトル(リロード)
+    const title = <div className="border-bottom  btn btn-block" onClick={() => {this.componentDidMount()}}><h4>Task</h4></div>
 // 一覧
     const taskName = this.state.loading ? "NowLoading..." : this.state.userTasks.slice(this.state.start, this.state.start + 3).map((obj,index)=>
       <div className="col text-left btn btn-light p-1 m-1" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
@@ -147,7 +149,7 @@ class TaskItem extends React.Component{
 // 一覧
     return (
       <div>
-        <h3 className="border-bottom text-center pb-2 mb-2">Task</h3>
+          {title}
         <div className="px-1">
           {taskName}
         </div>
