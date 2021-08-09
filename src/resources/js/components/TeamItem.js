@@ -121,7 +121,6 @@ class TeamItem extends React.Component{
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
-              
             </div>
           </div>
         </div>

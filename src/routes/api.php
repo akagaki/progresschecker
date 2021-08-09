@@ -39,3 +39,4 @@ Route::post('/userSearch', [App\Http\Controllers\ApiController::class, 'userSear
 Route::post('/teamMemberAdd', [App\Http\Controllers\ApiController::class, 'teamMemberAdd']);
 Route::post('/teamMemberIndex', [App\Http\Controllers\ApiController::class, 'teamMemberIndex']);
 Route::post('/projectMemberIndex', [App\Http\Controllers\ApiController::class, 'projectMemberIndex']);
+Route::post('/teamMemberData', [App\Http\Controllers\ApiController::class, 'teamMemberData']);

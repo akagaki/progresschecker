@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import TaskAdd from './add/taskAdd'; 
 import ProjectDel from './delete/projectDel';
 import ProjectMemberIndex from './member/projectMemberIndex';
+import ProjectMemberEdit from './member/projectMemberEdit';
 
 
 class ProjectItem extends React.Component{
@@ -126,11 +127,16 @@ class ProjectItem extends React.Component{
                 projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
               />
-              {/* チームメンバー表示ボタン */}
+              {/* プロジェクトメンバー表示ボタン */}
               <ProjectMemberIndex
                 projectId={this.state.projectInformation.id}
               />
-              
+              {/* プロジェクトメンバー登録 */}
+              <ProjectMemberEdit
+                teamId={this.state.projectInformation.team_id}
+                projectId={this.state.projectInformation.team_id}
+                projectName={this.state.projectInformation.name}
+              />
             </div>
           </div>
         </div>

@@ -158,7 +158,7 @@ class ApiController extends Controller
         $text = "${taskName}の期日を更新しました";
         return $text;
     }
-    // チームメンバー取得
+    // チームメンバー名取得
     public function teamMemberIndex()
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -192,6 +192,16 @@ class ApiController extends Controller
         $team = Team::find($data["team_id"]);
         $team->users()->attach($data['user_id']);
         return response("新規チームメンバーを登録しました");
+    }
+    // チームメンバー詳細取得
+    public function teamMemberData()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["id"]);
+        foreach ($team->users as $user) {
+            $members[] = $user;    
+        }
+        return $members;
     }
 
 
