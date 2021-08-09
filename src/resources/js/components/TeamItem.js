@@ -87,6 +87,12 @@ class TeamItem extends React.Component{
       <div className="m-4">
         <div className="border-bottom pb-2 mb-3 text-center">
           <a className="mr-2" href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+          {/* 削除ボタン */}
+          <div className="text-right mr-3">
+            <TeamDel
+                teamId={this.state.teamInformation.id}
+            />
+          </div>
         </div>
         <div className="container">
           <div className="row">
@@ -96,16 +102,14 @@ class TeamItem extends React.Component{
               <div>作成日　：　{this.state.teamInformation.created_at}</div>  
               <div>作成者　：　{this.state.createUserString}</div> 
             </div>
-          {/* ツールボタン */}
+          {/* 新規プロジェクト作成 */}
             <div className="col text-right">
               <ProjectAdd 
                 loginUserId={this.state.loginUser.id} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
-              <TeamDel
-                teamId={this.state.teamInformation.id}
-              />
+              
             </div>
           </div>
         </div>
@@ -130,29 +134,29 @@ class TeamItem extends React.Component{
     return (
       <div>
           {title}
-        <div className="px-1">
+        <div className="px-1 my-2">
           {teamName}
         </div>
         {/* ページネーション */}
         <ReactPaginate
-          pageCount={Math.ceil(this.state.userTeams.length / 3)} //総ページ数。今回は一覧表示したいデータ数 / 1ページあたりの表示数としてます。
-          marginPagesDisplayed={1} //先頭と末尾に表示するページの数。今回は2としたので1,2…今いるページの前後…後ろから2番目, 1番目 のように表示されます。
-          pageRangeDisplayed={0} //上記の「今いるページの前後」の番号をいくつ表示させるかを決めます。
-          onPageChange={this.pageChange} //ページネーションのリンクをクリックしたときのイベント(詳しくは下で解説します)
-          containerClassName='pagination pagination-sm' //ページネーションリンクの親要素のクラス名
-          pageClassName='page-item' //各子要素(li要素)のクラス名
-          pageLinkClassName='page-link' //ページネーションのリンクのクラス名
-          activeClassName='active' //今いるページ番号のクラス名。今いるページの番号だけ太字にしたりできます 
-          previousLabel='<' //前のページ番号に戻すリンクのテキスト
-          nextLabel='>' //次のページに進むボタンのテキスト
-          previousClassName='page-item' // '<'の親要素(li)のクラス名
-          nextClassName='page-item' //'>'の親要素(li)のクラス名
-          previousLinkClassName='page-link'  //'<'のリンクのクラス名
-          nextLinkClassName='page-link'　//'>'のリンクのクラス名
-          disabledClassName='disabled' //先頭 or 末尾に行ったときにそれ以上戻れ(進め)なくするためのクラス
-          breakLabel='...' // ページがたくさんあるときに表示しない番号に当たる部分をどう表示するか
-          breakClassName='page-item' // 上記の「…」のクラス名
-          breakLinkClassName='page-link' // 「…」の中のリンクにつけるクラス
+          pageCount={Math.ceil(this.state.userTeams.length / 3)}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={0}
+          onPageChange={this.pageChange}
+          containerClassName='pagination pagination-sm'
+          pageClassName='page-item'
+          pageLinkClassName='page-link'
+          activeClassName='active'
+          previousLabel='<'
+          nextLabel='>'
+          previousClassName='page-item'
+          nextClassName='page-item'
+          previousLinkClassName='page-link'
+          nextLinkClassName='page-link'
+          disabledClassName='disabled'
+          breakLabel='...'
+          breakClassName='page-item'
+          breakLinkClassName='page-link'
         />
         <div>
           {teamModal}
