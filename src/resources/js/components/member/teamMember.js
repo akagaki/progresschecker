@@ -11,20 +11,7 @@ class TeamMember extends React.Component{
         newMember:[],
       }
   }
-// API取得
-  // componentDidMount(){
-  //   const load = async () =>{
-  //     // ログインユーザー情報
-  //     const userdata = await fetch("http://0.0.0.0:8000/api/userIndex");
-  //     const users = await userdata.json();
-      
-  //     this.setState({ 
-  //       userIndex: users,
-  //     });
-  //   }
-  //   load();
-  // }
-  //フォーム入力
+  //メールフォーム
   onChangeEmail=(e)=>{
     this.setState({ 
       emailData: e.target.value,
@@ -32,8 +19,6 @@ class TeamMember extends React.Component{
   }
   //検索ボタン
   handleClickSearch=()=>{
-    
-    console.log(this.state.emailData);
     fetch("http://0.0.0.0:8000/api/userSearch",{
       method: 'POST',
       body:JSON.stringify({
@@ -42,16 +27,38 @@ class TeamMember extends React.Component{
       headers:{"Content-Type": "application/json"},
     }).then(response => response.json()
       ).then(json => {
-        console.log(json);
-        this.setState({ 
-          newMember: json,
-        });
+        this.setState({ newMember: json,});
         const isYes = confirm("「"+ this.state.newMember.name +"」さんを登録しますか？");
-        if(isYes === false){return}
+        if(isYes === false){return}else{
+          this.teamMemberAdd(json.id);}
       }).catch((e) => {
         console.log(e);
         alert('入力が正しくありません。');
       });
+  }
+
+  teamMemberAdd(user_id){
+    console.log(this.state.newMember);
+    fetch("http://0.0.0.0:8000/api/teamMemberAdd",{
+      method: 'POST',
+      body:JSON.stringify({
+        user_id:user_id,
+        team_id:this.props.teamId,
+      }),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => {
+        return response.text();
+      }).then((text) => {
+        alert(text);
+      }).catch((e) => {
+        console.log(e);
+        alert('入力が正しくありません。');
+      });
+     this.setState({
+        emailData:'',
+        newMember:[],
+      });
+      this.handleClickClose();
   }
   // MemberEditボタン
   teamMember(){

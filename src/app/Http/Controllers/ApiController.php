@@ -158,12 +158,20 @@ class ApiController extends Controller
         $text = "${taskName}の期日を更新しました";
         return $text;
     }
-
+    // ユーザー検索
     public function userSearch(Request $request)
     {
         $data = json_decode(file_get_contents("php://input"), true);
         $user = User::where('email', $data)->first();
         return $user;
+    }
+    // チームユーザー登録
+    public function teamMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["team_id"]);
+        $team->users()->attach($data['user_id']);
+        return response("新規チームメンバーを登録しました");
     }
 
 
