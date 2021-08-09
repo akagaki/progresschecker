@@ -12,27 +12,20 @@ class TeamDel extends React.Component {
     const isYes = confirm('チームを削除すると関連するプロジェクトやタスクも削除されます\n削除してよろしいですか？');
     if(isYes === false){return}
     console.log(this.props.teamId);
-    // fetch("http://0.0.0.0:8000/api/projectAdd",{
-    //   method: 'POST',
-    //   body:JSON.stringify({
-    //     user_id:this.props.loginUserId,
-    //     team_id:this.props.teamId,
-    //     name:data.name,
-    //     information:data.information
-    //   }),
-    //   headers:{"Content-Type": "application/json"},
-    // }).then(response => {
-    //     return response.text();
-    //   }).then((text) => {
-    //     alert(text);
-    //   }).catch((e) => {
-    //     console.log(e);
-    //     alert('入力が正しくありません。');
-    //   });
-    //  this.setState({ 
-    //     nameData: '',
-    //     informationData: '',
-    //   });
+    fetch("http://0.0.0.0:8000/api/teamDel",{
+      method: 'POST',
+      body:JSON.stringify({
+        id:this.props.teamId
+      }),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => {
+        return response.text();
+      }).then((text) => {
+        alert(text);
+      }).catch((e) => {
+        console.log(e);
+      });
+      window.location.reload();
   }
   // TeamDeleteボタン
   teamDelete(){
