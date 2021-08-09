@@ -79,7 +79,6 @@ class TeamItem extends React.Component{
           <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id)}}>
             <div className="border-bottom">{obj.name}</div>
             <br></br>
-            <br></br>
           </div>
         </div>
     )

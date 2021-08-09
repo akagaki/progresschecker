@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from 'react-dom';
 import TaskEdit from "./edit/taskEdit";
+import TaskDel from "./delete/taskDel";
 
 
 class Board extends React.Component {
@@ -153,8 +154,14 @@ class Board extends React.Component {
     const taskShow = (    
       <div className="m-4">
         <div className="border-bottom text-center pb-2 mb-3">
-          <a href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
-          <span className="small">　belong to {this.state.projectName}</span>
+            <a  href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
+            <span className="small">　belong to {this.state.projectName}</span>
+            {/* 削除ボタン */}
+            <div className="text-right">
+              <TaskDel
+                taskId={this.state.taskInformation.id}
+              />
+            </div>
         </div>
         {/* 詳細情報 */}
         <div>詳細　　：　{this.state.taskInformation.information}</div>  
@@ -166,6 +173,7 @@ class Board extends React.Component {
           <TaskEdit
             taskId={this.state.taskInformation.id}
             progress={this.state.taskInformation.progress}
+            deadline={this.state.taskInformation.deadline}
           />
       </div>
     )

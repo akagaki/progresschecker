@@ -13,7 +13,7 @@ class Index extends React.Component {
             <div  className='col justify-content-around' ><LoginUser/></div>
             <div  className='col justify-content-around' ><TeamItem/></div>
             <div  className='col justify-content-around' ><ProjectItem/></div>
-            <div  className='col justify-content-around' ><TaskItem/></div>
+            {/* <div  className='col justify-content-around' ><TaskItem/></div> */}
           </div>
       </div>
     );

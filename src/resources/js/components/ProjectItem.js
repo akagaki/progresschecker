@@ -93,7 +93,6 @@ class ProjectItem extends React.Component{
         <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
           <div className="border-bottom">{obj.name}</div>
           <div><small>Team：{this.getBelongsName(obj.team_id)}</small></div>
-          <br></br>
         </div>
         
       </div>
