@@ -24,7 +24,6 @@ class ProjectMemberEdit extends React.Component{
         this.setState({
           memberIndex:json
         })
-        console.log(json);
       }).catch((e) => {
         console.log(e);
         alert('情報を取得できませんでした');
@@ -39,49 +38,27 @@ class ProjectMemberEdit extends React.Component{
     });
   }
   //メンバー登録ボタン
-  handleClickAdd=()=>{
-    console.log(this.state.memberData);
-    // fetch("http://0.0.0.0:8000/api/userSearch",{
-    //   method: 'POST',
-    //   body:JSON.stringify({
-    //     email:this.state.emailData
-    //   }),
-    //   headers:{"Content-Type": "application/json"},
-    // }).then(response => response.json()
-    //   ).then(json => {
-    //     this.setState({ newMember: json,});
-    //     const isYes = confirm("「"+ this.state.newMember.name +"」さんを登録しますか？");
-    //     if(isYes === false){return}else{
-    //       this.teamMemberAdd(json.id);}
-    //   }).catch((e) => {
-    //     console.log(e);
-    //     alert('入力が正しくありません。');
-    //   });
+  handleClickAdd(){
+    fetch("http://0.0.0.0:8000/api/projectMemberAdd",{
+      method: 'POST',
+      body:JSON.stringify({
+        user_id:this.state.memberData,
+        project_id:this.props.projectId,
+      }),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => {
+        return response.text();
+      }).then((text) => {
+        alert(text);
+      }).catch((e) => {
+        console.log(e);
+        alert('入力が正しくありません。');
+      });
+     this.setState({
+        memberData:[],
+      });
+      this.handleClickClose();
   }
-  // チームメンバー登録
-  // teamMemberAdd(user_id){
-  //   console.log(this.state.newMember);
-  //   fetch("http://0.0.0.0:8000/api/teamMemberAdd",{
-  //     method: 'POST',
-  //     body:JSON.stringify({
-  //       user_id:user_id,
-  //       team_id:this.props.teamId,
-  //     }),
-  //     headers:{"Content-Type": "application/json"},
-  //   }).then(response => {
-  //       return response.text();
-  //     }).then((text) => {
-  //       alert(text);
-  //     }).catch((e) => {
-  //       console.log(e);
-  //       alert('入力が正しくありません。');
-  //     });
-  //    this.setState({
-  //       emailData:'',
-  //       newMember:[],
-  //     });
-  //     this.handleClickClose();
-  // }
   // MemberEditボタン
   projectMember(){
     return(
@@ -100,8 +77,8 @@ class ProjectMemberEdit extends React.Component{
   handleClickClose(){
     this.setState({
       memberEditModalOpen: false,
-      emailData:'',
-      newMember:[],
+      memberData:[],
+      memberIndex: [],
     });
   }
   
@@ -114,7 +91,7 @@ class ProjectMemberEdit extends React.Component{
         </div>        
         <div className="text-left">
           <div>メンバー登録</div>
-          <select className="custom-select"onChange={this.onChangeData}>
+          <select className="custom-select mb-2"onChange={this.onChangeData}>
             <option>選択してください</option>
             {this.state.memberIndex.map((obj,index) =>
             <option key={index} value={obj.id}>{obj.name}</option>

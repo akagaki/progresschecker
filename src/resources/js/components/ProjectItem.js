@@ -134,7 +134,7 @@ class ProjectItem extends React.Component{
               {/* プロジェクトメンバー登録 */}
               <ProjectMemberEdit
                 teamId={this.state.projectInformation.team_id}
-                projectId={this.state.projectInformation.team_id}
+                projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
               />
             </div>

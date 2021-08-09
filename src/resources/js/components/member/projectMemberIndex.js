@@ -7,7 +7,6 @@ class ProjectMemberIndex extends React.Component{
   }
   // メンバー一覧取得
     getProjectMember(){
-      console.log(this.props.teamId);
     fetch("http://0.0.0.0:8000/api/projectMemberIndex",{
       method: 'POST',
       body:JSON.stringify({

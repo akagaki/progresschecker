@@ -185,13 +185,21 @@ class ApiController extends Controller
         $user = User::where('email', $data)->first();
         return $user;
     }
-    // チームユーザー登録
+    // チームメンバー登録
     public function teamMemberAdd()
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $team = Team::find($data["team_id"]);
         $team->users()->attach($data['user_id']);
         return response("新規チームメンバーを登録しました");
+    }
+    // プロジェクトメンバー登録
+    public function projectMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["project_id"]);
+        $project->users()->attach($data['user_id']);
+        return response("新規プロジェクトメンバーを登録しました");
     }
     // チームメンバー詳細取得
     public function teamMemberData()
