@@ -31,7 +31,7 @@ class TaskDel extends React.Component {
   taskDelete(){
     return(
       <div>
-        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickDel()}}>Delete　<i className="far fa-trash-alt text-right"></i></small>
+        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickDel()}}><i className="far fa-trash-alt text-right"></i></small>
       </div>
     )
   }

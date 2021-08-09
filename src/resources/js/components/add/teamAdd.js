@@ -52,7 +52,7 @@ class TeamAdd extends React.Component {
   teamCreate(){
     return(
       <div className="d-flex flex-row-reverse">
-        <small className="btn btn-light bg-white  btn-sm shadow-sm m-1" onClick={() => {this.handleClickOpen()}}>NewTeam</small>
+        <small className="btn btn-light bg-white  btn-sm shadow-sm m-1" onClick={() => {this.handleClickOpen()}}>NewTeam　<i className="fas fa-plus"></i></small>
       </div>
     )
   }

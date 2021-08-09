@@ -62,18 +62,6 @@ class ApiController extends Controller
         $userTasks = Auth::user()->userTasks->sortByDesc('id')->values();
         return $userTasks;
     }
-    // マイページ進捗更新
-    public function progressUpdate(Request $request)
-    {   
-        $data = json_decode(file_get_contents("php://input"), true);
-        $task = Task::find($data["id"]);
-        $task->progress = $data["progress"];
-        $task->user_id = $task->users[0]->id;
-        $task->save();
-        $taskName = $task->name;
-        $text = "${taskName}の進捗情報を更新しました";
-        return $text;
-    }
     // 未完了のタスクを期日順に取得
     public function incompTasks()
     {
@@ -144,6 +132,30 @@ class ApiController extends Controller
         $data = json_decode(file_get_contents("php://input"), true);
         Task::find($data["id"])->delete();
         return response("タスクを削除しました");
+    }
+    // 進捗編集
+    public function progressUpdate(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $task = Task::find($data["id"]);
+        $task->progress = $data["progress"];
+        $task->user_id = $task->users[0]->id;
+        $task->save();
+        $taskName = $task->name;
+        $text = "${taskName}の進捗を更新しました";
+        return $text;
+    }
+    // 期日編集
+    public function deadlineUpdate(Request $request)
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $task = Task::find($data["id"]);
+        $task->deadline = $data["deadline"];
+        $task->user_id = $task->users[0]->id;
+        $task->save();
+        $taskName = $task->name;
+        $text = "${taskName}の期日を更新しました";
+        return $text;
     }
     /**
      * Store a newly created resource in storage.

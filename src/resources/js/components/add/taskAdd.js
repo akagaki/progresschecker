@@ -66,7 +66,7 @@ class TaskAdd extends React.Component {
   taskCreate(){
     return(
       <div>
-        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewTask</small>
+        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewTask　<i className="fas fa-plus"></i></small>
       </div>
     )
   }
