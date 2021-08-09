@@ -168,6 +168,16 @@ class ApiController extends Controller
         }
         return $members;
     }
+    // プロジェクトメンバー取得
+    public function projectMemberIndex()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["id"]);
+        foreach ($project->users as $user) {
+            $members[] = $user->name;    
+        }
+        return $members;
+    }
     // ユーザー検索
     public function userSearch()
     {

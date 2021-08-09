@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate'; 
 import TaskAdd from './add/taskAdd'; 
 import ProjectDel from './delete/projectDel';
+import ProjectMemberIndex from './member/projectMemberIndex';
 
 
 class ProjectItem extends React.Component{
@@ -118,12 +119,16 @@ class ProjectItem extends React.Component{
               <div>作成日　：　{this.state.projectInformation.created_at}</div> 
               <div>作成者　：　{this.state.createUserString}</div>
              </div>
-          {/* 新規タスク作成 */}
             <div className="col text-right">
+            {/* 新規タスク作成 */}
               <TaskAdd 
                 loginUserId={this.state.loginUser.id} 
                 projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
+              />
+              {/* チームメンバー表示ボタン */}
+              <ProjectMemberIndex
+                projectId={this.state.projectInformation.id}
               />
               
             </div>

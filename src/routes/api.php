@@ -38,3 +38,4 @@ Route::post('/deadlineUpdate', [App\Http\Controllers\ApiController::class, 'dead
 Route::post('/userSearch', [App\Http\Controllers\ApiController::class, 'userSearch']);
 Route::post('/teamMemberAdd', [App\Http\Controllers\ApiController::class, 'teamMemberAdd']);
 Route::post('/teamMemberIndex', [App\Http\Controllers\ApiController::class, 'teamMemberIndex']);
+Route::post('/projectMemberIndex', [App\Http\Controllers\ApiController::class, 'projectMemberIndex']);
