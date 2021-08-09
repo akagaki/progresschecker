@@ -133,6 +133,7 @@ class ApiController extends Controller
         Task::find($data["id"])->delete();
         return response("タスクを削除しました");
     }
+// 編集-----------------------------------------------------------------------------------
     // 進捗編集
     public function progressUpdate(Request $request)
     {   
@@ -157,6 +158,15 @@ class ApiController extends Controller
         $text = "${taskName}の期日を更新しました";
         return $text;
     }
+
+    public function userSearch(Request $request)
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $user = User::where('email', $data)->first();
+        return $user;
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
