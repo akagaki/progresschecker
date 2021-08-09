@@ -37,3 +37,4 @@ Route::post('/progressUpdate', [App\Http\Controllers\ApiController::class, 'prog
 Route::post('/deadlineUpdate', [App\Http\Controllers\ApiController::class, 'deadlineUpdate']);
 Route::post('/userSearch', [App\Http\Controllers\ApiController::class, 'userSearch']);
 Route::post('/teamMemberAdd', [App\Http\Controllers\ApiController::class, 'teamMemberAdd']);
+Route::post('/teamMemberIndex', [App\Http\Controllers\ApiController::class, 'teamMemberIndex']);
