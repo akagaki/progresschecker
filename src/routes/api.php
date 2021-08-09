@@ -32,3 +32,5 @@ Route::post('/projectAdd', [App\Http\Controllers\ApiController::class, 'projectA
 Route::post('/taskAdd', [App\Http\Controllers\ApiController::class, 'taskAdd']);
 // 削除
 Route::post('/teamDel', [App\Http\Controllers\ApiController::class, 'teamDel']);
+Route::post('/projectDel', [App\Http\Controllers\ApiController::class, 'projectDel']);
+Route::post('/taskDel', [App\Http\Controllers\ApiController::class, 'taskDel']);

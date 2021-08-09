@@ -101,9 +101,6 @@ class TeamAdd extends React.Component {
         <div className='modal'>
           <div className='modal-container'>
             {addForm}
-            <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
           </div>
         </div>
     )}

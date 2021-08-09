@@ -9,7 +9,7 @@ class TeamDel extends React.Component {
   
   //削除ボタン
   handleClickDel=()=>{
-    const isYes = confirm('チームを削除すると関連するプロジェクトやタスクも削除されます\n削除してよろしいですか？');
+    const isYes = confirm('チームを削除すると関連するプロジェクトやタスクも削除されます\n一度削除したデータは元に戻すことはできません\n削除してよろしいですか？');
     if(isYes === false){return}
     console.log(this.props.teamId);
     fetch("http://0.0.0.0:8000/api/teamDel",{

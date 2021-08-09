@@ -133,6 +133,18 @@ class ApiController extends Controller
         Team::find($data["id"])->delete();
         return response("チームを削除しました");
     }
+    public function projectDel()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        Project::find($data["id"])->delete();
+        return response("プロジェクトを削除しました");
+    }
+    public function taskDel()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        Task::find($data["id"])->delete();
+        return response("タスクを削除しました");
+    }
     /**
      * Store a newly created resource in storage.
      *

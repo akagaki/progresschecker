@@ -37,12 +37,6 @@ class TaskAdd extends React.Component {
       information:this.state.informationData,
       deadline:this.state.deadlineData
     };
-    console.log(data.deadline);
-    console.log(data.name);
-    console.log(data.information);
-    console.log(this.props.loginUserId);
-    console.log(this.props.projectId);
-
     fetch("http://0.0.0.0:8000/api/taskAdd",{
       method: 'POST',
       body:JSON.stringify({
@@ -71,7 +65,7 @@ class TaskAdd extends React.Component {
   // NewTaskボタン
   taskCreate(){
     return(
-      <div className="border-bottom pb-2 mb-3 d-flex flex-row-reverse">
+      <div>
         <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewTask</small>
       </div>
     )
@@ -99,7 +93,7 @@ class TaskAdd extends React.Component {
           新規タスク作成
           <span className="small">　for {this.props.projectName}</span>
         </div>
-        <form>
+        <form className="text-left">
           <div className="form-group">
               TaskName:
               <input type="text" className="form-control" value={this.state.nameData} placeholder="タスクの名前を入力"   onChange={this.onChangeName}/>
@@ -127,9 +121,6 @@ class TaskAdd extends React.Component {
         <div className='modal'>
           <div className='modal-container'>
             {addForm}
-            <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
           </div>
         </div>
     )}

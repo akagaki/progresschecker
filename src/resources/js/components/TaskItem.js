@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate'; 
+import TaskDel from './delete/taskDel';
 
 
 class TaskItem extends React.Component{
@@ -124,11 +125,24 @@ class TaskItem extends React.Component{
           <a href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
           <span className="small">　belong to {this.state.projectName}</span>
         </div>
-        <div>詳細　　：　{this.state.taskInformation.information}</div>  
-        <div>進捗　　：　{this.state.progressString}</div>  
-        <div>期日　　：　{this.state.taskInformation.deadline}</div>  
-        <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
-        <div>更新者　：　{this.state.updateUserString}</div> 
+        <div className="container">
+          <div className="row">
+          {/* 詳細情報 */}
+            <div className="col-auto">
+              <div>詳細　　：　{this.state.taskInformation.information}</div>  
+              <div>進捗　　：　{this.state.progressString}</div>  
+              <div>期日　　：　{this.state.taskInformation.deadline}</div>  
+              <div>更新日　：　{this.state.taskInformation.updated_at}</div>  
+              <div>更新者　：　{this.state.updateUserString}</div>
+            </div>
+          {/* ツールボタン */}
+            <div className="col text-right">
+              <TaskDel
+                taskId={this.state.taskInformation.id}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )
 // 『描写』
