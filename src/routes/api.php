@@ -35,3 +35,4 @@ Route::post('/taskDel', [App\Http\Controllers\ApiController::class, 'taskDel']);
 // 編集
 Route::post('/progressUpdate', [App\Http\Controllers\ApiController::class, 'progressUpdate']);
 Route::post('/deadlineUpdate', [App\Http\Controllers\ApiController::class, 'deadlineUpdate']);
+Route::post('/userSearch', [App\Http\Controllers\ApiController::class, 'userSearch']);

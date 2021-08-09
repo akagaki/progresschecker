@@ -8,6 +8,7 @@ class TeamMember extends React.Component{
         userIndex: [],
         memberEditModalOpen: false,
         emailData:'',
+        newMember:[],
       }
   }
 // API取得
@@ -33,27 +34,24 @@ class TeamMember extends React.Component{
   handleClickSearch=()=>{
     
     console.log(this.state.emailData);
-    // fetch("http://0.0.0.0:8000/api/projectAdd",{
-    //   method: 'POST',
-    //   body:JSON.stringify({
-    //     user_id:this.props.loginUserId,
-    //     team_id:this.props.teamId,
-    //     name:data.name,
-    //     information:data.information
-    //   }),
-    //   headers:{"Content-Type": "application/json"},
-    // }).then(response => {
-    //     return response.text();
-    //   }).then((text) => {
-    //     alert(text);
-    //   }).catch((e) => {
-    //     console.log(e);
-    //     alert('入力が正しくありません。');
-    //   });
-    //  this.setState({ 
-    //     nameData: '',
-    //     informationData: '',
-    //   });
+    fetch("http://0.0.0.0:8000/api/userSearch",{
+      method: 'POST',
+      body:JSON.stringify({
+        email:this.state.emailData
+      }),
+      headers:{"Content-Type": "application/json"},
+    }).then(response => response.json()
+      ).then(json => {
+        console.log(json);
+        this.setState({ 
+          newMember: json,
+        });
+        const isYes = confirm("「"+ this.state.newMember.name +"」さんを登録しますか？");
+        if(isYes === false){return}
+      }).catch((e) => {
+        console.log(e);
+        alert('入力が正しくありません。');
+      });
   }
   // MemberEditボタン
   teamMember(){
@@ -73,6 +71,8 @@ class TeamMember extends React.Component{
   handleClickClose(){
     this.setState({
       memberEditModalOpen: false,
+      emailData:'',
+      newMember:[],
     });
   }
   
