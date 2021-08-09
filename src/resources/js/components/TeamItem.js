@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import ProjectAdd from './add/projectAdd';
 import TeamDel from './delete/teamDel';
+import TeamMemberEdit from './member/teamMemberEdit';
+import TeamMemberIndex from './member/teamMemberIndex';
 
 
 
@@ -102,14 +104,23 @@ class TeamItem extends React.Component{
               <div>作成日　：　{this.state.teamInformation.created_at}</div>  
               <div>作成者　：　{this.state.createUserString}</div> 
             </div>
-          {/* 新規プロジェクト作成 */}
             <div className="col text-right">
+              {/* 新規プロジェクト作成 */}
               <ProjectAdd 
                 loginUserId={this.state.loginUser.id} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
-              
+              {/* チームメンバー表示ボタン */}
+              <TeamMemberIndex
+                  teamId={this.state.teamInformation.id}
+              />
+              {/* チームメンバー登録 */}
+              <TeamMemberEdit
+                loginUserId={this.state.loginUser.id} 
+                teamId={this.state.teamInformation.id}
+                teamName={this.state.teamInformation.name}
+              />
             </div>
           </div>
         </div>

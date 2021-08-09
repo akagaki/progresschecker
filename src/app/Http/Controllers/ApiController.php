@@ -133,6 +133,7 @@ class ApiController extends Controller
         Task::find($data["id"])->delete();
         return response("タスクを削除しました");
     }
+// 編集-----------------------------------------------------------------------------------
     // 進捗編集
     public function progressUpdate(Request $request)
     {   
@@ -157,6 +158,61 @@ class ApiController extends Controller
         $text = "${taskName}の期日を更新しました";
         return $text;
     }
+    // チームメンバー名取得
+    public function teamMemberIndex()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["id"]);
+        foreach ($team->users as $user) {
+            $members[] = $user->name;    
+        }
+        return $members;
+    }
+    // プロジェクトメンバー取得
+    public function projectMemberIndex()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["id"]);
+        foreach ($project->users as $user) {
+            $members[] = $user->name;    
+        }
+        return $members;
+    }
+    // ユーザー検索
+    public function userSearch()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $user = User::where('email', $data)->first();
+        return $user;
+    }
+    // チームメンバー登録
+    public function teamMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["team_id"]);
+        $team->users()->attach($data['user_id']);
+        return response("新規チームメンバーを登録しました");
+    }
+    // プロジェクトメンバー登録
+    public function projectMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["project_id"]);
+        $project->users()->attach($data['user_id']);
+        return response("新規プロジェクトメンバーを登録しました");
+    }
+    // チームメンバー詳細取得
+    public function teamMemberData()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["id"]);
+        foreach ($team->users as $user) {
+            $members[] = $user;    
+        }
+        return $members;
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
