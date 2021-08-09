@@ -52,8 +52,8 @@ class ProjectAdd extends React.Component {
   // NewProjectボタン
   projectCreate(){
     return(
-      <div className="border-bottom pb-2 mb-3 d-flex flex-row-reverse">
-        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewProject</small>
+      <div>
+        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}>NewProject　<i className="fas fa-plus"></i></small>
       </div>
     )
   }
@@ -79,7 +79,7 @@ class ProjectAdd extends React.Component {
           新規プロジェクト作成
           <span className="small">　for {this.props.teamName}</span>
         </div>
-        <form>
+        <form className="text-left">
           <div className="form-group">
               ProjectName:
               <input type="text" className="form-control" value={this.state.nameData} placeholder="プロジェクトの名前を入力"   onChange={this.onChangeName}/>
@@ -103,9 +103,6 @@ class ProjectAdd extends React.Component {
         <div className='modal'>
           <div className='modal-container'>
             {addForm}
-            <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
-              Close
-            </button>
           </div>
         </div>
     )}

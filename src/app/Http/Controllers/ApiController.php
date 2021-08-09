@@ -90,6 +90,8 @@ class ApiController extends Controller
             return $incompTasks;
         }
     }
+//登録 -----------------------------------------------------------------------------------
+
     // 新規チーム登録
     public function teamAdd(Request $request)
     {   
@@ -122,6 +124,26 @@ class ApiController extends Controller
         $task->fill($data)->save();
         $task->users()->attach($data['user_id']);
         return response("新規タスクを作成しました\n担当者を登録してください");
+    }
+// 削除-----------------------------------------------------------------------------------
+
+    public function teamDel()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        Team::find($data["id"])->delete();
+        return response("チームを削除しました");
+    }
+    public function projectDel()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        Project::find($data["id"])->delete();
+        return response("プロジェクトを削除しました");
+    }
+    public function taskDel()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        Task::find($data["id"])->delete();
+        return response("タスクを削除しました");
     }
     /**
      * Store a newly created resource in storage.

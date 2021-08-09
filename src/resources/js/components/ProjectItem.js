@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate'; 
 import TaskAdd from './add/taskAdd'; 
+import ProjectDel from './delete/projectDel';
 
 
 class ProjectItem extends React.Component{
@@ -100,19 +101,31 @@ class ProjectItem extends React.Component{
 // 詳細
     const projectShow = (    
       <div className="m-4">
-        <div className="text-center">
+        <div className="border-bottom pb-2 mb-3 text-center">
           <a href={"/project/show?id="+this.state.projectInformation.id}>{this.state.projectInformation.name}</a>
           <span className="small">　belong to {this.state.teamName}</span>
         </div>
-        {/* 新規タスク作成 */}
-            <TaskAdd 
-              loginUserId={this.state.loginUser.id} 
-              projectId={this.state.projectInformation.id}
-              projectName={this.state.projectInformation.name}
-            />
-        <div>詳細　　：　{this.state.projectInformation.information}</div> 
-        <div>作成日　：　{this.state.projectInformation.created_at}</div> 
-        <div>作成者　：　{this.state.createUserString}</div>
+        <div className="container">
+          <div className="row">
+          {/* 詳細情報 */}
+            <div className="col-auto">
+              <div>詳細　　：　{this.state.projectInformation.information}</div> 
+              <div>作成日　：　{this.state.projectInformation.created_at}</div> 
+              <div>作成者　：　{this.state.createUserString}</div>
+             </div>
+          {/* ツールボタン */}
+            <div className="col text-right">
+              <TaskAdd 
+                loginUserId={this.state.loginUser.id} 
+                projectId={this.state.projectInformation.id}
+                projectName={this.state.projectInformation.name}
+              />
+              <ProjectDel
+                projectId={this.state.projectInformation.id}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )
 // 『描写』
