@@ -118,8 +118,8 @@ class TaskAdd extends React.Component {
     let taskAddModal;
     if(this.state.taskAddModalOpen === true){
       taskAddModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {addForm}
           </div>
         </div>

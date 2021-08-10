@@ -13,7 +13,6 @@ class TeamItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          loginUser: [],
           userTeams: [],
           userIndex: [],
           teamModalOpen: false,
@@ -26,9 +25,6 @@ class TeamItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
-      // ログインユーザー情報
-      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      const user = await userdata.json();
       // ユーザーチーム一覧
       const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
       const teams = await teamData.json();
@@ -36,7 +32,6 @@ class TeamItem extends React.Component{
       const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
       const users = await userData.json();
           this.setState({
-            loginUser: user,
             userTeams: teams,
             userIndex: users,
             loading: false
@@ -88,7 +83,7 @@ class TeamItem extends React.Component{
     const teamShow = (
       <div className="m-4">
         <div className="border-bottom pb-2 mb-3 text-center">
-          <a className="mr-2" href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+          <h5>{this.state.teamInformation.name}</h5>
           {/* 削除ボタン */}
           <div className="text-right mr-3">
             <TeamDel
@@ -107,17 +102,17 @@ class TeamItem extends React.Component{
             <div className="col text-right">
               {/* 新規プロジェクト作成 */}
               <ProjectAdd 
-                loginUserId={this.state.loginUser.id} 
+                loginUserId={this.props.loginUserId} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
               {/* チームメンバー表示ボタン */}
               <TeamMemberIndex
-                  teamId={this.state.teamInformation.id}
+                teamId={this.state.teamInformation.id}
+                teamName={this.state.teamInformation.name}
               />
               {/* チームメンバー登録 */}
               <TeamMemberEdit
-                loginUserId={this.state.loginUser.id} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
@@ -131,8 +126,8 @@ class TeamItem extends React.Component{
     let teamModal;
     if(this.state.teamModalOpen === true){
         teamModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               {teamShow}
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close

@@ -57,6 +57,7 @@ class ProjectMemberEdit extends React.Component{
      this.setState({
         memberData:[],
       });
+      this.componentDidMount();
       this.handleClickClose();
   }
   // MemberEditボタン
@@ -77,8 +78,6 @@ class ProjectMemberEdit extends React.Component{
   handleClickClose(){
     this.setState({
       memberEditModalOpen: false,
-      memberData:[],
-      memberIndex: [],
     });
   }
   
@@ -109,8 +108,8 @@ class ProjectMemberEdit extends React.Component{
     let memberEditModal;
     if(this.state.memberEditModalOpen === true){
       memberEditModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {searchForm}
           </div>
         </div>

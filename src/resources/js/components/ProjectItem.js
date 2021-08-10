@@ -12,7 +12,6 @@ class ProjectItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          loginUser: [],
           userProjects: [],
           userTeams: [],
           userIndex: [],
@@ -27,9 +26,6 @@ class ProjectItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
-        // ログインユーザー情報
-      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      const user = await userdata.json();
         // ユーザープロジェクト一覧
         const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
         const projects = await projectData.json();
@@ -40,7 +36,6 @@ class ProjectItem extends React.Component{
         const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
         const users = await userData.json();
             this.setState({
-                loginUser: user,
                 userProjects: projects,
                 userTeams: teams,
                 userIndex: users,
@@ -103,8 +98,10 @@ class ProjectItem extends React.Component{
     const projectShow = (    
       <div className="m-4">
         <div className="border-bottom pb-2 mb-3 text-center">
-          <a href={"/project/show?id="+this.state.projectInformation.id}>{this.state.projectInformation.name}</a>
-          <span className="small">　belong to {this.state.teamName}</span>
+          <h5>
+            {this.state.projectInformation.name}
+            <span className="small">　belong to {this.state.teamName}</span>
+          </h5>
           {/* 削除ボタン */}
           <div className="text-right mr-3">
             <ProjectDel
@@ -123,13 +120,14 @@ class ProjectItem extends React.Component{
             <div className="col text-right">
             {/* 新規タスク作成 */}
               <TaskAdd 
-                loginUserId={this.state.loginUser.id} 
+                loginUserId={this.props.loginUserId} 
                 projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
               />
               {/* プロジェクトメンバー表示ボタン */}
               <ProjectMemberIndex
                 projectId={this.state.projectInformation.id}
+                projectName={this.state.projectInformation.name}
               />
               {/* プロジェクトメンバー登録 */}
               <ProjectMemberEdit
@@ -147,8 +145,8 @@ class ProjectItem extends React.Component{
     let projectModal;
     if(this.state.projectModalOpen === true){
         projectModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               {projectShow}
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close

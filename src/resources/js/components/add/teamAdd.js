@@ -98,8 +98,8 @@ class TeamAdd extends React.Component {
     let teamAddModal;
     if(this.state.teamAddModalOpen === true){
       teamAddModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {addForm}
           </div>
         </div>

@@ -14,12 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     // 一覧取得
     public function userIndex()
     {
@@ -134,7 +128,7 @@ class ApiController extends Controller
         return response("タスクを削除しました");
     }
 // 編集-----------------------------------------------------------------------------------
-    // 進捗編集
+    // タスクの進捗編集
     public function progressUpdate(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -146,7 +140,7 @@ class ApiController extends Controller
         $text = "${taskName}の進捗を更新しました";
         return $text;
     }
-    // 期日編集
+    // タスクの期日編集
     public function deadlineUpdate(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -158,7 +152,7 @@ class ApiController extends Controller
         $text = "${taskName}の期日を更新しました";
         return $text;
     }
-    // チームメンバー名取得
+    // チームメンバーの名前一覧を取得
     public function teamMemberIndex()
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -168,7 +162,7 @@ class ApiController extends Controller
         }
         return $members;
     }
-    // プロジェクトメンバー取得
+    // プロジェクトメンバーの名前一覧を取得
     public function projectMemberIndex()
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -178,7 +172,7 @@ class ApiController extends Controller
         }
         return $members;
     }
-    // ユーザー検索
+    // チームに登録するユーザーを全ユーザーからメールアドレスで検索
     public function userSearch()
     {
         $data = json_decode(file_get_contents("php://input"), true);
@@ -193,15 +187,7 @@ class ApiController extends Controller
         $team->users()->attach($data['user_id']);
         return response("新規チームメンバーを登録しました");
     }
-    // プロジェクトメンバー登録
-    public function projectMemberAdd()
-    {   
-        $data = json_decode(file_get_contents("php://input"), true);
-        $project = Project::find($data["project_id"]);
-        $project->users()->attach($data['user_id']);
-        return response("新規プロジェクトメンバーを登録しました");
-    }
-    // チームメンバー詳細取得
+    // プロジェクトメンバー登録のセレクトボックスに表示するデータ
     public function teamMemberData()
     {   
         $data = json_decode(file_get_contents("php://input"), true);
@@ -211,47 +197,47 @@ class ApiController extends Controller
         }
         return $members;
     }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    // タスク担当登録のセレクトボックスに表示するデータ
+    public function projectMemberData()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["id"]);
+        foreach ($project->users as $user) {
+            $members[] = $user;    
+        }
+        return $members;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    // チームメンバーから選択したメンバーをプロジェクトメンバー登録
+    public function projectMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["project_id"]);
+        $project->users()->attach($data['user_id']);
+        return response("新規プロジェクトメンバーを登録しました");
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    // プロジェクトメンバーから選択したメンバーをタスク担当に登録
+    public function taskMemberAdd()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $task = Task::find($data["task_id"]);
+        $task->users()->detach();//ここで担当をリセット
+        $task->users()->attach($data['user_id']);
+        return response("担当者を変更しました");
+    }
+    // チームメンバーから選択したメンバーを除外
+    public function teamMemberDel()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["team_id"]);
+        $team->users()->detach($data['user_id']);
+        return response("メンバーを削除しました");
+    }
+    // チームメンバーから選択したメンバーを除外
+    public function projectMemberDel()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["project_id"]);
+        $project->users()->detach($data['user_id']);
+        return response("メンバーを削除しました");
     }
 }

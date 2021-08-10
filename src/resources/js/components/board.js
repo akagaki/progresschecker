@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from 'react-dom';
 import TaskEdit from "./edit/taskEdit";
 import TaskDel from "./delete/taskDel";
+import TaskCount from "./taskCount";
 
 
 class Board extends React.Component {
@@ -108,6 +109,11 @@ class Board extends React.Component {
   }
   render() {
 // 『データ』
+// タイトル(リロード)
+    const title = 
+      <h3 className="custom-pointer col-auto arign-items-end" onClick={() => {this.componentDidMount()}}>
+        TaskBoard　<small>Your uncompleted tasks...</small>
+      </h3>
 // カード一覧
     // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
@@ -154,8 +160,9 @@ class Board extends React.Component {
     const taskShow = (    
       <div className="m-4">
         <div className="border-bottom text-center pb-2 mb-3">
-            <a  href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
+            <h5>{this.state.taskInformation.name}
             <span className="small">　belong to {this.state.projectName}</span>
+            </h5>
             {/* 削除ボタン */}
             <div className="text-right">
               <TaskDel
@@ -172,8 +179,10 @@ class Board extends React.Component {
         {/* 編集項目 */}
           <TaskEdit
             taskId={this.state.taskInformation.id}
+            projectId={this.state.taskInformation.project_id}
             progress={this.state.taskInformation.progress}
             deadline={this.state.taskInformation.deadline}
+            taskName={this.state.taskInformation.name}
           />
       </div>
     )
@@ -182,8 +191,8 @@ class Board extends React.Component {
     let taskModal;
     if(this.state.taskModalOpen === true){
       taskModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {taskShow}
             <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
               Close
@@ -194,14 +203,17 @@ class Board extends React.Component {
   }
     return (
       <div className='container rounded bg-light p-3 mb-4 shadow'>
-        <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
+          <div className="row  border-bottom mb-1">
+            {title}
+            <TaskCount/>
+          </div>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
               <h5><span className='badge badge-danger btn-block py-1'>未対応</span></h5>
                 {waitCard}
             </div>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
-                <h5><span className='badge badge-warning btn-block py-1'>対応中</span></h5>
+                <h5><span className='badge custom-yellow text-white btn-block py-1'>対応中</span></h5>
                 {waipCard}
             </div>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
@@ -215,6 +227,7 @@ class Board extends React.Component {
             {taskModal}
           </div>
       </div>
+
     );
   }
 }

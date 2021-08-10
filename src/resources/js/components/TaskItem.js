@@ -150,8 +150,8 @@ class TaskItem extends React.Component{
     let taskModal;
     if(this.state.taskModalOpen === true){
         taskModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               {taskShow}
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
