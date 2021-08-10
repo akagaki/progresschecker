@@ -47,8 +47,8 @@ class TeamItem extends React.Component{
   
   render() {
 // 『データ』
-// タイトル(リロード)
-    const title = <div className="border-bottom  btn btn-block"><h4>Team</h4></div>
+// タイトル
+    const title = <div className="border-bottom text-center"><h4>Team</h4></div>
 // 一覧
     const teamName = this.props.loading ? "NowLoading..." : this.props.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
         <div  key={index}>
@@ -67,6 +67,7 @@ class TeamItem extends React.Component{
           <div className="text-right mr-3">
             <TeamDel
                 teamId={this.state.teamInformation.id}
+                reload={this.props.reload}
             />
           </div>
         </div>
@@ -84,6 +85,7 @@ class TeamItem extends React.Component{
                 loginUserId={this.props.loginUserId} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
+                reload={this.props.reload}
               />
               {/* チームメンバー表示ボタン */}
               <TeamMemberIndex

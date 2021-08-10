@@ -73,6 +73,7 @@ class TaskEdit extends React.Component {
         }).catch((e) => {
           console.error(e);
         });
+      this.props.reload()
     }
   }
   // 期日変更ボタン
@@ -93,12 +94,14 @@ class TaskEdit extends React.Component {
         }).catch((e) => {
           console.error(e);
         });
+        this.props.reload()
     }
   }
   //担当変更ボタン
   handleClickAdd(){
     const isYes = confirm('担当者を変更しますか？');
     if(isYes === false){return}else{
+      this.props.reload()
       fetch("http://0.0.0.0:8000/api/taskMemberAdd",{
         method: 'POST',
         body:JSON.stringify({
@@ -116,6 +119,7 @@ class TaskEdit extends React.Component {
       this.setState({
           memberData:[],
         });
+      this.props.reload()
       }
     }
   // 描写

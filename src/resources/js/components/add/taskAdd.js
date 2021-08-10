@@ -61,6 +61,7 @@ class TaskAdd extends React.Component {
         informationData:'',
         deadlineData:'',
       });
+    this.props.reload()
   }
   // NewTaskボタン
   taskCreate(){

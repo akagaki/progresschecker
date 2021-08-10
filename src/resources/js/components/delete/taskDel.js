@@ -25,6 +25,7 @@ class TaskDel extends React.Component {
       }).catch((e) => {
         console.log(e);
       });
+      this.props.reload()
   }
   // TaskDeleteボタン
   taskDelete(){

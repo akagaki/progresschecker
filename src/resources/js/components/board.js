@@ -66,9 +66,9 @@ class Board extends React.Component {
   }
   render() {
 // 『データ』
-// タイトル(リロード)
+// タイトル
     const title = 
-      <h3 className="custom-pointer col-auto arign-items-end">
+      <h3 className="col-auto arign-items-end">
         TaskBoard　<small>Your uncompleted tasks...</small>
       </h3>
 // カード一覧
@@ -124,6 +124,7 @@ class Board extends React.Component {
             <div className="text-right">
               <TaskDel
                 taskId={this.state.taskInformation.id}
+                reload={this.props.reload}
               />
             </div>
         </div>
@@ -140,6 +141,7 @@ class Board extends React.Component {
             progress={this.state.taskInformation.progress}
             deadline={this.state.taskInformation.deadline}
             taskName={this.state.taskInformation.name}
+            reload={this.props.reload}
           />
       </div>
     )
@@ -162,7 +164,10 @@ class Board extends React.Component {
       <div className='container rounded bg-light p-3 mb-4 shadow'>
           <div className="row  border-bottom mb-1">
             {title}
-            <TaskCount/>
+            <TaskCount
+              loading={this.props.loading}
+              incompTask={this.props.incompTask}
+            />
           </div>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>

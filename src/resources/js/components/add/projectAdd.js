@@ -48,6 +48,7 @@ class ProjectAdd extends React.Component {
         nameData: '',
         informationData: '',
       });
+      this.props.reload()
   }
   // NewProjectボタン
   projectCreate(){

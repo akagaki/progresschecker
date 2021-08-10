@@ -18,7 +18,9 @@ class Index extends React.Component {
         waipTask:[],//対応中
         doneTask:[],//対応済
         conpletedTask:[],//完了
+        incompTask: [],
       }
+      this.reload=this.reload.bind(this);
   }
   // API取得
   componentDidMount(){
@@ -43,6 +45,9 @@ class Index extends React.Component {
       const waipList = tasks.filter(obj=>{return obj.progress === 1});
       const doneList = tasks.filter(obj=>{return obj.progress === 2});
       const conpletedList = tasks.filter(obj=>{return obj.progress === 3});
+      // 未完了タスク情報
+      const incompData = await fetch("http://0.0.0.0:8000/api/incompTasks");
+      const incomp = await incompData.json();
             this.setState({
               loginUser: user,
               userIndex: users,
@@ -53,6 +58,7 @@ class Index extends React.Component {
               waipTask:waipList,
               doneTask:doneList,
               conpletedTask:conpletedList,
+              incompTask: incomp,
               loading: false,
             });
     }
@@ -61,12 +67,10 @@ class Index extends React.Component {
   reload(){
     this.componentDidMount();
   }
+  
   render() {
     return (
       <div>
-        <div onClick={() => {this. componentDidMount()}}>
-          MyPage
-        </div>
         <div className='container rounded bg-light p-3 mb-4 shadow'>
             <div className='row border-bottom'>
               <div  className='col justify-content-around' >
@@ -74,6 +78,7 @@ class Index extends React.Component {
                   loginUserName={this.state.loginUser.name}
                   loginUserEmail={this.state.loginUser.email}
                   loginUserId={this.state.loginUser.id}
+                  reload={this.reload}
                 />
               </div>
               <div  className='col justify-content-around' >
@@ -82,6 +87,7 @@ class Index extends React.Component {
                   loginUserId={this.state.loginUser.id}
                   userTeams={this.state.userTeams}
                   userIndex={this.state.userIndex}
+                  reload={this.reload}
                 />
               </div>
               <div  className='col justify-content-around' >
@@ -91,6 +97,7 @@ class Index extends React.Component {
                   userTeams={this.state.userTeams}
                   userProjects={this.state.userProjects}
                   userIndex={this.state.userIndex}
+                  reload={this.reload}
                 />
               </div>
             </div>
@@ -106,6 +113,8 @@ class Index extends React.Component {
             waipTask={this.state.waipTask}
             doneTask={this.state.doneTask}
             conpletedTask={this.state.conpletedTask}
+            incompTask={this.state.incompTask}
+            reload={this.reload}
           />
         </div>
       </div>

@@ -25,6 +25,7 @@ class ProjectDel extends React.Component {
       }).catch((e) => {
         console.log(e);
       });
+      this.props.reload()
   }
   // projectDeleteボタン
   projectDelete(){

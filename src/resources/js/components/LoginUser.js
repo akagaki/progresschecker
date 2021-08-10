@@ -65,7 +65,12 @@ class LoginUser extends React.Component{
               <div className="border-bottom">MAIL：{this.props.loginUserEmail}</div>
             </small>
             {/* 新規チーム作成 */}
-            <TeamAdd loginUserId={this.props.loginUserId}/>
+            <TeamAdd 
+              loginUserId={this.props.loginUserId}
+              reload={this.props.reload}
+            />
+            
+
           </div>
       </div>
     )

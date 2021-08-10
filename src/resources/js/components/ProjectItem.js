@@ -56,8 +56,8 @@ class ProjectItem extends React.Component{
   }
   render() {
 // 『データ』
-// タイトル(リロード)
-    const title = <div className="border-bottom btn btn-block"><h4>Project</h4></div>
+// タイトル
+    const title = <div className="border-bottom text-center"><h4>Project</h4></div>
 // 一覧
     const projectName = this.props.loading ? "NowLoading..." : this.props.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
       <div key={index}>
@@ -80,6 +80,7 @@ class ProjectItem extends React.Component{
           <div className="text-right mr-3">
             <ProjectDel
                 projectId={this.state.projectInformation.id}
+                reload={this.props.reload}
             />
           </div>
         </div>
@@ -97,6 +98,7 @@ class ProjectItem extends React.Component{
                 loginUserId={this.props.loginUserId} 
                 projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
+                reload={this.props.reload}
               />
               {/* プロジェクトメンバー表示ボタン */}
               <ProjectMemberIndex
