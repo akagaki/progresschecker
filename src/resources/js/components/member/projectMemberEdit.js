@@ -109,8 +109,8 @@ class ProjectMemberEdit extends React.Component{
     let memberEditModal;
     if(this.state.memberEditModalOpen === true){
       memberEditModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {searchForm}
           </div>
         </div>

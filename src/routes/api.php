@@ -37,8 +37,13 @@ Route::post('/progressUpdate', [App\Http\Controllers\ApiController::class, 'prog
 Route::post('/deadlineUpdate', [App\Http\Controllers\ApiController::class, 'deadlineUpdate']);
 //メンバー-------------------------------------------------------------------------------------
 Route::post('/userSearch', [App\Http\Controllers\ApiController::class, 'userSearch']);
+// 多対多のデータ
 Route::post('/teamMemberAdd', [App\Http\Controllers\ApiController::class, 'teamMemberAdd']);
 Route::post('/projectMemberAdd', [App\Http\Controllers\ApiController::class, 'projectMemberAdd']);
+Route::post('/taskMemberAdd', [App\Http\Controllers\ApiController::class, 'taskMemberAdd']);
+// 詳細画面の各項目のメンバーを一覧表示するデータ
 Route::post('/teamMemberIndex', [App\Http\Controllers\ApiController::class, 'teamMemberIndex']);
 Route::post('/projectMemberIndex', [App\Http\Controllers\ApiController::class, 'projectMemberIndex']);
+// メンバー登録のセレクトボックスに表示するデータ
 Route::post('/teamMemberData', [App\Http\Controllers\ApiController::class, 'teamMemberData']);
+Route::post('/projectMemberData', [App\Http\Controllers\ApiController::class, 'projectMemberData']);

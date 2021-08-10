@@ -2,68 +2,29 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <style>
-    .items{float: right; padding-right: 40px;}
-    .team-box {
-        padding: 20px;margin: 20px 10px; 
-        background-color: white; box-shadow: 2px 2px 4px gray;border-radius: 1%;
-    }
-    /* mein */
-    .main-conteiner{display: flex; border-bottom:solid 1px #ccc; 
-    margin-bottom: 10px;
-    }
-    .main-information{
-        font-weight:bold; padding: 10px 0; 
-    }
-    .member-information { 
-        font-weight:bold; padding: 10px; margin: 0 20px; border-left:solid 1px #ccc;
-    }
-    .member-add { margin: 20px 0;}
-    .main-items{ margin: 10px 20px; float: right;}
-    /* sub */
-    .sub-information p{ 
-        align-items: center;
-        margin: auto 0;
-    }
-    .sub-information {
-        border-bottom:solid 1px #ccc; 
-        padding: 10px 0; margin: 10px 0;
+    .custom-modal{
+  /*画面全体を覆う*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+    z-index:4;
+    /* 画面の中央に要素を表示 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .custom-modal-container{
+    border-radius: 2%; 
+    width:70%;
+    padding: 1em;
+    background-color:white;
+  }
+</style> 
 
-    }
-    .task-box {
-        display: flex;
-        width: 100%;
-        padding-bottom: 10px;
-        border-bottom:solid 1px #ccc;
-    }
-    .card-container {
-        flex: 1;
-        margin: 0 10px;
-        padding: 10px;
-        text-align: center;
-        background-color:#5f9ea0;
-        color: whitesmoke;
-        box-shadow: 2px 2px 4px gray;
-        border-radius: 2%
-    }
-    .card-item {
-        width: 100%;
-        height: auto;
-        margin: 10px auto;
-        padding: 10px;
-        text-align: left;
-        background-color: #ffff;
-        font-size: 10px;
-        border-radius: 2%;
-    }
-    .sort-items a {
-        border: 2px solid #5f9ea0;
-        border-radius: 10%;
-        padding: 3px;
-        background-color: #5f9ea0;
-        color: white;
-    }
-
-    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

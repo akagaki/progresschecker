@@ -147,8 +147,8 @@ class ProjectItem extends React.Component{
     let projectModal;
     if(this.state.projectModalOpen === true){
         projectModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               {projectShow}
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close

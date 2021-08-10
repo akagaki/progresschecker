@@ -100,8 +100,8 @@ class ProjectAdd extends React.Component {
     let projectAddModal;
     if(this.state.projectAddModalOpen === true){
       projectAddModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {addForm}
           </div>
         </div>

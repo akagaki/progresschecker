@@ -119,8 +119,8 @@ class LoginUser extends React.Component{
     let incompModal;
     if(this.state.modalOpen === true){
       incompModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               <div className="border-bottom text-center pb-2 mb-3">未完了タスク一覧</div>
               <div>
                     {this.state.incompTask.map((obj,index)=>

@@ -131,8 +131,8 @@ class TeamItem extends React.Component{
     let teamModal;
     if(this.state.teamModalOpen === true){
         teamModal = (
-          <div className='modal'>
-            <div className='modal-container'>
+          <div className='custom-modal'>
+            <div className='custom-modal-container'>
               {teamShow}
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close

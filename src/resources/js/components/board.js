@@ -172,6 +172,7 @@ class Board extends React.Component {
         {/* 編集項目 */}
           <TaskEdit
             taskId={this.state.taskInformation.id}
+            projectId={this.state.taskInformation.project_id}
             progress={this.state.taskInformation.progress}
             deadline={this.state.taskInformation.deadline}
           />
@@ -182,8 +183,8 @@ class Board extends React.Component {
     let taskModal;
     if(this.state.taskModalOpen === true){
       taskModal = (
-        <div className='modal'>
-          <div className='modal-container'>
+        <div className='custom-modal'>
+          <div className='custom-modal-container'>
             {taskShow}
             <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
               Close
