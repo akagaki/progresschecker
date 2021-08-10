@@ -113,7 +113,8 @@ class TeamItem extends React.Component{
               />
               {/* チームメンバー表示ボタン */}
               <TeamMemberIndex
-                  teamId={this.state.teamInformation.id}
+                teamId={this.state.teamInformation.id}
+                teamName={this.state.teamInformation.name}
               />
               {/* チームメンバー登録 */}
               <TeamMemberEdit

@@ -47,3 +47,5 @@ Route::post('/projectMemberIndex', [App\Http\Controllers\ApiController::class, '
 // メンバー登録のセレクトボックスに表示するデータ
 Route::post('/teamMemberData', [App\Http\Controllers\ApiController::class, 'teamMemberData']);
 Route::post('/projectMemberData', [App\Http\Controllers\ApiController::class, 'projectMemberData']);
+
+Route::post('/teamMemberDel', [App\Http\Controllers\ApiController::class, 'teamMemberDel']);

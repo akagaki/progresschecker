@@ -224,4 +224,12 @@ class ApiController extends Controller
         $task->users()->attach($data['user_id']);
         return response("担当者を変更しました");
     }
+    // チームメンバーから選択したメンバーを除外
+    public function teamMemberDel()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $team = Team::find($data["team_id"]);
+        $team->users()->detach($data['user_id']);
+        return response("メンバーを削除しました");
+    }
 }
