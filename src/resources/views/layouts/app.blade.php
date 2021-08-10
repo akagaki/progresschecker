@@ -23,16 +23,21 @@
     padding: 1em;
     background-color:white;
   }
-
+  .custom-pointer{
+    cursor: pointer;
+  }
   .task-couont {
     cursor: pointer;
     display: inline-block;
     color: black;
     transition: all 1s;
-}
+  }
   .task-couont:hover {
     transform: rotateX(360deg);
-}
+  }
+  .custom-yellow{
+      background-color: #fcc800;
+  }
 </style> 
 
     <meta charset="utf-8">
@@ -57,7 +62,7 @@
 <body id="app" class="h-100 bg-white">
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('home') }}">
+            <a class="navbar-brand" href="{{ url('mypage') }}">
                 {{ config('app.name') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

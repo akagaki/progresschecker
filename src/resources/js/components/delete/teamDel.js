@@ -25,7 +25,6 @@ class TeamDel extends React.Component {
       }).catch((e) => {
         console.log(e);
       });
-      window.location.reload();
   }
   // TeamDeleteボタン
   teamDelete(){

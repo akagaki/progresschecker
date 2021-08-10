@@ -74,7 +74,6 @@ class TaskEdit extends React.Component {
         }).catch((e) => {
           console.error(e);
         });
-        window.location.reload();
     }
   }
   // 期日変更ボタン
@@ -95,7 +94,6 @@ class TaskEdit extends React.Component {
         }).catch((e) => {
           console.error(e);
         });
-        window.location.reload();
     }
   }
   //メンバー登録ボタン

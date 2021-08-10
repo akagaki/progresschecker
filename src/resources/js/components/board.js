@@ -109,6 +109,11 @@ class Board extends React.Component {
   }
   render() {
 // 『データ』
+// タイトル(リロード)
+    const title = 
+      <h3 className="custom-pointer col-auto arign-items-end" onClick={() => {this.componentDidMount()}}>
+        TaskBoard　<small>Your uncompleted tasks...</small>
+      </h3>
 // カード一覧
     // 未対応
     const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
@@ -198,9 +203,7 @@ class Board extends React.Component {
     return (
       <div className='container rounded bg-light p-3 mb-4 shadow'>
           <div className="row  border-bottom mb-1">
-            <h3 className="col-auto  arign-items-end ">
-              TaskBoard　<small>Your uncompleted tasks...</small>
-            </h3>
+            {title}
             <TaskCount/>
           </div>
           <div className='row border-bottom pb-4'>
@@ -209,7 +212,7 @@ class Board extends React.Component {
                 {waitCard}
             </div>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
-                <h5><span className='badge badge-warning btn-block py-1'>対応中</span></h5>
+                <h5><span className='badge custom-yellow text-white btn-block py-1'>対応中</span></h5>
                 {waipCard}
             </div>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
