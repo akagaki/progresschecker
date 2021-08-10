@@ -175,6 +175,7 @@ class Board extends React.Component {
             projectId={this.state.taskInformation.project_id}
             progress={this.state.taskInformation.progress}
             deadline={this.state.taskInformation.deadline}
+            taskName={this.state.taskInformation.name}
           />
       </div>
     )

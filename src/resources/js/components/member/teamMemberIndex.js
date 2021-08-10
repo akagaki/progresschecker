@@ -31,9 +31,8 @@ class TeamMemberIndex extends React.Component{
     load();
   }
   //メンバー削除ボタン
-  handleClickDel(userId){
-    console.log(userId);
-    const isYes = confirm('チームメンバーから削除してよろしいですか？');
+  handleClickDel(userId,userName){
+    const isYes = confirm("「"+ userName +"」さんをチームメンバーから削除してよろしいですか？");
     if(isYes === false){return}else{
     fetch("http://0.0.0.0:8000/api/teamMemberDel",{
       method: 'POST',
@@ -48,8 +47,12 @@ class TeamMemberIndex extends React.Component{
         alert(text);
       }).catch((e) => {
         console.log(e);
-        alert('入力が正しくありません。');
+        alert('削除に失敗しました');
       });
+      this.setState({
+        memberIndex:[]
+      })
+      this.componentDidMount();
       this.handleClickClose();
     }
   }
@@ -71,7 +74,6 @@ class TeamMemberIndex extends React.Component{
     handleClickClose(){
       this.setState({
         memberIndexModalOpen: false,
-        memberIndex: [],
       });
     }
 
@@ -86,7 +88,7 @@ class TeamMemberIndex extends React.Component{
         {this.state.memberIndex.map((obj,index) =>
             <div key={index}>
               {obj.name}
-              <small className="btn btn-sm" onClick={() => {this.handleClickDel(obj.id)}}><i className="far fa-trash-alt"></i></small>
+              <small className="btn btn-sm" onClick={() => {this.handleClickDel(obj.id,obj.name)}}><i className="far fa-trash-alt"></i></small>
             </div>
           )}
         </div>

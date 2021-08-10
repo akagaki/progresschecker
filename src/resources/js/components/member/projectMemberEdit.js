@@ -57,6 +57,7 @@ class ProjectMemberEdit extends React.Component{
      this.setState({
         memberData:[],
       });
+      this.componentDidMount();
       this.handleClickClose();
   }
   // MemberEditボタン
@@ -77,8 +78,6 @@ class ProjectMemberEdit extends React.Component{
   handleClickClose(){
     this.setState({
       memberEditModalOpen: false,
-      memberData:[],
-      memberIndex: [],
     });
   }
   

@@ -232,4 +232,12 @@ class ApiController extends Controller
         $team->users()->detach($data['user_id']);
         return response("メンバーを削除しました");
     }
+    // チームメンバーから選択したメンバーを除外
+    public function projectMemberDel()
+    {   
+        $data = json_decode(file_get_contents("php://input"), true);
+        $project = Project::find($data["project_id"]);
+        $project->users()->detach($data['user_id']);
+        return response("メンバーを削除しました");
+    }
 }

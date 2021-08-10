@@ -130,6 +130,7 @@ class ProjectItem extends React.Component{
               {/* プロジェクトメンバー表示ボタン */}
               <ProjectMemberIndex
                 projectId={this.state.projectInformation.id}
+                projectName={this.state.projectInformation.name}
               />
               {/* プロジェクトメンバー登録 */}
               <ProjectMemberEdit
