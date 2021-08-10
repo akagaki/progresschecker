@@ -36,9 +36,9 @@ class TaskCount extends React.Component{
     let taskCount ;
     if (this.state.incompTask === null) {
       taskCount = (
-        <div>
+        <h3 className="task-couont col-auto">
             {this.state.loading ? "" :0}
-        </div>
+        </h3>
     )} else {
       taskCount = (
         <h3 className="task-couont col-auto"onClick={() => {this.handleClickOpen()}}>

@@ -103,8 +103,10 @@ class ProjectItem extends React.Component{
     const projectShow = (    
       <div className="m-4">
         <div className="border-bottom pb-2 mb-3 text-center">
-          <a href={"/project/show?id="+this.state.projectInformation.id}>{this.state.projectInformation.name}</a>
-          <span className="small">　belong to {this.state.teamName}</span>
+          <h5>
+            {this.state.projectInformation.name}
+            <span className="small">　belong to {this.state.teamName}</span>
+          </h5>
           {/* 削除ボタン */}
           <div className="text-right mr-3">
             <ProjectDel

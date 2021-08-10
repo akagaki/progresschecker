@@ -88,7 +88,7 @@ class TeamItem extends React.Component{
     const teamShow = (
       <div className="m-4">
         <div className="border-bottom pb-2 mb-3 text-center">
-          <a className="mr-2" href={"/team/show?id="+this.state.teamInformation.id}>{this.state.teamInformation.name}</a>
+          <h5>{this.state.teamInformation.name}</h5>
           {/* 削除ボタン */}
           <div className="text-right mr-3">
             <TeamDel

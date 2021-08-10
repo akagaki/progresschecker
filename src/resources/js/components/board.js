@@ -160,8 +160,9 @@ class Board extends React.Component {
     const taskShow = (    
       <div className="m-4">
         <div className="border-bottom text-center pb-2 mb-3">
-            <a  href={"/task/show?id="+this.state.taskInformation.id}>{this.state.taskInformation.name}</a>
+            <h5>{this.state.taskInformation.name}
             <span className="small">　belong to {this.state.projectName}</span>
+            </h5>
             {/* 削除ボタン */}
             <div className="text-right">
               <TaskDel
