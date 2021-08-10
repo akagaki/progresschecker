@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from 'react-dom';
 import TaskEdit from "./edit/taskEdit";
 import TaskDel from "./delete/taskDel";
+import TaskCount from "./taskCount";
 
 
 class Board extends React.Component {
@@ -196,7 +197,12 @@ class Board extends React.Component {
   }
     return (
       <div className='container rounded bg-light p-3 mb-4 shadow'>
-        <h2 className="border-bottom text-center pb-2 mb-2">TaskBoard</h2>
+          <div className="row  border-bottom mb-1">
+            <h3 className="col-auto  arign-items-end ">
+              TaskBoard　<small>Your uncompleted tasks...</small>
+            </h3>
+            <TaskCount/>
+          </div>
           <div className='row border-bottom pb-4'>
             <div className='col justify-content-around bg-light shadow m-2 p-3'>
               <h5><span className='badge badge-danger btn-block py-1'>未対応</span></h5>
@@ -217,6 +223,7 @@ class Board extends React.Component {
             {taskModal}
           </div>
       </div>
+
     );
   }
 }

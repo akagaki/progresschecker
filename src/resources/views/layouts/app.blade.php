@@ -23,6 +23,16 @@
     padding: 1em;
     background-color:white;
   }
+
+  .task-couont {
+    cursor: pointer;
+    display: inline-block;
+    color: black;
+    transition: all 1s;
+}
+  .task-couont:hover {
+    transform: rotateX(360deg);
+}
 </style> 
 
     <meta charset="utf-8">
