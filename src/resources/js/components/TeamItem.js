@@ -12,32 +12,11 @@ class TeamItem extends React.Component{
   constructor(){
       super()
       this.state = {
-          loading:false,
-          userTeams: [],
-          userIndex: [],
           teamModalOpen: false,
           teamInformation:[],
           createUserString:'',
           start: 0,
       }  
-  }
-// API取得
-  componentDidMount(){
-      this.setState({loading: true})
-      const load = async () =>{
-      // ユーザーチーム一覧
-      const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
-      const teams = await teamData.json();
-      // ユーザー一覧
-      const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
-      const users = await userData.json();
-          this.setState({
-            userTeams: teams,
-            userIndex: users,
-            loading: false
-        });  
-      }
-      load();
   }
 // ページネーション時のメソッド
   pageChange = (data) => {
@@ -48,13 +27,13 @@ class TeamItem extends React.Component{
   }
 // 詳細表示
   handleClickOpen(id) {
-    const data = this.state.userTeams.find(obj=> obj.id === id);
+    const data = this.props.userTeams.find(obj=> obj.id === id);
     this.setState({
       teamInformation:data,
       teamModalOpen: true
     });
     //作成者表示変更
-    const createUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    const createUser = this.props.userIndex.find(obj=> obj.id === data.user_id);
     this.setState({createUserString:createUser.name});
   }
   // 詳細を閉じる
@@ -69,9 +48,9 @@ class TeamItem extends React.Component{
   render() {
 // 『データ』
 // タイトル(リロード)
-    const title = <div className="border-bottom  btn btn-block" onClick={() => {this.componentDidMount()}}><h4>Team</h4></div>
+    const title = <div className="border-bottom  btn btn-block"><h4>Team</h4></div>
 // 一覧
-    const teamName = this.state.loading ? "NowLoading..." : this.state.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
+    const teamName = this.props.loading ? "NowLoading..." : this.props.userTeams.slice(this.state.start, this.state.start + 3).map((obj,index)=>
         <div  key={index}>
           <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id)}}>
             <div className="border-bottom">{obj.name}</div>
@@ -145,7 +124,7 @@ class TeamItem extends React.Component{
         </div>
         {/* ページネーション */}
         <ReactPaginate
-          pageCount={Math.ceil(this.state.userTeams.length / 3)}
+          pageCount={Math.ceil(this.props.userTeams.length / 3)}
           marginPagesDisplayed={1}
           pageRangeDisplayed={0}
           onPageChange={this.pageChange}

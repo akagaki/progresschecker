@@ -11,10 +11,6 @@ class ProjectItem extends React.Component{
   constructor(){
       super()
       this.state = {
-          loading:false,
-          userProjects: [],
-          userTeams: [],
-          userIndex: [],
           projectModalOpen: false,
           projectInformation:[],
           createUserString:'',
@@ -22,30 +18,8 @@ class ProjectItem extends React.Component{
           start: 0,
       }
   }
-// API取得
-  componentDidMount(){
-      this.setState({loading: true})
-      const load = async () =>{
-        // ユーザープロジェクト一覧
-        const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
-        const projects = await projectData.json();
-        // ユーザーチーム一覧
-        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
-        const teams = await teamData.json();
-        // ユーザー一覧
-        const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
-        const users = await userData.json();
-            this.setState({
-                userProjects: projects,
-                userTeams: teams,
-                userIndex: users,
-                loading: false
-            });
-        }
-        load();
-  }
   getBelongsName(team_id){
-    const teamData = this.state.userTeams.find((obj)=>obj.id === team_id);
+    const teamData = this.props.userTeams.find((obj)=>obj.id === team_id);
     const teamName = teamData.name;
     return teamName;
   }
@@ -58,16 +32,16 @@ class ProjectItem extends React.Component{
   }
 // 詳細表示
   handleClickOpen(id,team_id) {
-    const data = this.state.userProjects.find(obj=> obj.id === id);
+    const data = this.props.userProjects.find(obj=> obj.id === id);
     this.setState({
       projectInformation:data,
       projectModalOpen: true
     });
     //作成者表示変更
-    const createUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    const createUser = this.props.userIndex.find(obj=> obj.id === data.user_id);
     this.setState({createUserString:createUser.name});
     // チーム情報表示変更
-    const teamData = this.state.userTeams.find((obj)=>obj.id === team_id );
+    const teamData = this.props.userTeams.find((obj)=>obj.id === team_id );
     this.setState({teamName:teamData.name});
   }
 // 詳細を閉じる
@@ -83,9 +57,9 @@ class ProjectItem extends React.Component{
   render() {
 // 『データ』
 // タイトル(リロード)
-    const title = <div className="border-bottom btn btn-block" onClick={() => {this.componentDidMount()}}><h4>Project</h4></div>
+    const title = <div className="border-bottom btn btn-block"><h4>Project</h4></div>
 // 一覧
-    const projectName = this.state.loading ? "NowLoading..." : this.state.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
+    const projectName = this.props.loading ? "NowLoading..." : this.props.userProjects.slice(this.state.start, this.state.start + 3).map((obj,index) =>
       <div key={index}>
         <div className="col text-left btn btn-light p-1 m-1" onClick={() => {this.handleClickOpen(obj.id,obj.team_id)}}>
           <div className="border-bottom">{obj.name}</div>
@@ -163,7 +137,7 @@ class ProjectItem extends React.Component{
           {projectName}
         </div>
         <ReactPaginate 
-          pageCount={Math.ceil(this.state.userProjects.length / 3)}
+          pageCount={Math.ceil(this.props.userProjects.length / 3)}
           marginPagesDisplayed={1}
           pageRangeDisplayed={0}
           onPageChange={this.pageChange}

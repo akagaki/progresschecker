@@ -9,71 +9,28 @@ class Board extends React.Component {
   constructor(){
       super()
       this.state = {
-          loading:false,
-          userTasks: [],
-          userTeams: [],
-          userProjects:[],
-          userIndex: [],
           taskModalOpen: false,
           taskInformation:[],
           progressString:'',
           updateUserString:'',
           projectName:'',
-          waitTask:[],//未対応
-          waipTask:[],//対応中
-          doneTask:[],//対応済
-          conpletedTask:[],//完了
       }
-  }
-// API取得
-  componentDidMount(){
-      this.setState({loading: true})
-      const load = async () =>{
-        // ユーザータスク一覧
-        const taskdata = await fetch("http://0.0.0.0:8000/api/userTasks");
-        const tasks = await taskdata.json();
-        const waitList = tasks.filter(obj=>{return obj.progress === 0});
-        const waipList = tasks.filter(obj=>{return obj.progress === 1});
-        const doneList = tasks.filter(obj=>{return obj.progress === 2});
-        const conpletedList = tasks.filter(obj=>{return obj.progress === 3});
-        // ユーザーチーム一覧
-        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
-        const teams = await teamData.json();
-        // ユーザープロジェクト一覧
-        const projectdata = await fetch("http://0.0.0.0:8000/api/userProjects");
-        const projects = await projectdata.json();
-        // ユーザー一覧
-        const userdata = await fetch("http://0.0.0.0:8000/api/userIndex");
-        const users = await userdata.json();
-          this.setState({
-            userTasks: tasks,
-            waitTask:waitList,
-            waipTask:waipList,
-            doneTask:doneList,
-            conpletedTask:conpletedList,
-            userTeams: teams,
-            userProjects: projects,
-            userIndex: users,
-            loading: false,
-          });
-      }
-      load();
   }
   getBelongsName(project_id){
-    const projectData = this.state.userProjects.find((obj)=>obj.id === project_id);
+    const projectData = this.props.userProjects.find((obj)=>obj.id === project_id);
     const projectName = projectData.name;
-    const teamData = this.state.userTeams.find((obj)=>obj.id === projectData.team_id);
+    const teamData = this.props.userTeams.find((obj)=>obj.id === projectData.team_id);
     const teamName = teamData.name;
     const belongsName ={projectName:projectName,teamName:teamName};
     return belongsName;
   }
   // タスク詳細表示
   handleClickOpen(id,project_id) {
-    const data = this.state.userTasks.find(obj=> obj.id === id);
+    const data = this.props.userTasks.find(obj=> obj.id === id);
     // 更新者表示変更
-    const updateUser = this.state.userIndex.find(obj=> obj.id === data.user_id);
+    const updateUser = this.props.userIndex.find(obj=> obj.id === data.user_id);
     // プロジェクト情報表示変更
-    const projectData = this.state.userProjects.find((obj)=>obj.id === project_id);
+    const projectData = this.props.userProjects.find((obj)=>obj.id === project_id);
     // 対象データ取得
     this.setState({          
       taskInformation:data,
@@ -111,12 +68,12 @@ class Board extends React.Component {
 // 『データ』
 // タイトル(リロード)
     const title = 
-      <h3 className="custom-pointer col-auto arign-items-end" onClick={() => {this.componentDidMount()}}>
+      <h3 className="custom-pointer col-auto arign-items-end">
         TaskBoard　<small>Your uncompleted tasks...</small>
       </h3>
 // カード一覧
     // 未対応
-    const waitCard = this.state.loading ? "NowLoading..." : this.state.waitTask.map((obj,index)=>
+    const waitCard = this.props.loading ? "NowLoading..." : this.props.waitTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
       <div className="border-bottom">{obj.name}</div>
       <div className="border-bottom">期日：{obj.deadline}</div>
@@ -126,7 +83,7 @@ class Board extends React.Component {
       </div>
     </div>)
     // 対応中
-    const waipCard = this.state.loading ? "NowLoading..." : this.state.waipTask.map((obj,index)=>
+    const waipCard = this.props.loading ? "NowLoading..." : this.props.waipTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
       <div className="border-bottom">{obj.name}</div>
       <div className="border-bottom">期日：{obj.deadline}</div>
@@ -136,7 +93,7 @@ class Board extends React.Component {
       </div>
     </div>)
     // 対応済
-    const doneCard = this.state.loading ? "NowLoading..." : this.state.doneTask.map((obj,index)=>
+    const doneCard = this.props.loading ? "NowLoading..." : this.props.doneTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
       <div className="border-bottom">{obj.name}</div>
       <div className="border-bottom">期日：{obj.deadline}</div>
@@ -146,7 +103,7 @@ class Board extends React.Component {
       </div>
     </div>)
     // 完了
-    const conpletedCard = this.state.loading ? "NowLoading..." : this.state.conpletedTask.map((obj,index)=>
+    const conpletedCard = this.props.loading ? "NowLoading..." : this.props.conpletedTask.map((obj,index)=>
     <div className="border text-left btn btn-light btn-block p-2 shadow" key={index} onClick={() => {this.handleClickOpen(obj.id,obj.project_id)}}>
       <div className="border-bottom">{obj.name}</div>
       <div className="border-bottom">期日：{obj.deadline}</div>
@@ -232,4 +189,4 @@ class Board extends React.Component {
   }
 }
 
-export default Board;
+export default React.memo(Board);

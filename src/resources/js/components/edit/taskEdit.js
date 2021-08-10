@@ -12,32 +12,31 @@ class TaskEdit extends React.Component {
       memberIndex: [],
     }
   }
-    componentDidMount(){
-      const load = async () =>{
-        // プロジェクトメンバー情報を取得
-        fetch("http://0.0.0.0:8000/api/projectMemberData",{
-        method: 'POST',
-        body:JSON.stringify({
-          id:this.props.projectId
-        }),
-        headers:{"Content-Type": "application/json"},
-        }).then(response => response.json()
-        ).then(json => {
-          this.setState({
-            memberIndex:json
-          })
-        }).catch((e) => {
-          console.log(e);
-          alert('情報を取得できませんでした');
-        });
-      }
-      load();
-      this.setState({ 
-        progressData: this.props.progress,
-        deadlineData: this.props.deadline,
+  componentDidMount(){
+    const load = async () =>{
+      // プロジェクトメンバー情報を取得
+      fetch("http://0.0.0.0:8000/api/projectMemberData",{
+      method: 'POST',
+      body:JSON.stringify({
+        id:this.props.projectId
+      }),
+      headers:{"Content-Type": "application/json"},
+      }).then(response => response.json()
+      ).then(json => {
+        this.setState({
+          memberIndex:json
+        })
+      }).catch((e) => {
+        console.log(e);
+        alert('情報を取得できませんでした');
       });
     }
-    
+    load();
+    this.setState({ 
+      progressData: this.props.progress,
+      deadlineData: this.props.deadline,
+    });
+  }
   // 進捗変更
   onChangeProgress=(e)=>{
     this.setState({ 
