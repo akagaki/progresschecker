@@ -74,6 +74,7 @@ class TaskEdit extends React.Component {
           console.error(e);
         });
       this.props.reload()
+      this.props.modalClose()
     }
   }
   // 期日変更ボタン
@@ -95,6 +96,7 @@ class TaskEdit extends React.Component {
           console.error(e);
         });
         this.props.reload()
+        this.props.modalClose()
     }
   }
   //担当変更ボタン
@@ -120,6 +122,7 @@ class TaskEdit extends React.Component {
           memberData:[],
         });
       this.props.reload()
+      this.props.modalClose()
       }
     }
   // 描写

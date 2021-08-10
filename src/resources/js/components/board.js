@@ -15,6 +15,7 @@ class Board extends React.Component {
           updateUserString:'',
           projectName:'',
       }
+      this.handleClickClose = this.handleClickClose.bind(this);
   }
   getBelongsName(project_id){
     const projectData = this.props.userProjects.find((obj)=>obj.id === project_id);
@@ -125,6 +126,7 @@ class Board extends React.Component {
               <TaskDel
                 taskId={this.state.taskInformation.id}
                 reload={this.props.reload}
+                modalClose={this.handleClickClose}
               />
             </div>
         </div>
@@ -142,6 +144,7 @@ class Board extends React.Component {
             deadline={this.state.taskInformation.deadline}
             taskName={this.state.taskInformation.name}
             reload={this.props.reload}
+            modalClose={this.handleClickClose}
           />
       </div>
     )
