@@ -7,7 +7,6 @@
 
 @section('content')
 <div id='index'></div>
-<div id='board'></div>
 @endsection
 
 @section('footer')

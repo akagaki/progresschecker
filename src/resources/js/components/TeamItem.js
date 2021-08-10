@@ -13,7 +13,6 @@ class TeamItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          loginUser: [],
           userTeams: [],
           userIndex: [],
           teamModalOpen: false,
@@ -26,9 +25,6 @@ class TeamItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
-      // ログインユーザー情報
-      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      const user = await userdata.json();
       // ユーザーチーム一覧
       const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
       const teams = await teamData.json();
@@ -36,7 +32,6 @@ class TeamItem extends React.Component{
       const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
       const users = await userData.json();
           this.setState({
-            loginUser: user,
             userTeams: teams,
             userIndex: users,
             loading: false
@@ -107,7 +102,7 @@ class TeamItem extends React.Component{
             <div className="col text-right">
               {/* 新規プロジェクト作成 */}
               <ProjectAdd 
-                loginUserId={this.state.loginUser.id} 
+                loginUserId={this.props.loginUserId} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
@@ -118,7 +113,6 @@ class TeamItem extends React.Component{
               />
               {/* チームメンバー登録 */}
               <TeamMemberEdit
-                loginUserId={this.state.loginUser.id} 
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />

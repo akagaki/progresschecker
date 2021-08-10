@@ -96,7 +96,7 @@ class TaskEdit extends React.Component {
         });
     }
   }
-  //メンバー登録ボタン
+  //担当変更ボタン
   handleClickAdd(){
     const isYes = confirm('担当者を変更しますか？');
     if(isYes === false){return}else{
@@ -167,7 +167,7 @@ class TaskEdit extends React.Component {
           <div className="col align-self-end">
             <button className="btn btn-info text-white btn-sm shadow-sm m-1 float-left" 
             onClick={() => {this. handleClickAdd()}}>
-                登録
+                更新
             </button>
           </div>
         </div>

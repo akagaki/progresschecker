@@ -12,7 +12,6 @@ class ProjectItem extends React.Component{
       super()
       this.state = {
           loading:false,
-          loginUser: [],
           userProjects: [],
           userTeams: [],
           userIndex: [],
@@ -27,9 +26,6 @@ class ProjectItem extends React.Component{
   componentDidMount(){
       this.setState({loading: true})
       const load = async () =>{
-        // ログインユーザー情報
-      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      const user = await userdata.json();
         // ユーザープロジェクト一覧
         const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
         const projects = await projectData.json();
@@ -40,7 +36,6 @@ class ProjectItem extends React.Component{
         const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
         const users = await userData.json();
             this.setState({
-                loginUser: user,
                 userProjects: projects,
                 userTeams: teams,
                 userIndex: users,
@@ -125,7 +120,7 @@ class ProjectItem extends React.Component{
             <div className="col text-right">
             {/* 新規タスク作成 */}
               <TaskAdd 
-                loginUserId={this.state.loginUser.id} 
+                loginUserId={this.props.loginUserId} 
                 projectId={this.state.projectInformation.id}
                 projectName={this.state.projectInformation.name}
               />

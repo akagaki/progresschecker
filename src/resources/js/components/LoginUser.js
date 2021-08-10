@@ -12,15 +12,6 @@ class LoginUser extends React.Component{
   }
 // API取得
   componentDidMount(){
-    const load= async () =>{
-      const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      const user = await userdata.json();
-            this.setState({
-              loginUser: user,
-            });
-            setInterval(clock, 1000);
-    }
-    load();
     // デジタル時計
     const clock = () => {
       // 現在の日時・時刻の情報を取得
@@ -54,6 +45,7 @@ class LoginUser extends React.Component{
       document.querySelector(".clock-date").innerText = today;
       document.querySelector(".clock-time").innerText = time;
     };
+    setInterval(clock, 1000);
   }
 
   render() {
@@ -69,11 +61,11 @@ class LoginUser extends React.Component{
           {/* ユーザー情報 */}
           <div  className="pt-4 pb-2">
             <small>
-              <div className="border-bottom">NAME：{this.state.loginUser.name}</div>  
-              <div className="border-bottom">MAIL：{this.state.loginUser.email}</div>
+              <div className="border-bottom">NAME：{this.props.loginUserName}</div>  
+              <div className="border-bottom">MAIL：{this.props.loginUserEmail}</div>
             </small>
             {/* 新規チーム作成 */}
-            <TeamAdd loginUserId={this.state.loginUser.id}/>
+            <TeamAdd loginUserId={this.props.loginUserId}/>
           </div>
       </div>
     )
