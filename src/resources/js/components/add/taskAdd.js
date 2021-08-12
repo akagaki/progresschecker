@@ -60,6 +60,7 @@ class TaskAdd extends React.Component {
         nameData:'',
         informationData:'',
         deadlineData:'',
+        taskAddModalOpen: false,
       });
     this.props.reload()
   }

@@ -17,6 +17,7 @@ class ProjectItem extends React.Component{
           teamName:'',
           start: 0,
       }
+      this.handleClickClose = this.handleClickClose.bind(this);
   }
   getBelongsName(team_id){
     const teamData = this.props.userTeams.find((obj)=>obj.id === team_id);
@@ -81,6 +82,7 @@ class ProjectItem extends React.Component{
             <ProjectDel
                 projectId={this.state.projectInformation.id}
                 reload={this.props.reload}
+                modalClose={this.handleClickClose}
             />
           </div>
         </div>

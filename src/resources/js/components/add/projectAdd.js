@@ -47,6 +47,7 @@ class ProjectAdd extends React.Component {
      this.setState({ 
         nameData: '',
         informationData: '',
+        projectAddModalOpen: false,
       });
       this.props.reload()
   }

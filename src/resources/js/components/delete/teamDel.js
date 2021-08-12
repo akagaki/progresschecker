@@ -26,6 +26,7 @@ class TeamDel extends React.Component {
         console.log(e);
       });
       this.props.reload()
+      this.props.modalClose()
   }
   // TeamDeleteボタン
   teamDelete(){

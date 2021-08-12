@@ -7,8 +7,6 @@
 
 @section('content')
 <div id='index'></div>
-@endsection
-
-@section('footer')
-copyright 2021 akagaki.
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
 @endsection

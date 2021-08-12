@@ -16,7 +16,8 @@ class TeamItem extends React.Component{
           teamInformation:[],
           createUserString:'',
           start: 0,
-      }  
+      }
+    this.handleClickClose = this.handleClickClose.bind(this);
   }
 // ページネーション時のメソッド
   pageChange = (data) => {
@@ -68,6 +69,7 @@ class TeamItem extends React.Component{
             <TeamDel
                 teamId={this.state.teamInformation.id}
                 reload={this.props.reload}
+                modalClose={this.handleClickClose}
             />
           </div>
         </div>

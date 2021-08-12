@@ -46,6 +46,7 @@ class TeamAdd extends React.Component {
      this.setState({ 
         nameData: '',
         informationData: '',
+        teamAddModalOpen: false,
       });
       this.props.reload()
   }
