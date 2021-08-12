@@ -45,11 +45,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
+    <!-- Title -->
     <title>@yield('title')</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -113,9 +111,6 @@
 
     <main class="py-4">
         <div class="container my-5">
-        @yield('menubar')
-        </div>
-        <div class="container my-5">
         @yield('content')
         </div>
     </main>
@@ -123,6 +118,6 @@
         <div class="container text-center">
             <p class="my-0">Copyright &copy;2021 akagaki, All Rights Reserved.</p>
         </div>
-    </footer> 
+    </footer>
 </body>
 </html>
