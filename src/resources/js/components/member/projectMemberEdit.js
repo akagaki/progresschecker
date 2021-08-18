@@ -13,7 +13,7 @@ class ProjectMemberEdit extends React.Component{
   componentDidMount(){
     const load = async () =>{
       // チームメンバー情報を取得
-      fetch("http://0.0.0.0:8000/api/teamMemberData",{
+      fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.teamId
@@ -39,7 +39,7 @@ class ProjectMemberEdit extends React.Component{
   }
   //メンバー登録ボタン
   handleClickAdd(){
-    fetch("http://0.0.0.0:8000/api/projectMemberAdd",{
+    fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberAdd",{
       method: 'POST',
       body:JSON.stringify({
         user_id:this.state.memberData,

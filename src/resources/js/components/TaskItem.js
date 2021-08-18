@@ -26,16 +26,16 @@ class TaskItem extends React.Component{
       this.setState({loading: true})
       const load = async () =>{
         // ユーザータスク一覧
-        const taskData = await fetch("http://0.0.0.0:8000/api/userTasks")
+        const taskData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userTasks")
         const tasks = await taskData.json();
         // ユーザーチーム一覧
-        const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+        const teamData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userTeams")
         const teams = await teamData.json();
         // ユーザープロジェクト一覧
-        const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
+        const projectData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userProjects")
         const projects = await projectData.json();
         // ユーザー一覧
-        const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
+        const userData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userIndex")
         const users = await userData.json();
             this.setState({
                 userTasks: tasks,
