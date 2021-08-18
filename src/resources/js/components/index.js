@@ -28,7 +28,9 @@ class Index extends React.Component {
     const load= async () =>{
       // ユーザー一覧
       const userData = await fetch("http://0.0.0.0:8000/api/userIndex")
+      console.log(userData);
       const users = await userData.json();
+      console.log(users);
       // ログインユーザー情報
       const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
       const user = await userdata.json();
