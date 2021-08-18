@@ -15,13 +15,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  
   }
   .custom-modal-container{
     border-radius: 2%; 
     width:70%;
     padding: 1em;
     background-color:white;
+  }
+  .welcometext{
+  /*画面全体を覆う*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .custom-pointer{
     cursor: pointer;
@@ -60,7 +70,7 @@
 <body id="app" class="h-100 bg-white">
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('mypage') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
