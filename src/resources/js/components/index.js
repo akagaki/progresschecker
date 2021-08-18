@@ -27,7 +27,7 @@ class Index extends React.Component {
     this.setState({loading: true})
     const load= async () =>{
       // ユーザー一覧
-      const usersData = await fetch("http://0.0.0.0:8000/api/userIndex")
+      const usersData = await fetch("http://0.0.0.0:8000/api/userIndex");
       console.log(usersData);
       const users = await userData.json();
       console.log(users);
@@ -37,10 +37,10 @@ class Index extends React.Component {
       const user = await userdata.json();
       console.log(user);
       // ユーザーチーム一覧
-      const teamData = await fetch("http://0.0.0.0:8000/api/userTeams")
+      const teamData = await fetch("http://0.0.0.0:8000/api/userTeams");
       const teams = await teamData.json();
       // ユーザープロジェクト一覧
-      const projectData = await fetch("http://0.0.0.0:8000/api/userProjects")
+      const projectData = await fetch("http://0.0.0.0:8000/api/userProjects");
       const projects = await projectData.json();
       // ユーザータスク一覧
       const taskdata = await fetch("http://0.0.0.0:8000/api/userTasks");
