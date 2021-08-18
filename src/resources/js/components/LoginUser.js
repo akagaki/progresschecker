@@ -61,7 +61,7 @@ class LoginUser extends React.Component{
           {/* ユーザー情報 */}
           <div  className="pt-4 pb-2">
             <small>
-              <div className="border-bottom">NAME：{this.props.loginUserName}</div>  
+              <div className="border-bottom">名前：{this.props.loginUserName}</div>  
               <div className="border-bottom">MAIL：{this.props.loginUserEmail}</div>
             </small>
             {/* 新規チーム作成 */}
