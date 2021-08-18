@@ -72,8 +72,8 @@ Route::post('task/del', [App\Http\Controllers\TaskController::class, 'remove'])-
 Route::get('task/show', [App\Http\Controllers\TaskController::class, 'show'])->middleware('auth');
 
 // ログイン情報取得API
-Route::middleware('auth')->get('api/loginUser', [App\Http\Controllers\ApiController::class, 'loginUser']);
-Route::middleware('auth')->get('api/userTeams', [App\Http\Controllers\ApiController::class, 'userTeams']);
-Route::middleware('auth')->get('api/userProjects', [App\Http\Controllers\ApiController::class, 'userProjects']);
-Route::middleware('auth')->get('api/userTasks', [App\Http\Controllers\ApiController::class, 'userTasks']);
-Route::middleware('auth')->get('api/incompTasks', [App\Http\Controllers\ApiController::class, 'incompTasks']);
+Route::middleware('auth','cors')->get('api/loginUser', [App\Http\Controllers\ApiController::class, 'loginUser']);
+Route::middleware('auth','cors')->get('api/userTeams', [App\Http\Controllers\ApiController::class, 'userTeams']);
+Route::middleware('auth','cors')->get('api/userProjects', [App\Http\Controllers\ApiController::class, 'userProjects']);
+Route::middleware('auth','cors')->get('api/userTasks', [App\Http\Controllers\ApiController::class, 'userTasks']);
+Route::middleware('auth','cors')->get('api/incompTasks', [App\Http\Controllers\ApiController::class, 'incompTasks']);

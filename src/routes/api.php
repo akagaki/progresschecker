@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['middleware' => ['api', 'cors']], function(){
 // データ取得ー-------------------------------------------------------------------------------------
 Route::get('userIndex', [App\Http\Controllers\ApiController::class, 'userIndex']);
 Route::get('teamIndex', [App\Http\Controllers\ApiController::class, 'teamIndex']);
@@ -50,3 +51,4 @@ Route::post('/projectMemberData', [App\Http\Controllers\ApiController::class, 'p
 // 登録済みのメンバーを除外
 Route::post('/teamMemberDel', [App\Http\Controllers\ApiController::class, 'teamMemberDel']);
 Route::post('/projectMemberDel', [App\Http\Controllers\ApiController::class, 'projectMemberDel']);
+});
