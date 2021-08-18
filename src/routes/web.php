@@ -25,7 +25,7 @@ Route::middleware('verified')->group(function() {
 // メール認証が必要なルートをここに追加（下記全部）
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/')->middleware('auth');
 // Mypege
 Route::get('/mypage', [App\Http\Controllers\MypageController::class, 'index'])->middleware('auth');
 // Team
