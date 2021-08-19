@@ -163,7 +163,7 @@ class TeamMemberIndex extends React.Component{
       <div className="border-top p-2 m-2">
         <form className="text-left">
           <div className="form-group">
-            <div>メンバー登録</div>
+            <div className="my-2">メンバー登録</div>
               <small>新規メンバーのメールアドレスを入力してください</small>
               <input type="email" className="form-control" value={this.state.emailData} placeholder="メールアドレスを入力"   onChange={this.onChangeEmail}/>
           </div>

@@ -7,9 +7,12 @@ class ProjectMemberIndex extends React.Component{
       this.state={ 
         memberIndexModalOpen: false,
         memberIndex: [],
+        teamMemberIndex: [],
+        memberData:[],
       }
   }
   componentDidMount(){
+    this.setState({loading: true})
     const load = async () =>{
       // プロジェクトメンバー情報を取得
       // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
@@ -22,12 +25,30 @@ class ProjectMemberIndex extends React.Component{
       }).then(response => response.json()
       ).then(json => {
         this.setState({
-          memberIndex:json
+          memberIndex:json,
+          loading: false,
         })
       }).catch((e) => {
         console.log(e);
         alert('情報を取得できませんでした');
       });
+      // チームメンバー情報を取得
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
+      fetch("http://0.0.0.0:8000/api/teamMemberData",{
+        method: 'POST',
+        body:JSON.stringify({
+          id:this.props.teamId
+        }),
+        headers:{"Content-Type": "application/json"},
+        }).then(response => response.json()
+        ).then(json => {
+          this.setState({
+            teamMemberIndex:json
+          })
+        }).catch((e) => {
+          console.log(e);
+          alert('情報を取得できませんでした');
+        });
     }
     load();
   }
@@ -53,17 +74,49 @@ class ProjectMemberIndex extends React.Component{
         alert('削除に失敗しました');
       });
       this.setState({
-        memberIndex:[]
+        memberIndex:[],
+        loading: true
       })
       this.componentDidMount();
-      this.handleClickClose();
     }
   }
+    // セレクトボックス変更時
+    onChangeData=(e)=>{
+      this.setState({ 
+        memberData: e.target.value,
+      });
+    }
+    //メンバー登録ボタン
+    handleClickAdd(){
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberAdd",{
+      fetch("http://0.0.0.0:8000/api/projectMemberAdd",{
+        method: 'POST',
+        body:JSON.stringify({
+          user_id:this.state.memberData,
+          project_id:this.props.projectId,
+        }),
+        headers:{"Content-Type": "application/json"},
+      }).then(response => {
+          return response.text();
+        }).then((text) => {
+          alert(text);
+        }).catch((e) => {
+          console.log(e);
+          alert('入力が正しくありません。');
+        });
+       this.setState({
+          memberData:[],
+          loading: true
+        });
+        this.componentDidMount();
+        // this.handleClickClose();
+    }
   // MemberIndexボタン
   memberIndex(){
     return(
       <div>
-        <small className="btn btn-light bg-white  btn-sm shadow-sm" onClick={() => {this.handleClickOpen()}}><i className="fas fa-users"></i></small>
+        <small className="btn btn-light bg-white  btn-sm shadow-sm" 
+        onClick={() => {this.handleClickOpen()}}>Members　<i className="fas fa-users"></i></small>
       </div>
     )
   }
@@ -88,7 +141,7 @@ class ProjectMemberIndex extends React.Component{
           <span className="small">　for {this.props.projectName}</span>
         </div>        
         <div className="text-left m2">
-        {this.state.memberIndex.map((obj,index) =>
+        {this.state.loading ? "NowLoading..." : this.state.memberIndex.map((obj,index) =>
             <div key={index}>
               {obj.name}
               <small className="btn btn-sm" onClick={() => {this.handleClickDel(obj.id,obj.name)}}><i className="far fa-trash-alt"></i></small>
@@ -97,12 +150,29 @@ class ProjectMemberIndex extends React.Component{
         </div>
       </div>
     )
+    const searchForm = (  
+      <div className="border-top p-2 m-2">
+        <div className="text-left">
+          <div className="my-2">メンバー登録</div>
+          <select className="custom-select my-2"onChange={this.onChangeData}>
+            <option>選択してください</option>
+            {this.state.teamMemberIndex.map((obj,index) =>
+            <option key={index} value={obj.id}>{obj.name}</option>
+            )}
+          </select>
+        </div>
+        <button className="btn btn-info text-white btn-sm shadow-sm m-1 align-self-start" onClick={() => {this. handleClickAdd()}}>
+          登録
+        </button>
+      </div>
+    )
     let memberIndexModal;
     if(this.state.memberIndexModalOpen === true){
       memberIndexModal = (
           <div className='custom-modal'>
             <div className='custom-modal-container'>
               {membersShow}
+              {searchForm} 
               <button className="btn btn-block btn-primary btn-info text-white" onClick={() => {this.handleClickClose()}}>
                 Close
               </button>
