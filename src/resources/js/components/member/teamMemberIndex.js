@@ -15,8 +15,8 @@ class TeamMemberIndex extends React.Component{
     this.setState({loading: true})
     const load = async () =>{
       // チームメンバー情報を取得
-      // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
-      fetch("http://0.0.0.0:8000/api/teamMemberData",{
+      fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
+      // fetch("http://0.0.0.0:8000/api/teamMemberData",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.teamId
@@ -39,8 +39,8 @@ class TeamMemberIndex extends React.Component{
   handleClickDel(userId,userName){
     const isYes = confirm("「"+ userName +"」さんをチームメンバーから削除してよろしいですか？");
     if(isYes === false){return}else{
-    // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberDel",{
-    fetch("http://0.0.0.0:8000/api/teamMemberDel",{
+    fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberDel",{
+    // fetch("http://0.0.0.0:8000/api/teamMemberDel",{
       method: 'POST',
       body:JSON.stringify({
         user_id:userId,
@@ -71,8 +71,8 @@ class TeamMemberIndex extends React.Component{
   }
   //ユーザー検索ボタン
   handleClickSearch=()=>{
-    // fetch("http://progresschecker-akagaki.herokuapp.com/api/userSearch",{
-    fetch("http://0.0.0.0:8000/api/userSearch",{
+    fetch("http://progresschecker-akagaki.herokuapp.com/api/userSearch",{
+    // fetch("http://0.0.0.0:8000/api/userSearch",{
       method: 'POST',
       body:JSON.stringify({
         email:this.state.emailData
@@ -92,8 +92,8 @@ class TeamMemberIndex extends React.Component{
   // チームメンバー登録
   teamMemberAdd(user_id){
     console.log(this.state.newMember);
-    // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberAdd",{
-    fetch("http://0.0.0.0:8000/api/teamMemberAdd",{
+    fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberAdd",{
+    // fetch("http://0.0.0.0:8000/api/teamMemberAdd",{
       method: 'POST',
       body:JSON.stringify({
         user_id:user_id,
