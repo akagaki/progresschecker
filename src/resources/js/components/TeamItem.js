@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import ProjectAdd from './add/projectAdd';
 import TeamDel from './delete/teamDel';
-import TeamMemberEdit from './member/teamMemberEdit';
 import TeamMemberIndex from './member/teamMemberIndex';
 
 
@@ -91,11 +90,6 @@ class TeamItem extends React.Component{
               />
               {/* チームメンバー表示ボタン */}
               <TeamMemberIndex
-                teamId={this.state.teamInformation.id}
-                teamName={this.state.teamInformation.name}
-              />
-              {/* チームメンバー登録 */}
-              <TeamMemberEdit
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
               />
