@@ -20,7 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
+Auth::routes();
 Route::middleware('verified')->group(function() {
 // メール認証が必要なルートをここに追加（下記全部）
 });
