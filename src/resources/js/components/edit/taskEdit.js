@@ -15,7 +15,8 @@ class TaskEdit extends React.Component {
   componentDidMount(){
     const load = async () =>{
       // プロジェクトメンバー情報を取得
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
+      fetch("http://0.0.0.0:8000/api/projectMemberData",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.projectId
@@ -59,7 +60,8 @@ class TaskEdit extends React.Component {
   handleClickProgressEdit(){
     const isYes = confirm('進捗を変更しますか？');
     if(isYes === false){return}else{
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/progressUpdate",{
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/progressUpdate",{
+      fetch("http://0.0.0.0:8000/api/progressUpdate",{
         method: 'POST',
         body:JSON.stringify({
           id:this.props.taskId,
@@ -81,7 +83,8 @@ class TaskEdit extends React.Component {
   handleClickDeadlineEdit(){
     const isYes = confirm('期日を変更しますか？');
     if(isYes === false){return}else{
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/deadlineUpdate",{
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/deadlineUpdate",{
+      fetch("http://0.0.0.0:8000/api/deadlineUpdate",{
         method: 'POST',
         body:JSON.stringify({
           id:this.props.taskId,
@@ -104,7 +107,8 @@ class TaskEdit extends React.Component {
     const isYes = confirm('担当者を変更しますか？');
     if(isYes === false){return}else{
       this.props.reload()
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/taskMemberAdd",{
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/taskMemberAdd",{
+      fetch("http://0.0.0.0:8000/api/taskMemberAdd",{
         method: 'POST',
         body:JSON.stringify({
           user_id:this.state.memberData,
