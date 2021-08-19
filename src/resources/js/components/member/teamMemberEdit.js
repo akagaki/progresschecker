@@ -20,7 +20,8 @@ class TeamMemberEdit extends React.Component{
   }
   //ユーザー検索ボタン
   handleClickSearch=()=>{
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/userSearch",{
+    // fetch("http://progresschecker-akagaki.herokuapp.com/api/userSearch",{
+    fetch("http://0.0.0.0:8000/api/userSearch",{
       method: 'POST',
       body:JSON.stringify({
         email:this.state.emailData
@@ -40,7 +41,8 @@ class TeamMemberEdit extends React.Component{
   // チームメンバー登録
   teamMemberAdd(user_id){
     console.log(this.state.newMember);
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberAdd",{
+    // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberAdd",{
+    fetch("http://0.0.0.0:8000/api/teamMemberAdd",{
       method: 'POST',
       body:JSON.stringify({
         user_id:user_id,

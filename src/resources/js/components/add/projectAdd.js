@@ -27,7 +27,8 @@ class ProjectAdd extends React.Component {
     const isYes = confirm('この内容で登録しますか？');
     if(isYes === false){return}
     const data = {name:this.state.nameData,information:this.state.informationData};
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/projectAdd",{
+    // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectAdd",{
+    fetch("http://0.0.0.0:8000/api/projectAdd",{
       method: 'POST',
       body:JSON.stringify({
         user_id:this.props.loginUserId,

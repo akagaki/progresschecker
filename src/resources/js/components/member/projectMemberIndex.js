@@ -12,7 +12,8 @@ class ProjectMemberIndex extends React.Component{
   componentDidMount(){
     const load = async () =>{
       // プロジェクトメンバー情報を取得
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
+      // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
+      fetch("http://0.0.0.0:8000/api/projectMemberData",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.projectId
@@ -35,7 +36,8 @@ class ProjectMemberIndex extends React.Component{
     console.log(userId);
     const isYes = confirm("「"+ userName +"」さんをプロジェクトメンバーから削除してよろしいですか？");
     if(isYes === false){return}else{
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberDel",{
+    // fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberDel",{
+    fetch("http://0.0.0.0:8000/api/projectMemberDel",{
       method: 'POST',
       body:JSON.stringify({
         user_id:userId,
