@@ -12,6 +12,7 @@ class TeamMemberIndex extends React.Component{
       }
   }
   componentDidMount(){
+    this.setState({loading: true})
     const load = async () =>{
       // チームメンバー情報を取得
       // fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
@@ -24,7 +25,8 @@ class TeamMemberIndex extends React.Component{
       }).then(response => response.json()
       ).then(json => {
         this.setState({
-          memberIndex:json
+          memberIndex:json,
+          loading: false,
         })
       }).catch((e) => {
         console.log(e);
@@ -54,7 +56,8 @@ class TeamMemberIndex extends React.Component{
         alert('削除に失敗しました');
       });
       this.setState({
-        memberIndex:[]
+        memberIndex:[],
+        loading: true
       })
       this.componentDidMount();
       // this.handleClickClose();
@@ -108,7 +111,8 @@ class TeamMemberIndex extends React.Component{
      this.setState({
         emailData:'',
         newMember:[],
-        memberIndex:[]
+        memberIndex:[],
+        loading: true
       });
       this.componentDidMount();
       // this.handleClickClose();
@@ -146,7 +150,7 @@ class TeamMemberIndex extends React.Component{
           <span className="small">　for {this.props.teamName}</span>
         </div>        
         <div className="text-left m2">
-        {this.state.memberIndex.map((obj,index) =>
+        {this.state.loading ? "NowLoading..." : this.state.memberIndex.map((obj,index) =>
             <div key={index}>
               {obj.name}
               <small className="btn btn-sm" onClick={() => {this.handleClickDel(obj.id,obj.name)}}><i className="far fa-trash-alt"></i></small>
