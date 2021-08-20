@@ -92,6 +92,7 @@ class TeamItem extends React.Component{
               <TeamMemberIndex
                 teamId={this.state.teamInformation.id}
                 teamName={this.state.teamInformation.name}
+                URL={this.props.URL}
               />
             </div>
           </div>

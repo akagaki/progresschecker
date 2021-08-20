@@ -11,9 +11,7 @@ class TaskDel extends React.Component {
   handleClickDel=()=>{
     const isYes = confirm('一度削除したデータは元に戻すことはできません\n削除してよろしいですか？');
     if(isYes === false){return}
-    console.log(this.props.taskId);
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/taskDel",{
-    // fetch("http://0.0.0.0:8000/api/taskDel",{
+    fetch("/api/taskDel",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.taskId

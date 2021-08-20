@@ -15,8 +15,7 @@ class ProjectMemberIndex extends React.Component{
     this.setState({loading: true})
     const load = async () =>{
       // プロジェクトメンバー情報を取得
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberData",{
-      // fetch("http://0.0.0.0:8000/api/projectMemberData",{
+      fetch("/api/projectMemberData",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.projectId
@@ -33,8 +32,7 @@ class ProjectMemberIndex extends React.Component{
         alert('情報を取得できませんでした');
       });
       // チームメンバー情報を取得
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/teamMemberData",{
-      // fetch("http://0.0.0.0:8000/api/teamMemberData",{
+      fetch("/api/teamMemberData",{
         method: 'POST',
         body:JSON.stringify({
           id:this.props.teamId
@@ -54,11 +52,9 @@ class ProjectMemberIndex extends React.Component{
   }
   //メンバー削除ボタン
   handleClickDel(userId,userName){
-    console.log(userId);
     const isYes = confirm("「"+ userName +"」さんをプロジェクトメンバーから削除してよろしいですか？");
     if(isYes === false){return}else{
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberDel",{
-    // fetch("http://0.0.0.0:8000/api/projectMemberDel",{
+    fetch("/api/projectMemberDel",{
       method: 'POST',
       body:JSON.stringify({
         user_id:userId,
@@ -88,8 +84,7 @@ class ProjectMemberIndex extends React.Component{
     }
     //メンバー登録ボタン
     handleClickAdd(){
-      fetch("http://progresschecker-akagaki.herokuapp.com/api/projectMemberAdd",{
-      // fetch("http://0.0.0.0:8000/api/projectMemberAdd",{
+      fetch("/api/projectMemberAdd",{
         method: 'POST',
         body:JSON.stringify({
           user_id:this.state.memberData,

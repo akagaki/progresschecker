@@ -11,9 +11,7 @@ class ProjectDel extends React.Component {
   handleClickDel=()=>{
     const isYes = confirm('プロジェクトを削除すると関連するタスクも削除されます\n一度削除したデータは元に戻すことはできません\n削除してよろしいですか？');
     if(isYes === false){return}
-    console.log(this.props.projectId);
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/projectDel",{
-    // fetch("http://0.0.0.0:8000/api/projectDel",{
+    fetch("/api/projectDel",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.projectId

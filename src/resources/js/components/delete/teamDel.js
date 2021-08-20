@@ -11,9 +11,7 @@ class TeamDel extends React.Component {
   handleClickDel=()=>{
     const isYes = confirm('チームを削除すると関連するプロジェクトやタスクも削除されます\n一度削除したデータは元に戻すことはできません\n削除してよろしいですか？');
     if(isYes === false){return}
-    console.log(this.props.teamId);
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/teamDel",{
-    // fetch("http://0.0.0.0:8000/api/teamDel",{
+    fetch("/api/teamDel",{
       method: 'POST',
       body:JSON.stringify({
         id:this.props.teamId
