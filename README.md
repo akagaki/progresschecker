@@ -20,16 +20,14 @@ Pass：k0123456
 ## ■使用技術
 ### フロント
 HTML/CSS  
-Bootstrap  
-JavaScript  
-React  
+Bootstrap 4.6.0  
+JavaScript　ES6  
+React 17.0.2  
 ### サーバー
-PHP  
-Laravel  
+PHP 8.08  
+Laravel 8.40  
 ### データベース 
-MySQL
+MySQL 5.7
 ### インフラ 
 Docker  
 Heroku
-
-
