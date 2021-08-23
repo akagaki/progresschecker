@@ -18,16 +18,28 @@ Email：konan@com
 Pass：k0123456 
 
 ## ■使用技術
-### フロント
+### ・フロントエンド
 HTML/CSS  
 Bootstrap 4.6.0  
-JavaScript　ES6  
+JavaScript ES6  
 React 17.0.2  
-### サーバー
+### ・バックエンド
 PHP 8.08  
 Laravel 8.40  
-### データベース 
+### ・データベース 
 MySQL 5.7
-### インフラ 
+### ・インフラ 
 Docker  
 Heroku
+### ・その他使用ツール
+Visual Studio Code  
+Postman  
+Sorcetree
+
+## ■今後の課題
+### 新規ユーザー登録時のバグの修正
+現状ユーザー登録後にサーバーエラーが発生します。  
+コードの問題も見つけられず、ローカル環境ではエラーは発生しないためHerokuの設定等に問題があると考え  
+デプロイ先をAWS EC2に変更予定です。
+### リマインド機能の追加
+GoogleカレンダーやSlackとの連携を予定
