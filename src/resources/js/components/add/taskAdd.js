@@ -37,8 +37,7 @@ class TaskAdd extends React.Component {
       information:this.state.informationData,
       deadline:this.state.deadlineData
     };
-    fetch("http://progresschecker-akagaki.herokuapp.com/api/taskAdd",{
-    // fetch("http://0.0.0.0:8000/api/taskAdd",{
+    fetch("/api/taskAdd",{
       method: 'POST',
       body:JSON.stringify({
         user_id:this.props.loginUserId,

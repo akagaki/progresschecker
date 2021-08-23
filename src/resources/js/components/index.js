@@ -27,36 +27,26 @@ class Index extends React.Component {
     this.setState({loading: true})
     const load= async () =>{
       // ユーザー一覧
-      const usersData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userIndex");
-      // const usersData = await fetch("http://0.0.0.0:8000/api/userIndex");
-      console.log(usersData);
+      const usersData = await fetch("/api/userIndex");
       const users = await usersData.json();
-      console.log(users);
       // ログインユーザー情報
-      const userdata = await fetch("http://progresschecker-akagaki.herokuapp.com/api/loginUser");
-      // const userdata = await fetch("http://0.0.0.0:8000/api/loginUser");
-      console.log(userdata);
+      const userdata = await fetch("/api/loginUser");
       const user = await userdata.json();
-      console.log(user);
       // ユーザーチーム一覧
-      const teamData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userTeams");
-      // const teamData = await fetch("http://0.0.0.0:8000/api/userTeams");
+      const teamData = await fetch("/api/userTeams");
       const teams = await teamData.json();
       // ユーザープロジェクト一覧
-      const projectData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userProjects");
-      // const projectData = await fetch("http://0.0.0.0:8000/api/userProjects");
+      const projectData = await fetch("/api/userProjects");
       const projects = await projectData.json();
       // ユーザータスク一覧
-      const taskdata = await fetch("http://progresschecker-akagaki.herokuapp.com/api/userTasks");
-      // const taskdata = await fetch("http://0.0.0.0:8000/api/userTasks");
+      const taskdata = await fetch("/api/userTasks");
       const tasks = await taskdata.json();
       const waitList = tasks.filter(obj=>{return obj.progress === 0});
       const waipList = tasks.filter(obj=>{return obj.progress === 1});
       const doneList = tasks.filter(obj=>{return obj.progress === 2});
       const conpletedList = tasks.filter(obj=>{return obj.progress === 3});
       // 未完了タスク情報
-      const incompData = await fetch("http://progresschecker-akagaki.herokuapp.com/api/incompTasks");
-      // const incompData = await fetch("http://0.0.0.0:8000/api/incompTasks");
+      const incompData = await fetch("/api/incompTasks");
       const incomp = await incompData.json();
             this.setState({
               loginUser: user,

@@ -11,6 +11,7 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -78,34 +79,62 @@ class ApiController extends Controller
     public function teamAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Team::$rules);
-        $team = new Team;
-        unset($data['_token']);
-        $team->fill($data)->save();
-        $team->users()->attach($data['user_id']);
-        return response("新規チームを作成しました\nメンバーを登録してください");
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'information' => 'required',
+            'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
+            $team = new Team;
+            unset($data['_token']);
+            $team->fill($data)->save();
+            $team->users()->attach($data['user_id']);
+            return response("新規チームを作成しました\nメンバーを登録してください");
+        }
     }
     // 新規プロジェクト登録
     public function projectAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Project::$rules);
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'team_id' => 'required',
+            'name' => 'required',
+            'information' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
         $project = new Project;
         unset($data['_token']);
         $project->fill($data)->save();
         $project->users()->attach($data['user_id']);
         return response("新規プロジェクトを作成しました\nメンバーを登録してください");
+        }
     }
     // 新規タスク登録
     public function taskAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Task::$rules);
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'project_id' => 'required',
+            'name' => 'required',
+            'information' => 'required',
+            'progress' => 'required',
+            'deadline' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
         $task = new Task;
         unset($data['_token']);
         $task->fill($data)->save();
         $task->users()->attach($data['user_id']);
         return response("新規タスクを作成しました\n担当者を登録してください");
+        } 
     }
 // 削除-----------------------------------------------------------------------------------
 
@@ -184,6 +213,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $team = Team::find($data["team_id"]);
+        foreach ($team->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $team->users()->attach($data['user_id']);
         return response("新規チームメンバーを登録しました");
     }
@@ -212,6 +246,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $project = Project::find($data["project_id"]);
+        foreach ($project->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $project->users()->attach($data['user_id']);
         return response("新規プロジェクトメンバーを登録しました");
     }
@@ -220,6 +259,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $task = Task::find($data["task_id"]);
+        foreach ($task->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $task->users()->detach();//ここで担当をリセット
         $task->users()->attach($data['user_id']);
         return response("担当者を変更しました");
