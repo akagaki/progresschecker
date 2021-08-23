@@ -11,6 +11,7 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -78,12 +79,20 @@ class ApiController extends Controller
     public function teamAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Team::$rules);
-        $team = new Team;
-        unset($data['_token']);
-        $team->fill($data)->save();
-        $team->users()->attach($data['user_id']);
-        return response("新規チームを作成しました\nメンバーを登録してください");
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'information' => 'required',
+            'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
+            $team = new Team;
+            unset($data['_token']);
+            $team->fill($data)->save();
+            $team->users()->attach($data['user_id']);
+            return response("新規チームを作成しました\nメンバーを登録してください");
+        }
     }
     // 新規プロジェクト登録
     public function projectAdd(Request $request)
