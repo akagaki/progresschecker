@@ -213,6 +213,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $team = Team::find($data["team_id"]);
+        foreach ($team->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $team->users()->attach($data['user_id']);
         return response("新規チームメンバーを登録しました");
     }
