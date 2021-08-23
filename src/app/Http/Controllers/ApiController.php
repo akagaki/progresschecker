@@ -98,23 +98,43 @@ class ApiController extends Controller
     public function projectAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Project::$rules);
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'team_id' => 'required',
+            'name' => 'required',
+            'information' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
         $project = new Project;
         unset($data['_token']);
         $project->fill($data)->save();
         $project->users()->attach($data['user_id']);
         return response("新規プロジェクトを作成しました\nメンバーを登録してください");
+        }
     }
     // 新規タスク登録
     public function taskAdd(Request $request)
     {   
         $data = json_decode(file_get_contents("php://input"), true);
-        $this->validate($request, Task::$rules);
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'project_id' => 'required',
+            'name' => 'required',
+            'information' => 'required',
+            'progress' => 'required',
+            'deadline' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response("入力が正しくありません");
+        }else{
         $task = new Task;
         unset($data['_token']);
         $task->fill($data)->save();
         $task->users()->attach($data['user_id']);
         return response("新規タスクを作成しました\n担当者を登録してください");
+        } 
     }
 // 削除-----------------------------------------------------------------------------------
 
