@@ -246,6 +246,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $project = Project::find($data["project_id"]);
+        foreach ($project->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $project->users()->attach($data['user_id']);
         return response("新規プロジェクトメンバーを登録しました");
     }
