@@ -259,6 +259,11 @@ class ApiController extends Controller
     {   
         $data = json_decode(file_get_contents("php://input"), true);
         $task = Task::find($data["task_id"]);
+        foreach ($task->users as $user) {
+            if( $user->id == $data['user_id']){
+                return response("既に登録済みのメンバーです");
+            }
+        } 
         $task->users()->detach();//ここで担当をリセット
         $task->users()->attach($data['user_id']);
         return response("担当者を変更しました");
